@@ -7,6 +7,10 @@ import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
 import FAQ from '../components/FAQ';
+import ENS, { getEnsAddress } from '@ensdomains/ensjs'
+const Web3 = require('web3');
+// const provider = new Web3.providers.HttpProvider();
+import detectEthereumProvider from '@metamask/detect-provider';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -19,10 +23,13 @@ class HomePage extends React.Component {
       isMobile: false,
       signedIn: false,
       userAddress: "",
+      ethAddress: "",
+
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
+    this.handleSumbit = this.handleSumbit.bind(this);
 
   }
 
@@ -47,6 +54,12 @@ class HomePage extends React.Component {
     this.setState({userAddress: event.target.value});
   }
 
+  async handleSumbit(event) {
+    const provider = await detectEthereumProvider();
+
+    const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
+    this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
+  }
 
 
   render() {
@@ -66,7 +79,13 @@ class HomePage extends React.Component {
           </div>
           <div class="md:w-2/3">
             <input class="bg-gray-800 appearance-none border-4 border-green-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+            <button className="bg-green-200 text-white" onClick={this.handleSumbit}>Go</button>
           </div>
+          {this.state.ethAddress.length > 0 &&
+          <div>
+              <h1>{this.state.ethAddress}</h1>
+            </div>
+          }
         </div>
             </div>
           </section>

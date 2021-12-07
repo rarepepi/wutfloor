@@ -7,7 +7,7 @@ const Footer = () => {
       <Fade>
         <div className="flex justify-start">
           <p className="text-white text-sm animate-pulse">
-            &copy; Wut Floor
+            &copy; Wut Floor <br/><span className="text-xs">by Pepi</span>
           </p>
         </div>
         <div className="flex justify-end text-right">

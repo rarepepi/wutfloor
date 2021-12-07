@@ -42,7 +42,16 @@ function TopNav() {
                     href="#"
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Dashboard
+                      <Link
+                          to="Why"
+                          spy={true}
+                          smooth={true}
+                          offset={-50}
+                          duration={500}
+                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                    Why
+                    </Link>
 
                   </a>
 
@@ -56,7 +65,7 @@ function TopNav() {
                           smooth={true}
                           offset={-50}
                           duration={500}
-                      
+                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                         >
                           FAQ
                         </Link>
@@ -123,39 +132,38 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="#"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </a>
+              <a
+                    href="#"
+                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                  >
+                      <Link
+                          to="Why"
+                          spy={true}
+                          smooth={true}
+                          offset={-50}
+                          duration={500}
+                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                    Why
+                    </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Team
-                </a>
+                  </a>
 
-                <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Projects
-                </a>
+                  <a
+                    href="#"
+                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                  >
+                    <Link
+                          to="FAQ"
+                          spy={true}
+                          smooth={true}
+                          offset={-50}
+                          duration={500}
+                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          FAQ
+                        </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Calendar
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Reports
                 </a>
               </div>
             </div>

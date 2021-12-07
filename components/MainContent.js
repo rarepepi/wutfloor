@@ -4,10 +4,10 @@ import { Zoom, Fade, Flip, Slide } from "react-reveal";
 
 const MainContent = () => {
   return (
-    <div id="UBC" className="space-y-12 ">
+    <div id="Why" className="space-y-12 ">
       <Fade>
         <h1 className="xl:text-4xl text-2xl font-bold text-white mt-16 px-8 text-center">
-          What's the floor price?
+          Why this exists?
         </h1>
         <div className="text-center flex justify-center flex-row flex-wrap  py-16">
           <div className="lg:mt-16 motion-safe:hover:scale-110">

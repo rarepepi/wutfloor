@@ -8,8 +8,8 @@ module.exports = {
   darkMode: "media", // or 'media' or 'class'
   theme: {
     backgroundColor: theme => ({
-      'primary': '#48a8c0',
-      'secondary': '#f0d830',
+      'primary': '#34d399',
+      'secondary': '#8a5cf6',
       'danger': '#e3342f',
       'background': '#181818',
       'bg-light': '#303048'
@@ -36,7 +36,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      'press-start': ['"Press Start 2P"', 'cursive']
+      'press-start': ['"Press Start 2P"', 'cursive'],
+      'share-tech': ['"Share Tech"', 'sans-serif']
     }
   },
   variants: {

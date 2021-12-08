@@ -53,7 +53,9 @@ class HomePage extends React.Component {
     this.setState({userAddress: event.target.value});
   }
 
-  async handleSumbit(event) {
+  async handleSumbit(e) {
+    e.preventDefault();
+
     const provider = await detectEthereumProvider();
 
     const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
@@ -79,16 +81,17 @@ class HomePage extends React.Component {
           <section className="flex flex-col h-screen justify-center items-center">
             {/* {this.state.accountAssets == 0 && } */}
             <div className="flex flex-row justify-center space-x-8 p-16">
-              <div class="md:flex md:items-center mb-6 flex-col ">
-                  <h1 class="text-white font-bold mb-16 pr-4 text-4xl text-center" >
+              <div className="md:flex md:items-center mb-6 flex-col ">
+                  <h1 className="text-white font-bold mb-16 pr-4 text-4xl text-center" >
                     <span className="text-green-200">Wut</span>'s the <span className="text-green-200">Floor </span>price?
                   </h1>
                   <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
 
-                <div class="md:w-2/3 flex justify-center flex-col">
-                  <input class="mt-16 bg-gray-800 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
-                  <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto"  onClick={this.handleSumbit}>Go!</button>
-
+                <div className="md:w-2/3 ">
+                  <form className="flex justify-center flex-col">
+                  <input className="mt-16 bg-gray-800 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+                  <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
+                  </form>
                 </div>
                 
               </div>

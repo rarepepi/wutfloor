@@ -15,8 +15,8 @@ const MainContent = () => {
           </div>
           <div className="text-white flex flex-col justify-center max-w-md rounded-lg p-12 motion-safe:hover:scale-110">
             <p>
-              Not sure what the value or your <span className="text-yellow-400">NFT</span> portfolio is? Dont worry we got you covered.
-              <span className="text-green-400"> <br/>wutfloor.xyz<br/></span> is here for you and all the "wuts the floor" questions you have.
+              Not sure what the value or your <span className="text-green-300">NFT</span> portfolio is? Dont worry we got you covered.
+              <span className="text-purple-500"> <br/>wutfloor.xyz<br/></span> is here for you and all the "wuts the floor" questions you have.
               
             </p>
           </div>

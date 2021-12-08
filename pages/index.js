@@ -121,14 +121,14 @@ class HomePage extends React.Component {
             <div className="flex flex-row justify-center space-x-8 p-16">
             <div className="md:flex md:items-center mb-6 flex-col ">
                 <h1 className="text-white font-bold mb-16 p-4 text-4xl text-center" >
-                  <span className="text-green-400">Wut</span>'s the <span className="text-green-400">Floor </span>price?
+                  <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
                 </h1>
                 <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
               <div className="md:w-2/3 ">
                 <form className="flex justify-center flex-col">
                 <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
                 {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
-                <button className="mt-16 motion-safe:hover:scale-110 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
+                <button className="mt-16 motion-safe:hover:scale-110 text-white bg-primary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
                 </form>
               </div>
               

@@ -24,8 +24,8 @@ const FAQ = () => {
                                 />
                             </Disclosure.Button>
                             <Disclosure.Panel className="px-4 pt-4 pb-4 lg:text-2xl text-gray-200 text-center">a
-                                <span className="text-green-400"> "floor" </span>
-                                <span className="text-red-300">price</span> calculator
+                                <span className="text-purple-500"> "floor" </span>
+                                <span className="text-green-300">price</span> calculator
                             </Disclosure.Panel>
                         </>
                     )}

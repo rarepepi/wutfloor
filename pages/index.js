@@ -56,10 +56,15 @@ class HomePage extends React.Component {
   async handleSumbit(e) {
     e.preventDefault();
 
-    const provider = await detectEthereumProvider();
+    if(this.state.userAddress.includes('.eth')){
+      const provider = await detectEthereumProvider();
+      const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
+      this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
+    }
+    else {
+      this.setState({ethAddress: this.state.userAddress});
+    }
 
-    const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
-    this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
 
     const data = await axios.get(`https://api.opensea.io/api/v1/assets?owner=${this.state.ethAddress}`)
     if (!data) return

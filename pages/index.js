@@ -81,7 +81,7 @@ class HomePage extends React.Component {
       return;
     }
 
-    const data = await request.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${this.state.ethAddress}`)
+    const data = await request.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${this.state.ethAddress}`, { crossdomain: true })
     if (!data) return
 
     let assets = data.data.assets;
@@ -91,7 +91,7 @@ class HomePage extends React.Component {
     this.setState({loading: true})
     await Promise.all(assets.map(async(item, i) => {
       const collectionSlug = item.collection.slug
-      const data = await request.get(`https://api.opensea.io/collection/${collectionSlug}`)
+      const data = await request.get(`https://api.opensea.io/collection/${collectionSlug}`, { crossdomain: true })
       if(data.data.collection.stats.floor_price > 0.01){
         total_eth_value+=data.data.collection.stats.floor_price
         item.floor_price = data.data.collection.stats.floor_price

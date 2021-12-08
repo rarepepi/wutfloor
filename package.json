@@ -46,7 +46,7 @@
     "react95": "^3.8.0",
     "styled-components": "^5.3.3",
     "tsparticles": "^1.35.4",
-    "typeit-react": "^2.0.3",
+    "typeit-react": "^2.0.8",
     "web3": "^1.6.1",
     "web3modal": "^1.9.4"
   },

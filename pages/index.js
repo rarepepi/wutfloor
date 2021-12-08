@@ -15,6 +15,7 @@ import axios from "axios";
 import NFTAsset from "../components/NFTAsset"
 const request = rateLimit(axios.create(), { maxRequests: 2, perMilliseconds: 1000, maxRPS: 2 })
 import Web3 from "web3";
+import TypeIt from "typeit-react";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -32,7 +33,8 @@ class HomePage extends React.Component {
       accountAssets: [],
       wrongAddress: false,
       total_eth_value: 0,
-      loading: false
+      loading: false,
+      ethPrice: 4500
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -65,7 +67,7 @@ class HomePage extends React.Component {
   async handleSumbit(e) {
     e.preventDefault();
     this.setState({accountAssets: []})
-    if(this.state.userAddress.includes('.eth')){
+    if(this.state.userAddress.endsWith('.eth')){
       const provider = await detectEthereumProvider();
       const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
       this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
@@ -115,10 +117,10 @@ class HomePage extends React.Component {
             <>
 
           <section className="flex flex-col h-screen justify-center items-center">
-            {this.state.loading ? <p className="text-white">Loading...</p> : 
+            {this.state.loading ? <p className="text-white p-8">Loading...</p> : 
             <div className="flex flex-row justify-center space-x-8 p-16">
             <div className="md:flex md:items-center mb-6 flex-col ">
-                <h1 className="text-white font-bold mb-16 pr-4 text-4xl text-center" >
+                <h1 className="text-white font-bold mb-16 p-4 text-4xl text-center" >
                   <span className="text-green-400">Wut</span>'s the <span className="text-green-400">Floor </span>price?
                 </h1>
                 <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
@@ -126,7 +128,7 @@ class HomePage extends React.Component {
                 <form className="flex justify-center flex-col">
                 <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
                 {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
-                <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
+                <button className="mt-16 motion-safe:hover:scale-110 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
                 </form>
               </div>
               
@@ -146,11 +148,28 @@ class HomePage extends React.Component {
             </> : <section>
           {this.state.accountAssets.length > 0 &&
             <>
-            <div className="flex justify-center">
-              <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
-              {this.state.total_eth_value > 0 && <p>{this.state.total_eth_value}</p>}
-              
+            <div className="flex flex-col justify-center">
+              <h1 className="text-purple-500 mt-16 text-center mb-16">{this.state.ethAddress.slice(0, 5) +
+                "..." +
+                this.state.ethAddress.slice(this.state.ethAddress.length - 4, this.state.ethAddress.length)}</h1>
+
+            <div className="flex flew-row justify-evenly mb-8">
+            <div className="flex flex-col justify-center text-center">
+                <h1 className="text-green-400 text-lg">NFT Amount</h1>
+                  <p className="text-white mt-4">{this.state.accountAssets.length}</p>
+                </div>
+                <div className="flex flex-col justify-center text-center">
+                  <h1 className="text-green-400 text-lg">ETH Value</h1>
+                  <p className="text-white mt-4">{this.state.total_eth_value}</p>
+
+                </div>
+                <div className="flex flex-col justify-center text-center">
+                <h1 className="text-green-400 text-lg">USD Value</h1>
+                  <p className="text-white mt-4">$ {(this.state.total_eth_value*this.state.ethPrice).toLocaleString("en-US")}</p>
+                </div>
             </div>
+            </div>
+
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center align-middle">
             {this.state.accountAssets.map((asset, i) => {
               return (

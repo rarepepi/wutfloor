@@ -14,9 +14,9 @@ const Footer = () => {
           <a
             className="text-white animate-pulse"
             target="_blank"
-            href="https://github.com"
+            href="https://github.com/pepimartinez/wutfloor"
           >
-            Open Sourced Code
+            Github
           </a>
         </div>
       </Fade>

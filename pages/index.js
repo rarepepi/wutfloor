@@ -3,6 +3,8 @@ import { motion, useMotionValue } from "framer-motion";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
+import rateLimit from 'axios-rate-limit';
+
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
@@ -11,9 +13,13 @@ import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
 import NFTAsset from "../components/NFTAsset"
+const request = rateLimit(axios.create(), { maxRequests: 2, perMilliseconds: 1000, maxRPS: 5 })
+import Web3 from "web3";
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -23,7 +29,8 @@ class HomePage extends React.Component {
       signedIn: false,
       userAddress: "",
       ethAddress: "",
-      accountAssets: []
+      accountAssets: [],
+      wrongAddress: false
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -65,25 +72,35 @@ class HomePage extends React.Component {
       this.setState({ethAddress: this.state.userAddress});
     }
 
+    if(!Web3.utils.isAddress(this.state.ethAddress)) {
+      this.setState({wrongAddress: true})
+      return;
+    }
 
-    const data = await axios.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${this.state.ethAddress}`)
+    const data = await request.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${this.state.ethAddress}`)
     if (!data) return
 
-    let assets = data.data.assets
-    
-    assets.map(async (item, i) => {
-      const collectionSlug = item.collection.slug
-      if(item.num_sales > 0) {
-        const data = await axios.get(`https://api.opensea.io/collection/${collectionSlug}`)
-        console.log(data.data.collection.stats.floor_price)
-        item.floor_price = data.data.collection.stats.floor_price
-      }
-      else {
-        item.floor_price = 0
-      }
-    })
-    this.setState({accountAssets: assets});
-
+    let assets = data.data.assets;
+    try {
+        assets.map(async (item, i) => {
+        const collectionSlug = item.collection.slug
+        await sleep(3000);
+        console.log("pinging os..")
+        let data = await request.get(`https://api.opensea.io/collection/${collectionSlug}`)
+        if(data.data.collection.stats.floor_price > 0.01){
+          console.log("hello")
+          item.floor_price = data.data.collection.stats.floor_price
+          assets[i] = item
+        }
+        else {
+          delete assets[i];
+        }
+      })
+      this.setState({accountAssets: assets});
+    } catch (error) {
+      alert(error)
+      alert("something failed")
+    }
   }
 
 
@@ -95,17 +112,16 @@ class HomePage extends React.Component {
             <TopNav />
           </div>
           <section className="flex flex-col h-screen justify-center items-center">
-            {/* {this.state.accountAssets == 0 && } */}
             <div className="flex flex-row justify-center space-x-8 p-16">
               <div className="md:flex md:items-center mb-6 flex-col ">
                   <h1 className="text-white font-bold mb-16 pr-4 text-4xl text-center" >
-                    <span className="text-green-200">Wut</span>'s the <span className="text-green-200">Floor </span>price?
+                    <span className="text-green-400">Wut</span>'s the <span className="text-green-400">Floor </span>price?
                   </h1>
                   <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
-
                 <div className="md:w-2/3 ">
                   <form className="flex justify-center flex-col">
-                  <input className="mt-16 bg-gray-800 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+                  <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+                  {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
                   <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
                   </form>
                 </div>
@@ -113,21 +129,24 @@ class HomePage extends React.Component {
               </div>
             </div>
           </section>
-          <>
+          <section>
           {this.state.accountAssets.length > 0 &&
-                <>
-                <div className="flex justify-center">
-                    <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
-                  </div>
-                  {this.state.accountAssets.map((asset, i) => {
-                    return (
-                      
-                      <NFTAsset asset={asset} />
-                   )
-                  })}
+            <>
+            <div className="flex justify-center">
+              <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
+              </div>
+              <div className="flex flex-row flex-wrap justify-center">
+              {this.state.accountAssets.map((asset, i) => {
+                return (
+                  <>
+                  <NFTAsset key={i} asset={asset} />
                   </>
-                }
-                </>
+                )
+              })}
+              </div>
+              </>
+            }
+        </section>
         </Fade>
         <section className="mt-16 shadow-2xl p-16">
           <MainContent />

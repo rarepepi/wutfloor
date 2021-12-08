@@ -9,6 +9,7 @@ import MainContent from "../components/MainContent";
 import FAQ from '../components/FAQ';
 import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import detectEthereumProvider from '@metamask/detect-provider';
+import axios from "axios";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -22,7 +23,7 @@ class HomePage extends React.Component {
       signedIn: false,
       userAddress: "",
       ethAddress: "",
-
+      accountAssets: []
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -57,6 +58,14 @@ class HomePage extends React.Component {
 
     const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
     this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
+
+    const data = await axios.get(`https://api.opensea.io/api/v1/assets?owner=${this.state.ethAddress}`)
+    if (!data) return
+
+    const assets = data.data.assets
+    console.log(assets)
+    this.setState({accountAssets: assets});
+    console.log(this.state.accountAssets)
   }
 
 
@@ -68,6 +77,7 @@ class HomePage extends React.Component {
             <TopNav />
           </div>
           <section className="flex flex-col h-screen justify-center items-center">
+            {/* {this.state.accountAssets == 0 && } */}
             <div className="flex flex-row justify-center space-x-8 p-16">
               <div class="md:flex md:items-center mb-6 flex-col ">
                   <h1 class="text-white font-bold mb-16 pr-4 text-4xl text-center" >
@@ -80,14 +90,22 @@ class HomePage extends React.Component {
                   <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto"  onClick={this.handleSumbit}>Go!</button>
 
                 </div>
-                {this.state.ethAddress.length > 0 &&
-                <div className="flex justify-center">
-                    <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
-                  </div>
-                }
+                
               </div>
             </div>
           </section>
+          <>
+          {this.state.accountAssets.length > 0 &&
+                <>
+                <div className="flex justify-center">
+                    <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
+                  </div>
+                  {this.state.accountAssets.map((asset, i) => {
+                    return (<p>{asset.name}</p>)
+                  })}
+                  </>
+                }
+                </>
         </Fade>
         <section className="mt-16 shadow-2xl p-16">
           <MainContent />

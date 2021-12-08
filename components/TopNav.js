@@ -28,18 +28,21 @@ function TopNav() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
+                <a className="" href="https://wutfloor.xyz">
                 <img
-                  className="h-8 w-8"
+                  className="h-8 w-8 "
                   src="/img/logo.png"
                   alt="Workflow"
                 />
+                </a>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-      
-
+                <a
+                    href="https://wutfloor.xyz"
+                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >Wut Floor                </a>
                   <a
-                    href="#"
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                       <Link
@@ -48,7 +51,7 @@ function TopNav() {
                           smooth={true}
                           offset={-50}
                           duration={500}
-                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                          className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                         >
                     Why
                     </Link>
@@ -56,8 +59,7 @@ function TopNav() {
                   </a>
 
                   <a
-                    href="#"
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     <Link
                           to="FAQ"

@@ -13,7 +13,7 @@ import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
 import NFTAsset from "../components/NFTAsset"
-const request = rateLimit(axios.create(), { maxRequests: 2, perMilliseconds: 1000, maxRPS: 5 })
+const request = rateLimit(axios.create(), { maxRequests: 2, perMilliseconds: 1000, maxRPS: 2 })
 import Web3 from "web3";
 
 function sleep(ms) {
@@ -30,7 +30,9 @@ class HomePage extends React.Component {
       userAddress: "",
       ethAddress: "",
       accountAssets: [],
-      wrongAddress: false
+      wrongAddress: false,
+      total_eth_value: 0,
+      loading: false
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -62,7 +64,7 @@ class HomePage extends React.Component {
 
   async handleSumbit(e) {
     e.preventDefault();
-
+    this.setState({accountAssets: []})
     if(this.state.userAddress.includes('.eth')){
       const provider = await detectEthereumProvider();
       const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
@@ -81,74 +83,58 @@ class HomePage extends React.Component {
     if (!data) return
 
     let assets = data.data.assets;
-    try {
-        assets.map(async (item, i) => {
-        const collectionSlug = item.collection.slug
-        await sleep(3000);
-        console.log("pinging os..")
-        let data = await request.get(`https://api.opensea.io/collection/${collectionSlug}`)
-        if(data.data.collection.stats.floor_price > 0.01){
-          console.log("hello")
-          item.floor_price = data.data.collection.stats.floor_price
-          assets[i] = item
+    let total_eth_value = 0;
+    const newAssets = []
+    console.log(`There are ${assets.length} assets`)
+    this.setState({loading: true})
+    await Promise.all(assets.map(async(item, i) => {
+      const collectionSlug = item.collection.slug
+      const data = await request.get(`https://api.opensea.io/collection/${collectionSlug}`)
+      if(data.data.collection.stats.floor_price > 0.01){
+        total_eth_value+=data.data.collection.stats.floor_price
+        item.floor_price = data.data.collection.stats.floor_price
+        if(item.image_url.length < 1){
+          item.image_url = data.data.collection.image_url
         }
-        else {
-          delete assets[i];
-        }
-      })
-      this.setState({accountAssets: assets});
-    } catch (error) {
-      alert(error)
-      alert("something failed")
-    }
+        newAssets.push(item)
+      }
+  }));
+  this.setState({accountAssets: newAssets});
+  this.setState({total_eth_value: total_eth_value})
+  this.setState({loading: false})
   }
 
 
   render() {
     return (
       <div className="font-press-start">
-        <Fade>
           <div className="shadow-2xl">
             <TopNav />
           </div>
-          <section className="flex flex-col h-screen justify-center items-center">
-            <div className="flex flex-row justify-center space-x-8 p-16">
-              <div className="md:flex md:items-center mb-6 flex-col ">
-                  <h1 className="text-white font-bold mb-16 pr-4 text-4xl text-center" >
-                    <span className="text-green-400">Wut</span>'s the <span className="text-green-400">Floor </span>price?
-                  </h1>
-                  <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
-                <div className="md:w-2/3 ">
-                  <form className="flex justify-center flex-col">
-                  <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
-                  {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
-                  <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
-                  </form>
-                </div>
-                
-              </div>
-            </div>
-          </section>
-          <section>
-          {this.state.accountAssets.length > 0 &&
+          {this.state.accountAssets == 0 ? 
             <>
-            <div className="flex justify-center">
-              <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
+
+          <section className="flex flex-col h-screen justify-center items-center">
+            {this.state.loading ? <p className="text-white">Loading...</p> : 
+            <div className="flex flex-row justify-center space-x-8 p-16">
+            <div className="md:flex md:items-center mb-6 flex-col ">
+                <h1 className="text-white font-bold mb-16 pr-4 text-4xl text-center" >
+                  <span className="text-green-400">Wut</span>'s the <span className="text-green-400">Floor </span>price?
+                </h1>
+                <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
+              <div className="md:w-2/3 ">
+                <form className="flex justify-center flex-col">
+                <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+                {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
+                <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
+                </form>
               </div>
-              <div className="flex flex-row flex-wrap justify-center">
-              {this.state.accountAssets.map((asset, i) => {
-                return (
-                  <>
-                  <NFTAsset key={i} asset={asset} />
-                  </>
-                )
-              })}
-              </div>
-              </>
-            }
-        </section>
-        </Fade>
-        <section className="mt-16 shadow-2xl p-16">
+              
+            </div>
+          </div>}
+            
+          </section>
+          <section className="mt-16 shadow-2xl p-16">
           <MainContent />
         </section>        
           <section className="mt-16 shadow-2xl p-16">
@@ -157,6 +143,28 @@ class HomePage extends React.Component {
         <section className="mt-16 shadow-2xl">
           <Footer />
         </section>
+            </> : <section>
+          {this.state.accountAssets.length > 0 &&
+            <>
+            <div className="flex justify-center">
+              <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
+              {this.state.total_eth_value > 0 && <p>{this.state.total_eth_value}</p>}
+              
+            </div>
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center align-middle">
+            {this.state.accountAssets.map((asset, i) => {
+              return (
+                <>
+                  <NFTAsset key={i} asset={asset} />
+                </>
+              )
+            })}
+            </div>
+            </>
+          }
+        </section>        
+        }
+        
       </div >
     );
   }

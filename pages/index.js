@@ -108,7 +108,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="font-press-start">
-          <div className="shadow-2xl">
+          <div className="shadow-lg">
             <TopNav />
           </div>
           {this.state.accountAssets == 0 ? 
@@ -134,13 +134,13 @@ class HomePage extends React.Component {
           </div>}
             
           </section>
-          <section className="mt-16 shadow-2xl p-16">
+          <section className="mt-16 p-16">
           <MainContent />
         </section>        
-          <section className="mt-16 shadow-2xl p-16">
+          <section className="mt-16 p-16">
             <FAQ />
           </section>
-        <section className="mt-16 shadow-2xl">
+        <section className="mt-16">
           <Footer />
         </section>
             </> : <section>

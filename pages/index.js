@@ -86,7 +86,7 @@ class HomePage extends React.Component {
                   <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
 
                 <div class="md:w-2/3 flex justify-center flex-col">
-                  <input class="mt-16 bg-gray-800 appearance-none border-4 border-purple-500 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
+                  <input class="mt-16 bg-gray-800 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
                   <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto"  onClick={this.handleSumbit}>Go!</button>
 
                 </div>

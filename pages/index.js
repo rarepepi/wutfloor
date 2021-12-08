@@ -10,7 +10,7 @@ import FAQ from '../components/FAQ';
 import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
-
+import NFTAsset from "../components/NFTAsset"
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -66,13 +66,24 @@ class HomePage extends React.Component {
     }
 
 
-    const data = await axios.get(`https://api.opensea.io/api/v1/assets?owner=${this.state.ethAddress}`)
+    const data = await axios.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${this.state.ethAddress}`)
     if (!data) return
 
-    const assets = data.data.assets
-    console.log(assets)
+    let assets = data.data.assets
+    
+    assets.map(async (item, i) => {
+      const collectionSlug = item.collection.slug
+      if(item.num_sales > 0) {
+        const data = await axios.get(`https://api.opensea.io/collection/${collectionSlug}`)
+        console.log(data.data.collection.stats.floor_price)
+        item.floor_price = data.data.collection.stats.floor_price
+      }
+      else {
+        item.floor_price = 0
+      }
+    })
     this.setState({accountAssets: assets});
-    console.log(this.state.accountAssets)
+
   }
 
 
@@ -109,7 +120,10 @@ class HomePage extends React.Component {
                     <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
                   </div>
                   {this.state.accountAssets.map((asset, i) => {
-                    return (<p>{asset.name}</p>)
+                    return (
+                      
+                      <NFTAsset asset={asset} />
+                   )
                   })}
                   </>
                 }

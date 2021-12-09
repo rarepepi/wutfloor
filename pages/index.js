@@ -13,7 +13,7 @@ import ENS, { getEnsAddress } from '@ensdomains/ensjs';
 import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
 import NFTAsset from "../components/NFTAsset";
-const request = rateLimit(axios.create(), { maxRequests: 2, perMilliseconds: 1000, maxRPS: 2 });
+const request = rateLimit(axios.create(), { maxRequests: 5, perMilliseconds: 1000, maxRPS: 5 });
 import Web3 from "web3";
 import TypeIt from "typeit-react";
 
@@ -75,6 +75,9 @@ class HomePage extends React.Component {
     else {
       this.setState({ ethAddress: this.state.userAddress });
     }
+
+    console.log(this.state.ethAddress);
+    console.log(this.state.userAddress);
 
     if (!Web3.utils.isAddress(this.state.ethAddress)) {
       this.setState({ wrongAddress: true });
@@ -155,17 +158,26 @@ class HomePage extends React.Component {
 
                   <div className="flex flew-row justify-evenly mb-8">
                     <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">NFT Amount</h1>
-                      <p className="text-white mt-4">{this.state.accountAssets.length}</p>
+                      <h1 className="text-green-400 text-lg">ETH Price</h1>
+                      <p className="text-white mt-8">{this.state.ethPrice}</p>
                     </div>
                     <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">ETH Value</h1>
-                      <p className="text-white mt-4">{this.state.total_eth_value}</p>
+                      <h1 className="text-green-400 text-lg">Total Assets</h1>
+                      <p className="text-white mt-8">{this.state.accountAssets.length}</p>
+                    </div>
+                    <div className="flex flex-col justify-center text-center">
+                      <h1 className="text-green-400 text-lg">Total Value</h1>
+                      <div className="flex flex-row jusitfy-center text-center space-x-2">
+                        <p className="text-white mt-4">Ξ{Math.round(this.state.total_eth_value * 100) / 100}</p>
+                        <p className="text-white mt-4">(${Math.round((this.state.total_eth_value * this.state.ethPrice) * 100) / 100})</p>
+                      </div>
 
                     </div>
                     <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">USD Value</h1>
-                      <p className="text-white mt-4">$ {(this.state.total_eth_value * this.state.ethPrice).toLocaleString("en-US")}</p>
+                      <h1 className="text-green-400 text-lg">Total Cost</h1>
+                      <p className="text-white mt-4">Soon..</p>
+                      <p className="text-white mt-4">Soon..</p>
+
                     </div>
                   </div>
                 </div>

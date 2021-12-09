@@ -31,6 +31,8 @@ const getOpenSeaData = async (address) => {
 
     let assets = data.data.assets;
     let total_eth_value = 0;
+    let total_eth_7_avg_value = 0;
+
     const newAssets = [];
     console.log(`There are ${assets.length} assets`);
     await Promise.all(assets.map(async (item, i) => {
@@ -38,6 +40,8 @@ const getOpenSeaData = async (address) => {
         const data = await request.get(`https://api.opensea.io/api/v1/collection/${collectionSlug}`, { crossdomain: true });
         if (data.data.collection.stats.floor_price > 0.01) {
             total_eth_value += data.data.collection.stats.floor_price;
+            total_eth_7_avg_value += data.data.collection.stats.seven_day_average_price;
+
             item.floor_price = data.data.collection.stats.floor_price;
             item.average_price = data.data.collection.stats.average_price;
             item.num_owners = data.data.collection.stats.num_owners;
@@ -67,7 +71,7 @@ const getOpenSeaData = async (address) => {
             newAssets.push(item);
         }
     }));
-    return { assets: newAssets, totalETHValue: total_eth_value, address: address };
+    return { assets: newAssets, totalETHValue: total_eth_value, totalETHValue7Day: total_eth_7_avg_value, address: address };
 };
 
 const Account = (props) => {
@@ -75,6 +79,8 @@ const Account = (props) => {
     const queryAddress = router.query.address;
     const [ethPrice, setETHPrice] = useState(0);
     const [totalETHValue, setTotalETHValue] = useState(0);
+    const [totalETHValue7Day, setTotalETHValue7Day] = useState(0);
+
     const [accountAssets, setAccountAssets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [ethAddress, setETHAddress] = useState("");
@@ -86,6 +92,7 @@ const Account = (props) => {
                 const results = await getOpenSeaData(queryAddress);
                 setAccountAssets(results.assets);
                 setTotalETHValue(results.totalETHValue);
+                setTotalETHValue7Day(results.totalETHValue7Day);
                 setETHAddress(results.address);
                 setLoading(false);
             };
@@ -227,9 +234,11 @@ const Account = (props) => {
 
                             </div>
                             <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
-                                <h1 className="text-white text-lg">Total Cost</h1>
-                                <p className="text-green-400 mt-4">Soon..</p>
-
+                                <h1 className="text-white text-lg">7 Day Avg</h1>
+                                <div className="flex flex-row jusitfy-center text-center space-x-2">
+                                    <p className="text-green-400 mt-4">Ξ{Math.round(totalETHValue7Day * 100) / 100}</p>
+                                    <p className="text-green-400 mt-4">(${(Math.round((totalETHValue7Day * ethPrice) * 100) / 100).toLocaleString()})</p>
+                                </div>
                             </div>
                         </div>
                     </div>

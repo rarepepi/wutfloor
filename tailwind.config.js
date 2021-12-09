@@ -13,11 +13,15 @@ module.exports = {
       'danger': '#e3342f',
       'background': '#181818',
       'bg-light': '#303048'
-     }),
+    }),
     extend: {
       backgroundImage: (theme) => ({
         "bg-logo": "url('/img/logo.png')",
       }),
+      zIndex: {
+
+        '-10': '-10',
+      },
       screens: {
         'sm': '640px',
         // => @media (min-width: 640px) { ... }

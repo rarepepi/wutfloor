@@ -113,7 +113,6 @@ class HomePage extends React.Component {
     this.setState({ loading: false });
   }
 
-
   render() {
     return (
       <div className="font-press-start">

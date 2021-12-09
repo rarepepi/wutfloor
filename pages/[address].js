@@ -9,6 +9,8 @@ import rateLimit from 'axios-rate-limit';
 import NFTAsset from "../components/NFTAsset";
 import TopNav from "../components/TopNav";
 import Particles from "react-particles-js";
+import Router from 'next/router';
+
 
 const getOpenSeaData = async (address) => {
     console.log(address);
@@ -59,6 +61,7 @@ const getOpenSeaData = async (address) => {
             item.seven_day_sales = data.data.collection.stats.seven_day_sales;
             item.seven_day_average_price = data.data.collection.stats.seven_day_average_price;
 
+            item.created_date = data.data.collection.created_date;
 
             item.thirty_day_volume = data.data.collection.stats.thirty_day_volume;
             item.thirty_day_change = data.data.collection.stats.thirty_day_change;
@@ -90,6 +93,10 @@ const Account = (props) => {
                 const data = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
                 setETHPrice(data.data.USD);
                 const results = await getOpenSeaData(queryAddress);
+                if (!results) {
+                    Router.push('/');
+                    return;
+                }
                 setAccountAssets(results.assets);
                 setTotalETHValue(results.totalETHValue);
                 setTotalETHValue7Day(results.totalETHValue7Day);

@@ -24,7 +24,7 @@ const NFTAsset = (props) => {
                     <div className="relative text-xs mb-8 mt-2 text-purple-400 cursor-pointer" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
                         {tooltipStatus == 1 && (
                             <div role="tooltip" className="z-20 w-54 -top-96 mt-2 absolute transition duration-150 ease-in-out shadow-lg bg-white p-4 border-2 border-purple-400 rounded bg-background bg-opacity-100">
-                                <p className="text-xs ">Days Deployed <span className="mb-2 text-green-200 block" >{Math.round((new Date() - new Date(props.asset.created_date)) / (1000 * 3600 * 24) * 100) / 100}</span></p>
+                                <p className="text-xs ">Days Deployed <span className="mb-2 text-green-200 block" >{parseInt((new Date() - new Date(props.asset.created_date)) / (1000 * 3600 * 24))}</span></p>
 
                                 <p className="text-xs ">Total Supply <span className="mb-2 text-green-200 block" >{Math.round(props.asset.total_supply * 100) / 100}</span></p>
                                 <p className="text-xs ">Owners <span className="mb-2 text-green-200 block" >{Math.round(props.asset.num_owners * 100) / 100}</span></p>

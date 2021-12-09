@@ -12,7 +12,7 @@ const NFTAsset = (props) => {
                             <img src={props.asset.image_url} className="w-36 h-36 mx-auto my-4 rounded-2xl p-2" />
                         </div>
                         {tooltipStatus == 1 && (
-                            <div role="tooltip" className="z-20 -mt-20 w-64 absolute transition duration-150 ease-in-out left-0 ml-8 shadow-lg bg-white p-4 rounded bg-background">
+                            <div role="tooltip" className="z-20 -mt-50 w-64 absolute transition duration-150 ease-in-out shadow-lg bg-white p-4 border-2 border-green-200 rounded bg-background bg-opacity-100">
                                 <p className="text-xs ">Total Supply <span className="mb-2 text-green-200 block" >{Math.round(props.asset.total_supply * 100) / 100}</span></p>
                                 <p className="text-xs ">Owners <span className="mb-2 text-green-200 block" >{Math.round(props.asset.num_owners * 100) / 100}</span></p>
                                 <p className="text-xs text-white">Market Cap <span className=" block text-green-200" >Ξ{Math.round(props.asset.market_cap * 100) / 100}</span><span className="block text-green-200 mb-4"  >(${(Math.round((props.asset.market_cap * props.ethPrice) * 100) / 100).toLocaleString()})</span></p>

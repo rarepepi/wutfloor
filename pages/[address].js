@@ -209,16 +209,16 @@ const Account = (props) => {
                             "..." +
                             ethAddress.slice(ethAddress.length - 4, ethAddress.length)}</h1>
 
-                        <div className="flex flew-row flex-wrap justify-evenly p-8">
-                            <div className="flex flex-col justify-center text-center p-8">
+                        <div className="flex flew-row flex-wrap justify-evenly p-8 ">
+                            <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl items-center">
                                 <h1 className="text-white text-lg">ETH Price</h1>
                                 <p className=" text-green-400 mt-4">${ethPrice}</p>
                             </div>
-                            <div className="flex flex-col justify-center text-center p-8">
+                            <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl items-center">
                                 <h1 className=" text-white text-lg">Total Assets</h1>
                                 <p className="text-green-400 mt-4">{accountAssets.length}</p>
                             </div>
-                            <div className="flex flex-col justify-center text-center p-8">
+                            <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                 <h1 className=" text-white text-lg">Total Value</h1>
                                 <div className="flex flex-row jusitfy-center text-center space-x-2">
                                     <p className="text-green-400 mt-4">Ξ{Math.round(totalETHValue * 100) / 100}</p>
@@ -226,7 +226,7 @@ const Account = (props) => {
                                 </div>
 
                             </div>
-                            <div className="flex flex-col justify-center text-center p-8">
+                            <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                 <h1 className="text-white text-lg">Total Cost</h1>
                                 <p className="text-green-400 mt-4">Soon..</p>
 
@@ -234,7 +234,7 @@ const Account = (props) => {
                         </div>
                     </div>
 
-                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center align-middle px-16">
+                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 shadow-2xl sm:grid-cols-2 grid-cols-1 justify-center align-middle px-16 m-8">
                         {accountAssets.map((asset, i) => {
                             return (
                                 <>

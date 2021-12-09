@@ -39,6 +39,28 @@ const getOpenSeaData = async (address) => {
         if (data.data.collection.stats.floor_price > 0.01) {
             total_eth_value += data.data.collection.stats.floor_price;
             item.floor_price = data.data.collection.stats.floor_price;
+            item.average_price = data.data.collection.stats.average_price;
+            item.num_owners = data.data.collection.stats.num_owners;
+            item.total_supply = data.data.collection.stats.total_supply;
+            item.market_cap = data.data.collection.stats.market_cap;
+            item.total_volume = data.data.collection.stats.total_volume;
+
+            item.one_day_volume = data.data.collection.stats.one_day_volume;
+            item.one_day_change = data.data.collection.stats.one_day_change;
+            item.one_day_sales = data.data.collection.stats.one_day_sales;
+            item.one_day_average_price = data.data.collection.stats.one_day_average_price;
+
+            item.seven_day_volume = data.data.collection.stats.seven_day_volume;
+            item.seven_day_change = data.data.collection.stats.seven_day_change;
+            item.seven_day_sales = data.data.collection.stats.seven_day_sales;
+            item.seven_day_average_price = data.data.collection.stats.seven_day_average_price;
+
+
+            item.thirty_day_volume = data.data.collection.stats.thirty_day_volume;
+            item.thirty_day_change = data.data.collection.stats.thirty_day_change;
+            item.thirty_day_sales = data.data.collection.stats.thirty_day_sales;
+            item.thirty_day_average_price = data.data.collection.stats.thirty_day_average_price;
+
             if (item.image_url.length < 1) {
                 item.image_url = data.data.collection.image_url;
             }
@@ -200,7 +222,7 @@ const Account = (props) => {
                                 <h1 className=" text-white text-lg">Total Value</h1>
                                 <div className="flex flex-row jusitfy-center text-center space-x-2">
                                     <p className="text-green-400 mt-4">Ξ{Math.round(totalETHValue * 100) / 100}</p>
-                                    <p className="text-green-400 mt-4">(${Math.round((totalETHValue * ethPrice) * 100) / 100})</p>
+                                    <p className="text-green-400 mt-4">(${(Math.round((totalETHValue * ethPrice) * 100) / 100).toLocaleString()})</p>
                                 </div>
 
                             </div>

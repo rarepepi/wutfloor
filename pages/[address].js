@@ -7,6 +7,8 @@ const request = rateLimit(axios.create(), { maxRequests: 5, perMilliseconds: 100
 import ENS, { getEnsAddress } from '@ensdomains/ensjs';
 import rateLimit from 'axios-rate-limit';
 import NFTAsset from "../components/NFTAsset";
+import TopNav from "../components/TopNav";
+
 
 const getOpenSeaData = async (address) => {
     console.log(address);
@@ -72,8 +74,12 @@ const Account = (props) => {
     return (
         <div className="font-press-start">
             {loading ? <div className="flex flex-col h-screen justify-center items-center"><>
+
                 <p className="text-white p-8">Loading...</p> </></div> :
                 <div>
+                    <div className="shadow-lg">
+                        <TopNav />
+                    </div>
                     <div className="flex flex-col justify-center">
                         <h1 className="text-purple-500 mt-4 text-center mb-8">{ethAddress.slice(0, 5) +
                             "..." +

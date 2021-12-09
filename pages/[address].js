@@ -10,6 +10,7 @@ import NFTAsset from "../components/NFTAsset";
 import TopNav from "../components/TopNav";
 import Particles from "react-particles-js";
 import Router from 'next/router';
+import Footer from "../components/Footer";
 
 
 const getOpenSeaData = async (address) => {
@@ -254,15 +255,16 @@ const Account = (props) => {
                         </div>
                     </div>
 
-                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 shadow-2xl sm:grid-cols-2 grid-cols-1 justify-center align-middle px-16 m-8">
+                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 shadow-2xl sm:grid-cols-2 grid-cols-1 align-middle p-6 m-8">
                         {accountAssets.map((asset, i) => {
                             return (
                                 <>
-                                    <NFTAsset key={i} asset={asset} ethPrice={ethPrice} />
+                                    <NFTAsset number={i} asset={asset} ethPrice={ethPrice} />
                                 </>
                             );
                         })}
                     </div>
+                    <Footer></Footer>
                 </div>
             }
         </div>

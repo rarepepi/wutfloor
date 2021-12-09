@@ -1,9 +1,7 @@
 // tailwind.config.js
 
 module.exports = {
-  mode: "jit",
   important: true,
-  purge: [],
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
@@ -57,6 +55,6 @@ module.exports = {
         'xl': '50em', // 800px at 1rem
       },
       variants: ['responsive'],
-    })
+    }),
   ],
 };

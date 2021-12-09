@@ -43,13 +43,17 @@ class HomePage extends React.Component {
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.updatePredicate();
     window.addEventListener("resize", this.updatePredicate);
 
     sleep(2000).then(() => {
       this.setState({ loading: false });
     });
+
+    const data = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
+
+    this.setState({ ethPrice: data.data.USD });
   }
 
   componentWillUnmount() {
@@ -120,7 +124,8 @@ class HomePage extends React.Component {
           <>
 
             <section className="flex flex-col h-screen justify-center items-center">
-              {this.state.loading ? <p className="text-white p-8">Loading...</p> :
+              {this.state.loading ? <>
+                <p className="text-white p-8">Loading...</p> </> :
                 <div className="flex flex-row justify-center space-x-8 p-16">
                   <div className="md:flex md:items-center mb-6 flex-col ">
                     <h1 className="text-white font-bold mb-16 p-4 text-4xl text-center" >
@@ -152,41 +157,40 @@ class HomePage extends React.Component {
             {this.state.accountAssets.length > 0 &&
               <>
                 <div className="flex flex-col justify-center">
-                  <h1 className="text-purple-500 mt-16 text-center mb-16">{this.state.ethAddress.slice(0, 5) +
+                  <h1 className="text-purple-500 mt-4 text-center mb-8">{this.state.ethAddress.slice(0, 5) +
                     "..." +
                     this.state.ethAddress.slice(this.state.ethAddress.length - 4, this.state.ethAddress.length)}</h1>
 
-                  <div className="flex flew-row justify-evenly mb-8">
-                    <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">ETH Price</h1>
-                      <p className="text-white mt-8">{this.state.ethPrice}</p>
+                  <div className="flex flew-row flex-wrap justify-evenly p-8">
+                    <div className="flex flex-col justify-center text-center p-8">
+                      <h1 className="text-white text-lg">ETH Price</h1>
+                      <p className=" text-green-400 mt-4">${this.state.ethPrice}</p>
                     </div>
-                    <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">Total Assets</h1>
-                      <p className="text-white mt-8">{this.state.accountAssets.length}</p>
+                    <div className="flex flex-col justify-center text-center p-8">
+                      <h1 className=" text-white text-lg">Total Assets</h1>
+                      <p className="text-green-400 mt-4">{this.state.accountAssets.length}</p>
                     </div>
-                    <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">Total Value</h1>
+                    <div className="flex flex-col justify-center text-center p-8">
+                      <h1 className=" text-white text-lg">Total Value</h1>
                       <div className="flex flex-row jusitfy-center text-center space-x-2">
-                        <p className="text-white mt-4">Ξ{Math.round(this.state.total_eth_value * 100) / 100}</p>
-                        <p className="text-white mt-4">(${Math.round((this.state.total_eth_value * this.state.ethPrice) * 100) / 100})</p>
+                        <p className="text-green-400 mt-4">Ξ{Math.round(this.state.total_eth_value * 100) / 100}</p>
+                        <p className="text-green-400 mt-4">(${Math.round((this.state.total_eth_value * this.state.ethPrice) * 100) / 100})</p>
                       </div>
 
                     </div>
-                    <div className="flex flex-col justify-center text-center">
-                      <h1 className="text-green-400 text-lg">Total Cost</h1>
-                      <p className="text-white mt-4">Soon..</p>
-                      <p className="text-white mt-4">Soon..</p>
+                    <div className="flex flex-col justify-center text-center p-8">
+                      <h1 className="text-white text-lg">Total Cost</h1>
+                      <p className="text-green-400 mt-4">Soon..</p>
 
                     </div>
                   </div>
                 </div>
 
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center align-middle">
+                <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 justify-center align-middle px-16">
                   {this.state.accountAssets.map((asset, i) => {
                     return (
                       <>
-                        <NFTAsset key={i} asset={asset} />
+                        <NFTAsset key={i} asset={asset} ethPrice={this.state.ethPrice} />
                       </>
                     );
                   })}

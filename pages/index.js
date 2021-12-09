@@ -85,7 +85,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="font-press-start min-h-screen relative">
+      <div className="font-press-start min-h-screen relative bg-background">
         <div className=""><Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
           "background": {
             "color": {

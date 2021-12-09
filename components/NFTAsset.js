@@ -9,10 +9,10 @@ const NFTAsset = (props) => {
                 <div className="flex flex-col justify-center text-center text-white w-64 h-128 motion-safe:hover:scale-110 border-2 border-purple-400 rounded-xl my-8 mb-8 pt-8 pb-2">
                     <div className="relative mt-20 md:mt-0" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
                         <div className="mr-2 cursor-pointer">
-                            <img src={props.asset.image_url} className="w-36 h-36 mx-auto my-4 rounded-2xl p-2" />
+                            <img src={props.asset.image_url} className="w-36 h-36 mx-auto my-4 ring-green-200 ring-2 rounded-2xl mb-12 " />
                         </div>
                         {tooltipStatus == 1 && (
-                            <div role="tooltip" className="z-20 -mt-50 w-64 absolute transition duration-150 ease-in-out shadow-lg bg-white p-4 border-2 border-green-200 rounded bg-background bg-opacity-100">
+                            <div role="tooltip" className="z-20 -mt-50 w-54 absolute transition duration-150 ease-in-out shadow-lg bg-white p-4 border-2 border-green-200 rounded bg-background bg-opacity-100">
                                 <p className="text-xs ">Total Supply <span className="mb-2 text-green-200 block" >{Math.round(props.asset.total_supply * 100) / 100}</span></p>
                                 <p className="text-xs ">Owners <span className="mb-2 text-green-200 block" >{Math.round(props.asset.num_owners * 100) / 100}</span></p>
                                 <p className="text-xs text-white">Market Cap <span className=" block text-green-200" >Ξ{Math.round(props.asset.market_cap * 100) / 100}</span><span className="block text-green-200 mb-4"  >(${(Math.round((props.asset.market_cap * props.ethPrice) * 100) / 100).toLocaleString()})</span></p>

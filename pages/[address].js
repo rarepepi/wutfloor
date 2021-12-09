@@ -223,25 +223,27 @@ const Account = (props) => {
                         <h1 className="text-white font-bold my-16 p-4 text-4xl text-center" >
                             <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
                         </h1>
-                        <div className="shadow-2xl w-64 mx-auto items-center p-4">
-                            <h1 className="text-white text-lg text-center block mt-2">Account</h1>
-                            <h1 className="text-purple-500 text-center mt-2">{ethAddress.slice(0, 5) +
+                        <div className="shadow-2xl w-64 mx-auto items-center p-4 ">
+                            <h1 className="text-white text-2xl text-center block mt-2">Account</h1>
+                            {queryAddress.endsWith('.eth') && <h1 className="text-purple-500 text-center block mt-2">{queryAddress}</h1>}
+
+                            <h1 className="text-gray-300 text-center mt-2">{ethAddress.slice(0, 5) +
                                 "..." +
                                 ethAddress.slice(ethAddress.length - 4, ethAddress.length)}</h1>
 
                         </div>
                         <div className="">
                             <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-8">
-                                <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl items-center">
-                                    <h1 className="text-white text-lg">ETH Price</h1>
+                                <div className="flex flex-col justify-center mt-4 text-center lg:p-10 p-8 shadow-2xl items-center">
+                                    <h1 className="text-white text-lg pt-4">ETH Price</h1>
                                     <p className=" text-green-400 mt-4">${ethPrice}</p>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl items-center">
-                                    <h1 className=" text-white text-lg">Total Assets</h1>
+                                    <h1 className=" text-white text-lg pt-4">Total Assets</h1>
                                     <p className="text-green-400 mt-4">{accountAssets.length}</p>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
-                                    <h1 className=" text-white text-lg">Floor Value</h1>
+                                    <h1 className=" text-white text-lg pt-4">Floor Value</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
                                         <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(totalETHValue * 100) / 100}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round((totalETHValue * ethPrice) * 100) / 100).toLocaleString()})</p>
@@ -249,7 +251,7 @@ const Account = (props) => {
 
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
-                                    <h1 className="text-white text-lg">7 Day Avg</h1>
+                                    <h1 className="text-white text-lg pt-4">7 Day Avg</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
                                         <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(totalETHValue7Day * 100) / 100}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round((totalETHValue7Day * ethPrice) * 100) / 100).toLocaleString()})</p>

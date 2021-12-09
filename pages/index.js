@@ -4,7 +4,7 @@ import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import rateLimit from 'axios-rate-limit';
-
+import { ethers } from "ethers";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
@@ -72,7 +72,7 @@ class HomePage extends React.Component {
     e.preventDefault();
     this.setState({ accountAssets: [] });
     if (this.state.userAddress.endsWith('.eth')) {
-      const provider = await detectEthereumProvider();
+      const provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7");
       const ens = new ENS({ provider, ensAddress: getEnsAddress('1') });
       this.setState({ ethAddress: await ens.name(this.state.userAddress).getAddress() });
     }

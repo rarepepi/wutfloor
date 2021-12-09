@@ -212,9 +212,13 @@ const Account = (props) => {
                         <TopNav />
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h1 className="text-purple-500 mt-4 text-center mb-8">{ethAddress.slice(0, 5) +
-                            "..." +
-                            ethAddress.slice(ethAddress.length - 4, ethAddress.length)}</h1>
+                        <div className="shadow-2xl w-64 mx-auto items-center p-4">
+                            <h1 className="text-white text-lg text-center block mt-2">Account</h1>
+                            <h1 className="text-purple-500 text-center mt-2">{ethAddress.slice(0, 5) +
+                                "..." +
+                                ethAddress.slice(ethAddress.length - 4, ethAddress.length)}</h1>
+
+                        </div>
 
                         <div className="flex flew-row flex-wrap justify-evenly p-8 ">
                             <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl items-center">
@@ -226,7 +230,7 @@ const Account = (props) => {
                                 <p className="text-green-400 mt-4">{accountAssets.length}</p>
                             </div>
                             <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
-                                <h1 className=" text-white text-lg">Total Value</h1>
+                                <h1 className=" text-white text-lg">Floor Value</h1>
                                 <div className="flex flex-row jusitfy-center text-center space-x-2">
                                     <p className="text-green-400 mt-4">Ξ{Math.round(totalETHValue * 100) / 100}</p>
                                     <p className="text-green-400 mt-4">(${(Math.round((totalETHValue * ethPrice) * 100) / 100).toLocaleString()})</p>

@@ -246,6 +246,14 @@ const Account = (props) => {
                         <div className="">
                             <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-8">
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
+                                    <h1 className="text-white text-lg pt-4">Total Balance</h1>
+                                    <div className="flex flex-col jusitfy-center text-center space-x-2">
+                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{parseFloat(ethBalance) + parseFloat(totalETHValue)}</p>
+                                        <p className="text-green-400 mt-4">(${(Math.round(((ethBalance * ethPrice) + (totalETHValue * ethPrice)) * 100) / 100).toLocaleString()})</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">ETH Balance</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
                                         <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethBalance}</p>

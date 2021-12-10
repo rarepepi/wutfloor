@@ -98,6 +98,11 @@ const Account = (props) => {
                     Router.push('/');
                     return;
                 }
+                if (results.address == "0x0000000000000000000000000000000000000000") {
+                    Router.push('/');
+                    console.log("no resolver / ens returned 0x000dead");
+                    return;
+                }
                 setAccountAssets(results.assets);
                 setTotalETHValue(results.totalETHValue);
                 setTotalETHValue7Day(results.totalETHValue7Day);

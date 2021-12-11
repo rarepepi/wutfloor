@@ -29,31 +29,31 @@ function TopNav() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <a className="" href="https://wutfloor.xyz">
-                <img
-                  className="h-8 w-8 "
-                  src="/img/logo.png"
-                  alt="Workflow"
-                />
+                  <img
+                    className="h-8 w-8 "
+                    src="/img/logo-transparent.png"
+                    alt="Workflow"
+                  />
                 </a>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                <a
+                  <a
                     href="https://wutfloor.xyz"
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >Wut Floor                </a>
                   <a
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                      <Link
-                          to="Why"
-                          spy={true}
-                          smooth={true}
-                          offset={-50}
-                          duration={500}
-                          className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                    Why
+                    <Link
+                      to="Why"
+                      spy={true}
+                      smooth={true}
+                      offset={-50}
+                      duration={500}
+                      className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Why
                     </Link>
 
                   </a>
@@ -62,18 +62,34 @@ function TopNav() {
                     className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     <Link
-                          to="FAQ"
-                          spy={true}
-                          smooth={true}
-                          offset={-50}
-                          duration={500}
-                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                          FAQ
-                        </Link>
+                      to="FAQ"
+                      spy={true}
+                      smooth={true}
+                      offset={-50}
+                      duration={500}
+                      className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      FAQ
+                    </Link>
                   </a>
                 </div>
+
               </div>
+              <div className="hidden md:block right-0 absolute">
+                <a
+                  className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <i className="fab fa-twitter text-xl mr-2" />
+
+                </a>
+                <a
+                  className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <i className="fab fa-github text-xl mr-2" />
+
+                </a>
+              </div>
+
             </div>
             <div className="-mr-2 flex md:hidden">
               <button
@@ -134,37 +150,53 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a
-                    href="#"
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                <a
+                  href="#"
+                  className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                >
+                  <Link
+                    to="Why"
+                    spy={true}
+                    smooth={true}
+                    offset={-50}
+                    duration={500}
+                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                      <Link
-                          to="Why"
-                          spy={true}
-                          smooth={true}
-                          offset={-50}
-                          duration={500}
-                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
                     Why
-                    </Link>
+                  </Link>
 
-                  </a>
+                </a>
 
-                  <a
-                    href="#"
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                <a
+                  href="#"
+                  className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
+                >
+                  <Link
+                    to="FAQ"
+                    spy={true}
+                    smooth={true}
+                    offset={-50}
+                    duration={500}
+                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    <Link
-                          to="FAQ"
-                          spy={true}
-                          smooth={true}
-                          offset={-50}
-                          duration={500}
-                          className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                          FAQ
-                        </Link>
+                    FAQ
+                  </Link>
+
+                </a>
+                <a
+                  href="https://twitter.com/wutfloorxyz"
+                  target="_blank"
+                  className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <i className="fab fa-twitter text-xl mr-2" />
+
+                </a>
+                <a
+                  href="https://github.com/pepimartinez/wutfloor"
+                  target="_blank"
+                  className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <i className="fab fa-github text-xl mr-2" />
 
                 </a>
               </div>

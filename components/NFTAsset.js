@@ -11,10 +11,10 @@ const NFTAsset = (props) => {
             <Fade>
                 {/* <h1 className="text-white text-center -top-5 left-2 z-20 relative ring-2 ring-green-300 h-8 p-2 rounded-full ">{props.number + 1}</h1> */}
                 <div className="flex flex-col justify-center text-center text-white w-64 border-2 border-purple-500 rounded-xl lg:pt-8 pt-4">
-                    <div className="cursor-pointer lg:w-48 lg:h-48 w-32 h-32 mx-auto mb-4">
+                    <div className="cursor-pointer w-32 h-32 mx-auto mb-4">
                         <a href={url2} target="_blank">
 
-                            <img src={props.asset.image_url} className=" ring-purple-400 ring-2 rounded-2xl mb-4 " />
+                            <img src={props.asset.image_url} className=" ring-purple-400 ring-2 rounded-2xl mb-4  w-32 h-32 " />
                         </a>
                     </div>
                     <a href={url} target="_blank" className="p-2 text-white">

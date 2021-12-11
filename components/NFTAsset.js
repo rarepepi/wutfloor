@@ -17,7 +17,7 @@ const NFTAsset = (props) => {
                             <img src={props.asset.image_url} className=" ring-purple-400 ring-2 rounded-2xl mb-4  w-32 h-32 " />
                         </a>
                     </div>
-                    <a href={url} target="_blank" className="p-2 text-white">
+                    <a href={url} target="_blank" className="p-2 text-white h-16">
                         <p className="text-xs px-8 hover:text-blue-300">{props.asset.name}</p>
                     </a>
                     <p className="mt-2 text-xs px-8 text-green-300"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-4 w-4 inline mr-2" />{Math.round(props.asset.floor_price * 100) / 100}</p>

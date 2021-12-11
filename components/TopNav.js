@@ -77,12 +77,16 @@ function TopNav() {
               </div>
               <div className="hidden md:block right-0 absolute">
                 <a
+                  href="https://twitter.com/wutfloorxyz"
+                  target="_blank"
                   className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-twitter text-xl mr-2" />
 
                 </a>
                 <a
+                  href="https://github.com/pepimartinez/wutfloor"
+                  target="_blank"
                   className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-github text-xl mr-2" />

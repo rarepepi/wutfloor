@@ -13,7 +13,7 @@ import Router from 'next/router';
 import Footer from "../components/Footer";
 
 
-const getOpenSeaData = async (address) => {
+const getOpenSeaData = async (address, setAssetAmount, setCurrentlyLoadingAssetNumber) => {
     let provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7");;
     console.log(address);
     if (address.endsWith('.eth')) {
@@ -31,6 +31,7 @@ const getOpenSeaData = async (address) => {
     }
 
     const data = await request.get(`https://api.opensea.io/api/v1/assets?limit=50&owner=${address}`, { crossdomain: true });
+    setAssetAmount(data.data.assets.length);
     if (!data) return;
 
     let assets = data.data.assets;
@@ -75,6 +76,8 @@ const getOpenSeaData = async (address) => {
             if (item.image_url.length < 1) {
                 item.image_url = data.data.collection.image_url;
             }
+            setCurrentlyLoadingAssetNumber(i);
+
             newAssets.push(item);
         }
     }));
@@ -88,6 +91,8 @@ const Account = (props) => {
     const [totalETHValue, setTotalETHValue] = useState(0);
     const [totalETHValue7Day, setTotalETHValue7Day] = useState(0);
     const [ethBalance, setETHBalance] = useState(0);
+    const [assetAmount, setAssetAmount] = useState(0);
+    const [currentlyLoadingAssetNumber, setCurrentlyLoadingAssetNumber] = useState(0);
 
     const [accountAssets, setAccountAssets] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -97,7 +102,7 @@ const Account = (props) => {
             const getData = async () => {
                 const data = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
                 setETHPrice(data.data.USD);
-                const results = await getOpenSeaData(queryAddress);
+                const results = await getOpenSeaData(queryAddress, setAssetAmount, setCurrentlyLoadingAssetNumber);
                 if (!results) {
                     Router.push('/');
                     return;
@@ -225,7 +230,7 @@ const Account = (props) => {
                         }
                     }
                 }} />
-                <p className="text-white p-8">Loading...</p> </></div> :
+                <p className="text-white p-8">Loading...</p> <p className="text-xs text-white">{currentlyLoadingAssetNumber}/{assetAmount}</p></></div> :
                 <div>
                     <div className="shadow-lg">
                         <TopNav />
@@ -248,7 +253,7 @@ const Account = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">Total Balance</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{parseFloat(ethBalance) + parseFloat(totalETHValue)}</p>
+                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{(parseFloat(ethBalance) + parseFloat(totalETHValue)).toLocaleString()}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round(((ethBalance * ethPrice) + (totalETHValue * ethPrice)) * 100) / 100).toLocaleString()})</p>
                                     </div>
                                 </div>
@@ -256,15 +261,15 @@ const Account = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">ETH Balance</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethBalance}</p>
+                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethBalance.toLocaleString()}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round((ethBalance * ethPrice) * 100) / 100).toLocaleString()})</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className=" text-white text-lg pt-4">Floor Value</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(totalETHValue * 100) / 100}</p>
-                                        <p className="text-green-400 mt-4">(${(Math.round((totalETHValue * ethPrice) * 100) / 100).toLocaleString()})</p>
+                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{totalETHValue.toLocaleString()}</p>
+                                        <p className="text-green-400 mt-4">(${(totalETHValue * ethPrice).toLocaleString()})</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center mt-4 text-center lg:p-10 p-8 shadow-2xl items-center">

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
@@ -10,23 +9,32 @@ import Footer from "../components/Footer";
 import NFTEvent from "../components/NFTEvent";
 
 const getHotCollectionsData = async () => {
-    const data = await axios.get(`https://api.opensea.io/api/v1/events?event_type=successful&only_opensea=false&offset=0&limit=20&occurred_after=2021-03-28T06%3A08%3A31.489901`, { headers: { 'X-API-KEY': process.env.OS_KEY } });
-    // const data = await axios.get(`https://api.opensea.io/wyvern/v1/orders?bundled=false&include_bundled=false&limit=20&offset=0&order_by=created_date&order_direction=desc`, { headers: { 'X-API-KEY': process.env.OS_KEY } });
-    if (!data) return;
-    let events = data.data.asset_events;
+
+    const maxOffset = 200;
+    const bundleSize = 20;
+    let events = [];
+    for (let i = 0; i < maxOffset / bundleSize; i++) {
+        let offset = bundleSize * i;
+        const data = await axios.get(`https://api.opensea.io/api/v1/events?event_type=successful&only_opensea=false&offset=${offset}&limit=${bundleSize}`, { headers: { 'X-API-KEY': process.env.OS_KEY } });
+        if (!data) return;
+        // console.log(data.data.asset_events);
+        events.push(...data.data.asset_events);
+    }
     console.log(events);
+    let newEvents = [];
+    await Promise.all(events.map(async (e, i) => {
+        newEvents.push(e);
+    }));
 
     // const web3 = new Web3(provider);
     // const result = await web3.eth.getBalance(address);
     // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
     // console.log(`There are ${collections.length} collections`);
 
-    return { events };
+    return { newEvents };
 };
 
-const hot = (props) => {
-    const router = useRouter();
-    const queryAddress = router.query.address;
+const feed = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
     const [events, setEvents] = useState([]);
@@ -34,9 +42,12 @@ const hot = (props) => {
 
 
     useEffect(async () => {
+
         const getData = async () => {
             const data = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
             setETHPrice(data.data.USD);
+            setLoading(true);
+
             const results = await getHotCollectionsData();
             if (!results) {
                 Router.push('/');
@@ -47,11 +58,16 @@ const hot = (props) => {
                 console.log("no resolver / ens returned 0x000dead");
                 return;
             }
-            setEvents(results.events);
+            setEvents(results.newEvents);
             setLoading(false);
         };
-        await getData();
+        getData();
 
+        const interval = setInterval(() => {
+            getData();
+        }, 60000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -162,7 +178,7 @@ const hot = (props) => {
                     }
                 }} />
                 <p className="text-white p-8 text-center" >Loading...</p></></div> :
-                <div>
+                <div className="w-full">
                     <div className="shadow-lg">
                         <TopNav />
                     </div>
@@ -172,7 +188,7 @@ const hot = (props) => {
                         </h1>
                     </div>
 
-                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 shadow-2xl sm:grid-cols-2 grid-cols-1 align-middle p-6 m-8">
+                    <div className="grid grid-cols-1 align-middle p-6 m-8">
                         {events.map((event, i) => {
                             return (
                                 <>
@@ -189,4 +205,4 @@ const hot = (props) => {
     );
 };
 
-export default hot;
+export default feed;

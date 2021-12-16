@@ -6,34 +6,30 @@ const NFTEvent = (props) => {
     const [tooltipStatus, setTooltipStatus] = useState(0);
     return (
         <div className="flex flex-row justify-evenly shadow-2xl">
-
             <Fade>
                 <>
-                    <div className="flex flex-row justify-evenly space-x-32  text-center text-white w-full h-full rounded-xl lg:pt-8 pt-4">
-                        <div classname="flex justify-center flex-row">
-                            <img className="w-12 h-12 rounded-full" src={props.event.asset.image_url}></img>
-                            <h1 className="text-white text-xs text-center ml-2 truncate">{props.event.asset.name}</h1>
+                    <div className="flex flex-row flex-wrap text-left justify-evenly space-x-24  text-white w-full h-full rounded-xl lg:pt-8 p-4">
+                        <div classname="flex">
+                            <img className="w-8 h-8 rounded-full" src={props.event.asset.image_url}></img>
+                        </div>
+                        <div className="flex align-middle w-32">
+                            <h1 className="text-white text-xs text-left ml-2  overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                        </div>
+                        <div className="flex space-x-8">
+                            <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-4 w-4" />
+                            <p className="text-white text-left w-16">{Math.round(ethers.utils.formatEther(props.event.total_price) * 100) / 100}</p>
+                            <p className="text-gray-400 w-16 text-xs">${parseInt((ethers.utils.formatEther(props.event.total_price) * props.ethPrice))}</p>
                         </div>
 
-                        <div className="flex justify-center flex-row">
-                            <span className="text-white w-16"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethers.utils.formatEther(props.event.total_price)}</span>
-                            <p className="text-white w-16">${(ethers.utils.formatEther(props.event.total_price) * props.ethPrice).toLocaleString()}</p>
-
-                        </div>
-                        <div className="flex justify-center flex-row">
-                            <span className="text-white w-16"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethers.utils.formatEther(props.event.total_price)}</span>
-                            <p className="text-white w-16">${(ethers.utils.formatEther(props.event.total_price) * props.ethPrice).toLocaleString()}</p>
-
+                        <div className="flex rounded-2xl bg-primary h-8 p-2">
+                            <p className="text-white text-sm">{props.event.event_type == "successful" && <p>Sale</p>}</p>
                         </div>
 
-                        <div className="flex justify-end flex-col " >
-                            <h1 className="text-white text-xs">{props.event.listing_time}</h1>
+                        <div className="flex" >
+                            {/* <h1 className="text-white text-xs">{props.event.listing_time}</h1> */}
                             <a href={props.event.asset.permalink} target="_blank">
-
-                                <i className="fa fa-water"></i>
+                                <i className="fa fa-external-link-alt"></i>
                             </a>
-                            <h1 className="text-white">{props.event.event_type && props.event.event_type}</h1>
-
                         </div>
 
                         {/* 

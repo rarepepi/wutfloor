@@ -7,10 +7,12 @@ import Particles from "react-particles-js";
 import Router from 'next/router';
 import Footer from "../components/Footer";
 import NFTEvent from "../components/NFTEvent";
+import { ethers } from "ethers";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const getHotCollectionsData = async () => {
 
-    const maxOffset = 60;
+    const maxOffset = 1000;
     const bundleSize = 20;
     let events = [];
     for (let i = 0; i < maxOffset / bundleSize; i++) {
@@ -23,7 +25,7 @@ const getHotCollectionsData = async () => {
     console.log(events);
     let newEvents = [];
     await Promise.all(events.map(async (e, i) => {
-        if (e.asset) {
+        if (e.asset && ethers.utils.formatEther(e.total_price) > 0.01) {
             newEvents.push(e);
         }
     }));
@@ -36,11 +38,46 @@ const getHotCollectionsData = async () => {
     return { newEvents };
 };
 
+function findOcc(arr, key) {
+    let arr2 = [];
+
+    arr.forEach((x) => {
+
+        // Checking if there is any object in arr2
+        // which contains the key value
+        if (arr2.some((val) => { return val[key] == x[key]; })) {
+
+            // If yes! then increase the occurrence by 1
+            arr2.forEach((k) => {
+                if (k[key] === x[key]) {
+                    k["ocurrance"]++;
+                    k["amt"]++;
+
+                }
+            });
+
+        } else {
+            // If not! Then create a new object initialize 
+            // it with the present iteration key's value and 
+            // set the occurrence to 1
+            let a = {};
+            a[key] = x[key];
+            a["name"] = x[key];
+            a["ocurrance"] = 1;
+            a["amt"] = 1;
+            arr2.push(a);
+        }
+    });
+
+    return arr2;
+}
+
 const feed = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [occurances, setOccurances] = useState([]);
 
 
     useEffect(async () => {
@@ -60,7 +97,12 @@ const feed = (props) => {
                 console.log("no resolver / ens returned 0x000dead");
                 return;
             }
-            setEvents(results.newEvents);
+            setEvents(results.newEvents.slice(0, 20));
+            console.log(results.events);
+            let occur = findOcc(results.newEvents, "collection_slug");
+            occur = occur.sort((a, b) => (a.ocurrance > b.ocurrance) ? -1 : 1);
+            setOccurances(occur.splice(0, 5));
+            console.log({ occur });
             setLoading(false);
         };
         getData();
@@ -80,12 +122,13 @@ const feed = (props) => {
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
-                <div className="flex flex-col justify-center">
-                    <h1 className="text-white font-bold my-16 p-4 text-4xl text-center" >
-                        <span className="text-purple-500">Live </span>Feed
+                <div className="flex flex-col justify-center p-4 my-16">
+                    <h1 className="text-white font-bold mb-2 text-4xl text-center" >
+                        Live Feed
                     </h1>
+                    <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
                 </div>
-                <div className="flex flex-row justify-evenly w-full bg-secondary">
+                {/* <div className="flex flex-row justify-evenly w-full bg-secondary">
                     <div classname="flex">
                         Name
                     </div>
@@ -98,7 +141,29 @@ const feed = (props) => {
                     <div classname="flex">
                         Activity
                     </div>
-                </div>
+                </div> */}
+
+                {occurances.length > 0 && <div className="overflow-x-auto flex w-full h-full">
+                    <ResponsiveContainer width="100%" height={300}>
+                        <BarChart
+                            width={400}
+                            height={200}
+                            data={occurances}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <XAxis className="text-xs w-2 break-words" dataKey="name" />
+                            <YAxis />
+                            <Legend />
+                            <Bar dataKey="ocurrance" barSize={20} fill="#8884d8" />
+                        </BarChart>
+                    </ResponsiveContainer>
+
+                </div>}
                 <div className="flex flex-col w-full align-middle m-8 overflow-x-auto">
 
                     {events.map((event, i) => {

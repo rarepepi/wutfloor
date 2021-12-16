@@ -36,7 +36,7 @@ const getHotCollectionsData = async () => {
     return { newEvents };
 };
 
-const feed = (props) => {
+const hot = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
     const [events, setEvents] = useState([]);
@@ -190,11 +190,11 @@ const feed = (props) => {
                         </h1>
                     </div>
 
-                    <div className="grid grid-cols-1 w-full align-middle p-6 m-8">
+                    <div className="grid grid-cols-1 align-middle p-6 m-8">
                         {events.map((event, i) => {
                             return (
                                 <>
-                                    <NFTEvent number={i} event={event} ethPrice={ethPrice} />
+                                    <NFTCollection number={i} collection={collection} ethPrice={ethPrice} />
                                 </>
                             );
                         })}
@@ -207,4 +207,4 @@ const feed = (props) => {
     );
 };
 
-export default feed;
+export default hot;

@@ -20,12 +20,12 @@ const FAQ = () => {
                                 <span>What is Wut Floor?</span>
                                 <ChevronUpIcon
                                     className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-green-500`}
+                                        } w-5 h-5 text-green-400`}
                                 />
                             </Disclosure.Button>
                             <Disclosure.Panel className="px-4 pt-4 pb-4 lg:text-2xl text-gray-200 text-center">a
-                                <span className="text-green-300"> "floor" </span>
-                                <span className="text-red-300">price</span> calculator
+                                <span className="text-purple-500"> "floor" </span>
+                                <span className="text-green-300">price</span> calculator
                             </Disclosure.Panel>
                         </>
                     )}
@@ -37,11 +37,11 @@ const FAQ = () => {
                                 <span>Is this open sourced?</span>
                                 <ChevronUpIcon
                                     className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-green-500`}
+                                        } w-5 h-5 text-green-400`}
                                 />
                             </Disclosure.Button>
                             <Disclosure.Panel className="px-4 pt-4 pb-2 lg:text-2xl text-gray-200 text-center">
-                            <span className="text-green-300"> Yes! </span>
+                            <span className="text-green-400"> Yes! </span>
                             </Disclosure.Panel>
                         </>
                     )}

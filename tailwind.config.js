@@ -1,9 +1,7 @@
 // tailwind.config.js
 
 module.exports = {
-  mode: "jit",
   important: true,
-  purge: [],
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
@@ -13,11 +11,15 @@ module.exports = {
       'danger': '#e3342f',
       'background': '#181818',
       'bg-light': '#303048'
-     }),
+    }),
     extend: {
       backgroundImage: (theme) => ({
         "bg-logo": "url('/img/logo.png')",
       }),
+      zIndex: {
+
+        '-10': '-10',
+      },
       screens: {
         'sm': '640px',
         // => @media (min-width: 640px) { ... }
@@ -53,6 +55,6 @@ module.exports = {
         'xl': '50em', // 800px at 1rem
       },
       variants: ['responsive'],
-    })
+    }),
   ],
 };

@@ -3,17 +3,26 @@ import { motion, useMotionValue } from "framer-motion";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
+import rateLimit from 'axios-rate-limit';
+import { ethers } from "ethers";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
 import FAQ from '../components/FAQ';
-import ENS, { getEnsAddress } from '@ensdomains/ensjs'
+import ENS, { getEnsAddress } from '@ensdomains/ensjs';
 import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
+import NFTAsset from "../components/NFTAsset";
+const request = rateLimit(axios.create(), { maxRequests: 5, perMilliseconds: 1000, maxRPS: 5 });
+import Web3 from "web3";
+import TypeIt from "typeit-react";
+import Router from 'next/router';
+import Particles from "react-particles-js";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -22,8 +31,7 @@ class HomePage extends React.Component {
       isMobile: false,
       signedIn: false,
       userAddress: "",
-      ethAddress: "",
-      accountAssets: []
+      wrongAddress: false,
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -32,13 +40,17 @@ class HomePage extends React.Component {
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.updatePredicate();
     window.addEventListener("resize", this.updatePredicate);
 
     sleep(2000).then(() => {
       this.setState({ loading: false });
     });
+
+    const data = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
+
+    this.setState({ ethPrice: data.data.USD });
   }
 
   componentWillUnmount() {
@@ -50,72 +62,169 @@ class HomePage extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({userAddress: event.target.value});
+    this.setState({ userAddress: event.target.value });
   }
 
-  async handleSumbit(event) {
-    const provider = await detectEthereumProvider();
+  async handleSumbit(e) {
+    e.preventDefault();
+    let ethAddress = this.state.userAddress;
+    if (ethAddress.endsWith('.eth')) {
+      const provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7");
+      const ens = new ENS({ provider, ensAddress: getEnsAddress('1') });
+      ethAddress = await ens.name(ethAddress).getAddress();
+    }
 
-    const ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
-    this.setState({ethAddress: await ens.name(this.state.userAddress).getAddress()});
 
-    const data = await axios.get(`https://api.opensea.io/api/v1/assets?owner=${this.state.ethAddress}`)
-    if (!data) return
+    if (!Web3.utils.isAddress(ethAddress)) {
+      this.setState({ wrongAddress: true });
+      return;
+    }
 
-    const assets = data.data.assets
-    console.log(assets)
-    this.setState({accountAssets: assets});
-    console.log(this.state.accountAssets)
+    Router.push(`${ethAddress}`);
   }
-
 
   render() {
     return (
-      <div className="font-press-start">
-        <Fade>
-          <div className="shadow-2xl">
-            <TopNav />
-          </div>
+      <div className="font-press-start min-h-screen relative bg-background">
+        <div className=""><Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
+          "background": {
+            "color": {
+              "value": "#232741"
+            },
+            "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
+            "position": "50% 50%",
+            "repeat": "no-repeat",
+            "size": "100%"
+          },
+          "fullScreen": {
+            "zIndex": 1,
+            "enable": true,
+          },
+          "interactivity": {
+            "events": {
+              "onClick": {
+                "enable": true,
+                "mode": "repulse"
+              },
+              "onHover": {
+                "enable": true,
+                "mode": "bubble"
+              }
+            },
+            "modes": {
+              "bubble": {
+                "distance": 250,
+                "duration": 2,
+                "opacity": 0,
+                "size": 0
+              },
+              "grab": {
+                "distance": 400
+              },
+              "repulse": {
+                "distance": 400
+              }
+            }
+          },
+          "particles": {
+            "color": {
+              "value": "#ffffff"
+            },
+            "links": {
+              "color": {
+                "value": "#ffffff"
+              },
+              "distance": 150,
+              "opacity": 0.4
+            },
+            "move": {
+              "attract": {
+                "rotate": {
+                  "x": 600,
+                  "y": 600
+                }
+              },
+              "enable": true,
+              "outModes": {
+                "bottom": "out",
+                "left": "out",
+                "right": "out",
+                "top": "out"
+              },
+              "random": true,
+              "speed": 1
+            },
+            "number": {
+              "density": {
+                "enable": true
+              },
+              "value": 160
+            },
+            "opacity": {
+              "random": {
+                "enable": true
+              },
+              "value": {
+                "min": 0,
+                "max": 1
+              },
+              "animation": {
+                "enable": true,
+                "speed": 1,
+                "minimumValue": 0
+              }
+            },
+            "size": {
+              "random": {
+                "enable": true
+              },
+              "value": {
+                "min": 1,
+                "max": 3
+              },
+              "animation": {
+                "speed": 4,
+                "minimumValue": 0.3
+              }
+            }
+          }
+        }} /></div>
+        <div className="shadow-lg">
+          <TopNav />
+        </div>
+        <>
+
           <section className="flex flex-col h-screen justify-center items-center">
-            {/* {this.state.accountAssets == 0 && } */}
+
             <div className="flex flex-row justify-center space-x-8 p-16">
-              <div class="md:flex md:items-center mb-6 flex-col ">
-                  <h1 class="text-white font-bold mb-16 pr-4 text-4xl text-center" >
-                    <span className="text-green-200">Wut</span>'s the <span className="text-green-200">Floor </span>price?
-                  </h1>
-                  <p className="text-gray-400 text-center text-xs">Enter your Ethereum Adress below or use your ENS</p>
-
-                <div class="md:w-2/3 flex justify-center flex-col">
-                  <input class="mt-16 bg-gray-800 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange}/>
-                  <button className="mt-16 text-white bg-secondary w-32 rounded-lg mx-auto"  onClick={this.handleSumbit}>Go!</button>
-
+              <div className="md:flex md:items-center mb-6 flex-col ">
+                <h1 className="text-white font-bold mb-16 p-4 text-4xl text-center" >
+                  <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
+                </h1>
+                <p className="text-gray-400 text-center text-xs">Enter your ENS address or use your ETH address below</p>
+                <div className="md:w-2/3 ">
+                  <form className="flex justify-center flex-col">
+                    <input className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" placeholder="vb.eth or 0x..." id="inline-full-name" type="text" value={this.state.userAddress} onChange={this.handleChange} />
+                    {this.state.wrongAddress && <Fade top><p className="text-red-500 text-center mt-8">Not an ETH address, try again</p></Fade>}
+                    <button className="mt-16 p-1 motion-safe:hover:scale-110 text-white bg-primary w-32 rounded-xl mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
+                  </form>
                 </div>
-                
+
               </div>
             </div>
+
           </section>
-          <>
-          {this.state.accountAssets.length > 0 &&
-                <>
-                <div className="flex justify-center">
-                    <h1 className="text-red-300 mt-16">Address: {this.state.ethAddress}</h1>
-                  </div>
-                  {this.state.accountAssets.map((asset, i) => {
-                    return (<p>{asset.name}</p>)
-                  })}
-                  </>
-                }
-                </>
-        </Fade>
-        <section className="mt-16 shadow-2xl p-16">
-          <MainContent />
-        </section>        
-          <section className="mt-16 shadow-2xl p-16">
+          <section className="mt-16 p-16">
+            <MainContent />
+
+          </section>
+          <section className="mt-16 p-16">
             <FAQ />
           </section>
-        <section className="mt-16 shadow-2xl">
-          <Footer />
-        </section>
+          <section className="mt-16">
+            <Footer />
+          </section>
+        </>
       </div >
     );
   }

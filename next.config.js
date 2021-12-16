@@ -5,5 +5,6 @@ module.exports = {
   env: {
     SMART_CONTRACT_ENV: process.env.SMART_CONTRACT_ENV,
     NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
+    OS_KEY: process.env.OS_KEY,
   },
 };

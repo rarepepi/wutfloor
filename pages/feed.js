@@ -10,7 +10,7 @@ import NFTEvent from "../components/NFTEvent";
 
 const getHotCollectionsData = async () => {
 
-    const maxOffset = 200;
+    const maxOffset = 60;
     const bundleSize = 20;
     let events = [];
     for (let i = 0; i < maxOffset / bundleSize; i++) {
@@ -75,133 +75,148 @@ const feed = (props) => {
     return (
         <div className="font-press-start">
 
-            {loading ? <div className="flex flex-col h-screen justify-center items-center"><>
-                <Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
-                    "background": {
-                        "color": {
-                            "value": "#232741"
-                        },
-                        "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
-                        "position": "50% 50%",
-                        "repeat": "no-repeat",
-                        "size": "100%"
-                    },
-                    "fullScreen": {
-                        "zIndex": 1,
-                        "enable": true,
-                    },
-                    "interactivity": {
-                        "events": {
-                            "onClick": {
-                                "enable": true,
-                                "mode": "repulse"
+
+            <div className="w-full">
+                <div className="shadow-lg">
+                    <TopNav />
+                </div>
+                <div className="flex flex-col justify-center">
+                    <h1 className="text-white font-bold my-16 p-4 text-4xl text-center" >
+                        <span className="text-purple-500">Live </span>Feed
+                    </h1>
+                </div>
+                <div className="flex flex-row justify-evenly w-full bg-secondary">
+                    <div classname="flex">
+                        Name
+                    </div>
+                    <div classname="flex">
+                        Floor
+                    </div>
+                    <div classname="flex">
+                        Volume
+                    </div>
+                    <div classname="flex">
+                        Activity
+                    </div>
+                </div>
+                <div className="flex flex-col w-full align-middle m-8 overflow-x-auto">
+
+                    {events.map((event, i) => {
+                        return (
+                            <>
+                                <NFTEvent number={i} event={event} ethPrice={ethPrice} />
+                            </>
+                        );
+                    })}
+                </div>
+                {loading && <div className="flex flex-col h-screen justify-center items-center"><>
+                    <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
+                        "background": {
+                            "color": {
+                                "value": "#232741"
                             },
-                            "onHover": {
-                                "enable": true,
-                                "mode": "bubble"
+                            "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
+                            "position": "50% 50%",
+                            "repeat": "no-repeat",
+                            "size": "100%"
+                        },
+                        "fullScreen": {
+                            "zIndex": 1,
+                            "enable": true,
+                        },
+                        "interactivity": {
+                            "events": {
+                                "onClick": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "onHover": {
+                                    "enable": true,
+                                    "mode": "bubble"
+                                }
+                            },
+                            "modes": {
+                                "bubble": {
+                                    "distance": 250,
+                                    "duration": 2,
+                                    "opacity": 0,
+                                    "size": 0
+                                },
+                                "grab": {
+                                    "distance": 400
+                                },
+                                "repulse": {
+                                    "distance": 400
+                                }
                             }
                         },
-                        "modes": {
-                            "bubble": {
-                                "distance": 250,
-                                "duration": 2,
-                                "opacity": 0,
-                                "size": 0
-                            },
-                            "grab": {
-                                "distance": 400
-                            },
-                            "repulse": {
-                                "distance": 400
-                            }
-                        }
-                    },
-                    "particles": {
-                        "color": {
-                            "value": "#ffffff"
-                        },
-                        "links": {
+                        "particles": {
                             "color": {
                                 "value": "#ffffff"
                             },
-                            "distance": 150,
-                            "opacity": 0.4
-                        },
-                        "move": {
-                            "attract": {
-                                "rotate": {
-                                    "x": 600,
-                                    "y": 600
+                            "links": {
+                                "color": {
+                                    "value": "#ffffff"
+                                },
+                                "distance": 150,
+                                "opacity": 0.4
+                            },
+                            "move": {
+                                "attract": {
+                                    "rotate": {
+                                        "x": 600,
+                                        "y": 600
+                                    }
+                                },
+                                "enable": true,
+                                "outModes": {
+                                    "bottom": "out",
+                                    "left": "out",
+                                    "right": "out",
+                                    "top": "out"
+                                },
+                                "random": true,
+                                "speed": 1
+                            },
+                            "number": {
+                                "density": {
+                                    "enable": true
+                                },
+                                "value": 160
+                            },
+                            "opacity": {
+                                "random": {
+                                    "enable": true
+                                },
+                                "value": {
+                                    "min": 0,
+                                    "max": 1
+                                },
+                                "animation": {
+                                    "enable": true,
+                                    "speed": 1,
+                                    "minimumValue": 0
                                 }
                             },
-                            "enable": true,
-                            "outModes": {
-                                "bottom": "out",
-                                "left": "out",
-                                "right": "out",
-                                "top": "out"
-                            },
-                            "random": true,
-                            "speed": 1
-                        },
-                        "number": {
-                            "density": {
-                                "enable": true
-                            },
-                            "value": 160
-                        },
-                        "opacity": {
-                            "random": {
-                                "enable": true
-                            },
-                            "value": {
-                                "min": 0,
-                                "max": 1
-                            },
-                            "animation": {
-                                "enable": true,
-                                "speed": 1,
-                                "minimumValue": 0
-                            }
-                        },
-                        "size": {
-                            "random": {
-                                "enable": true
-                            },
-                            "value": {
-                                "min": 1,
-                                "max": 3
-                            },
-                            "animation": {
-                                "speed": 4,
-                                "minimumValue": 0.3
+                            "size": {
+                                "random": {
+                                    "enable": true
+                                },
+                                "value": {
+                                    "min": 1,
+                                    "max": 3
+                                },
+                                "animation": {
+                                    "speed": 4,
+                                    "minimumValue": 0.3
+                                }
                             }
                         }
-                    }
-                }} />
-                <p className="text-white p-8 text-center" >Loading...</p></></div> :
-                <div className="w-full">
-                    <div className="shadow-lg">
-                        <TopNav />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                        <h1 className="text-white font-bold my-16 p-4 text-4xl text-center" >
-                            <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
-                        </h1>
-                    </div>
+                    }} />
+                    <p className="text-white p-8 text-center" >Loading...</p></></div>}
+                <Footer></Footer>
+            </div>
 
-                    <div className="grid grid-cols-1 w-full align-middle p-6 m-8">
-                        {events.map((event, i) => {
-                            return (
-                                <>
-                                    <NFTEvent number={i} event={event} ethPrice={ethPrice} />
-                                </>
-                            );
-                        })}
-                    </div>
-                    <Footer></Footer>
-                </div>
-            }
         </div>
 
     );

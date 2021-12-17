@@ -46,6 +46,8 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
     require('tailwindcss-line-length')({
       widths: {
         'xs': '18em', // 300px at 1rem

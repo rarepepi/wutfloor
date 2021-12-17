@@ -124,7 +124,7 @@ const Account = (props) => {
     }, [router]);
 
     return (
-        <div className="font-press-start">
+        <div className="font-press-start ">
 
             {loading ? <div className="flex flex-col h-screen justify-center items-center"><>
                 <Particles className="absolute -z-10 inset-0" id="tsparticles" options={{

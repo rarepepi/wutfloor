@@ -45,7 +45,7 @@ function TopNav() {
                   <a
                     href="https://wutfloor.xyz/feed"
                     target="_blank"
-                    className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Feed
                   </a>
@@ -165,7 +165,7 @@ function TopNav() {
                 <a
                   href="https://wutfloor.xyz/feed"
                   target="_blank"
-                  className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Feed
                 </a>

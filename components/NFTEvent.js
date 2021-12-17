@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import { ethers } from "ethers";
+import Link from 'next/link';
 const NFTEvent = (props) => {
 
     const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -13,7 +14,9 @@ const NFTEvent = (props) => {
                             <img className="w-8 h-8 rounded-full" src={props.event.asset.image_url}></img>
                         </div>
                         <div className="flex align-middle w-32">
-                            <h1 className="text-white text-xs text-left ml-2  overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                            <Link href={'/c/' + props.event.asset.collection.slug} className="hover:cursor_pointer hover:text-green-300">
+                                <h1 className="text-white text-xs text-left ml-2  overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                            </Link>
                         </div>
                         <div className="flex space-x-8">
                             <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-4 w-4" />

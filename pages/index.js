@@ -80,7 +80,7 @@ class HomePage extends React.Component {
       return;
     }
 
-    Router.push(`${ethAddress}`);
+    Router.push(`/a/${ethAddress}`);
   }
 
   render() {

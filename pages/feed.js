@@ -9,10 +9,10 @@ import Footer from "../components/Footer";
 import NFTEvent from "../components/NFTEvent";
 import { ethers } from "ethers";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import randomColor from 'randomcolor';
 const getHotCollectionsData = async () => {
 
-    const maxOffset = 1000;
+    const maxOffset = 100;
     const bundleSize = 20;
     let events = [];
     for (let i = 0; i < maxOffset / bundleSize; i++) {
@@ -142,28 +142,32 @@ const feed = (props) => {
                         Activity
                     </div>
                 </div> */}
+                <div className="flex flex-row flex-wrap justify-between">
 
-                {occurances.length > 0 && <div className="overflow-x-auto flex w-full h-full">
-                    <ResponsiveContainer width="100%" height={300}>
-                        <BarChart
-                            width={400}
-                            height={200}
-                            data={occurances}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <XAxis className="text-xs w-2 break-words" dataKey="name" />
-                            <YAxis />
-                            <Legend />
-                            <Bar dataKey="ocurrance" barSize={20} fill="#8884d8" />
-                        </BarChart>
-                    </ResponsiveContainer>
+                    {occurances.length > 0 && <div className="overflow-x-auto shadow-2xl flex w-full h-full">
+                        <ResponsiveContainer width="100%" height={300}>
+                            <BarChart
+                                width={400}
+                                height={200}
+                                data={occurances}
+                                margin={{
+                                    top: 5,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                }}
+                            >
+                                <XAxis className="text-xs w-2 hidden" dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                {/* <Legend /> */}
+                                <Bar dataKey="ocurrance" barSize={20} fill="#34d399" />
+                            </BarChart>
+                        </ResponsiveContainer>
 
-                </div>}
+                    </div>}
+
+                </div>
                 <div className="flex flex-col w-full align-middle m-8 overflow-x-auto">
 
                     {events.map((event, i) => {

@@ -6,11 +6,11 @@ import Web3 from "web3";
 const request = rateLimit(axios.create(), { maxRequests: 5, perMilliseconds: 1000, maxRPS: 5 });
 import ENS, { getEnsAddress } from '@ensdomains/ensjs';
 import rateLimit from 'axios-rate-limit';
-import NFTAsset from "../components/NFTAsset";
-import TopNav from "../components/TopNav";
+import NFTAsset from "../../components/NFTAsset";
+import TopNav from "../../components/TopNav";
 import Particles from "react-particles-js";
 import Router from 'next/router';
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 
 const getOpenSeaData = async (address, setAssetAmount, setCurrentlyLoadingAssetNumber) => {

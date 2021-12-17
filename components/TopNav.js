@@ -6,8 +6,8 @@ import Router from "next/router";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { AdjustmentsIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { Link } from "react-scroll";
-
+import { Link as ScrollLink } from "react-scroll";
+import Link from 'next/link';
 const navigation = [
   { name: "Twitter", href: "#", current: false },
   { name: "Github", href: "#", current: false },
@@ -38,21 +38,23 @@ function TopNav() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
+                  <Link href="/">
+                    <a
+                      className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >Wut Floor                </a>
+                  </Link>
+                  <Link href="/feed">
+                    <a
+                      className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Feed
+                    </a>
+
+                  </Link>
                   <a
-                    href="https://wutfloor.xyz"
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >Wut Floor                </a>
-                  <a
-                    href="https://wutfloor.xyz/feed"
-                    target="_blank"
-                    className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Feed
-                  </a>
-                  <a
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    <Link
+                    <ScrollLink
                       to="Why"
                       spy={true}
                       smooth={true}
@@ -61,14 +63,14 @@ function TopNav() {
                       className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Why
-                    </Link>
+                    </ScrollLink>
 
                   </a>
 
                   <a
                     className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    <Link
+                    <ScrollLink
                       to="FAQ"
                       spy={true}
                       smooth={true}
@@ -77,7 +79,7 @@ function TopNav() {
                       className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       FAQ
-                    </Link>
+                    </ScrollLink>
                   </a>
 
                 </div>
@@ -174,7 +176,7 @@ function TopNav() {
                   className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
                 >
 
-                  <Link
+                  <ScrollLink
                     to="Why"
                     spy={true}
                     smooth={true}
@@ -183,7 +185,7 @@ function TopNav() {
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Why
-                  </Link>
+                  </ScrollLink>
 
                 </a>
 
@@ -191,7 +193,7 @@ function TopNav() {
                   href="#"
                   className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
                 >
-                  <Link
+                  <ScrollLink
                     to="FAQ"
                     spy={true}
                     smooth={true}
@@ -200,7 +202,7 @@ function TopNav() {
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     FAQ
-                  </Link>
+                  </ScrollLink>
 
                 </a>
 

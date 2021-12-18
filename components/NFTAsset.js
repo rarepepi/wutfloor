@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
+import Link from 'next/link';
 const NFTAsset = (props) => {
     const url = `https://opensea.io/collection/${props.asset.collection.slug}`;
     const url2 = `${props.asset.permalink}`;
@@ -12,13 +13,13 @@ const NFTAsset = (props) => {
                 {/* <h1 className="text-white text-center -top-5 left-2 z-20 relative ring-2 ring-green-300 h-8 p-2 rounded-full ">{props.number + 1}</h1> */}
                 <div className="flex flex-col justify-center text-center text-white w-64 border-2 border-purple-500 rounded-xl lg:pt-8 pt-4">
                     <div className="cursor-pointer w-32 h-32 mx-auto mb-4">
-                        <a href={url2} target="_blank">
+                        <Link href={'/c/' + props.asset.collection.slug} target="_blank">
 
-                            <img src={props.asset.image_url} className=" ring-purple-400 ring-2 rounded-2xl mb-4  w-32 h-32 " />
-                        </a>
+                            <img src={props.asset.image_url} className="rounded-2xl mb-4  w-32 h-32 " />
+                        </Link>
                     </div>
                     <a href={url} target="_blank" className="p-2 text-white h-16">
-                        <p className="text-xs px-8 hover:text-blue-300">{props.asset.name}</p>
+                        <p className="text-xs px-8 hover:text-green-300">{props.asset.name}</p>
                     </a>
                     <p className="mt-2 text-xs px-8 text-green-300"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-4 w-4 inline mr-2" />{Math.round(props.asset.floor_price * 100) / 100}</p>
                     <p className="mt-2 text-xs px-8 text-green-300 ">(${(Math.round((props.asset.floor_price * props.ethPrice) * 100) / 100).toLocaleString()})</p>

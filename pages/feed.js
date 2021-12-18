@@ -8,11 +8,11 @@ import Router from 'next/router';
 import Footer from "../components/Footer";
 import NFTEvent from "../components/NFTEvent";
 import { ethers } from "ethers";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
 const getHotCollectionsData = async () => {
 
-    const maxOffset = 100;
+    const maxOffset = 800;
     const bundleSize = 20;
     let events = [];
     for (let i = 0; i < maxOffset / bundleSize; i++) {
@@ -142,27 +142,27 @@ const feed = (props) => {
                         Activity
                     </div>
                 </div> */}
-                <div className="flex flex-row flex-wrap justify-between">
+                <div className="flex flex-row flex-wrap justify-between w-2/3 mx-auto">
 
                     {occurances.length > 0 && <div className="overflow-x-auto shadow-2xl flex w-full h-full">
                         <ResponsiveContainer width="100%" height={300}>
-                            <BarChart
-                                width={400}
-                                height={200}
+                            <AreaChart
+                                width={500}
+                                height={400}
                                 data={occurances}
                                 margin={{
-                                    top: 5,
+                                    top: 10,
                                     right: 30,
-                                    left: 20,
-                                    bottom: 5,
+                                    left: 0,
+                                    bottom: 0,
                                 }}
                             >
-                                <XAxis className="text-xs w-2 hidden" dataKey="name" />
+                                {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                                <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
-                                {/* <Legend /> */}
-                                <Bar dataKey="ocurrance" barSize={20} fill="#34d399" />
-                            </BarChart>
+                                <Area type="monotone" dataKey="amt" stackId="1" fill="#34d399" />;
+                            </AreaChart>
                         </ResponsiveContainer>
 
                     </div>}

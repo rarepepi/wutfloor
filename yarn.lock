@@ -3920,6 +3920,11 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+croner@^4.0.80:
+  version "4.0.80"
+  resolved "https://registry.yarnpkg.com/croner/-/croner-4.0.80.tgz#b955abb5d8d771b970e2d558ea61284740229e6a"
+  integrity sha512-bSxNkv46pCqYLEknEpoxr1+JstCWlFYtUe1Ng4rehktImYFKYNQkgg3obPok84txyGLX4oiT7zq8dhhR8KtmqQ==
+
 cross-fetch@^2.1.0, cross-fetch@^2.1.1:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-2.2.5.tgz#afaf5729f3b6c78d89c9296115c9f142541a5705"

@@ -10,6 +10,7 @@ import NFTEvent from "../components/NFTEvent";
 import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
+import Head from 'next/head';
 const getHotCollectionsData = async () => {
 
     const maxOffset = 800;
@@ -116,14 +117,19 @@ const watch = (props) => {
 
     return (
         <div className="font-press-start">
+            <Head>
+                <title>
+                    Watch
+                </title>
 
+            </Head>
 
             <div className="w-full">
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
-                <div className="flex flex-col justify-center p-4 my-8">
-                    <h1 className="text-white font-bold mb-2 text-2xl text-center" >
+                <div className="flex flex-col justify-center ">
+                    <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
                         Watch Lists
                     </h1>
                     <p className="text-gray-300 text-sm text-center">coming soon follow twitter for more</p>

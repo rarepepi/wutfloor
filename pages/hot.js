@@ -7,7 +7,7 @@ import Particles from "react-particles-js";
 import Router from 'next/router';
 import Footer from "../components/Footer";
 import NFTCollection from "../components/NFTCollection";
-
+import Head from 'next/head';
 const getHotCollectionsData = async () => {
 
     const maxOffset = 200;
@@ -56,18 +56,24 @@ const hot = (props) => {
 
     return (
         <div className="font-press-start">
+            <Head>
+                <title>
+                    Hot
+                </title>
+
+            </Head>
             <div className="w-full">
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
                 <div className="flex flex-col justify-center">
-                    <h1 className="text-white font-bold my-8 p-4 text-2xl text-center" >
+                    <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
                         Hot Collections
                     </h1>
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
 
                 </div>
-                <table className="flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
+                <table className="table-auto flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
                     {/* <div className="flex flex-row shadow-2xl"> */}
                     <Fade>
                         <>

@@ -18,7 +18,7 @@ import Web3 from "web3";
 import TypeIt from "typeit-react";
 import Router from 'next/router';
 import Particles from "react-particles-js";
-
+import Head from 'next/head';
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -86,6 +86,12 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="font-press-start min-h-screen relative bg-background">
+        <Head>
+          <title>
+            Wut Floor
+          </title>
+
+        </Head>
         <div className=""><Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
           "background": {
             "color": {

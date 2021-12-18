@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
 import NFTCollection from "../components/NFTCollection";
-
+import Head from 'next/head';
 
 const getTopCollectionsData = async () => {
     let collections = [];
@@ -71,14 +71,19 @@ const top = (props) => {
 
     return (
         <div className="font-press-start">
+            <Head>
+                <title>
+                    Top
+                </title>
 
+            </Head>
 
             <div className="w-full">
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
-                <div className="flex flex-col justify-center p-4 my-8">
-                    <h1 className="text-white font-bold mb-2 text-2xl text-center" >
+                <div className="flex flex-col justify-center">
+                    <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
                         Top Collections
                     </h1>
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
@@ -111,11 +116,11 @@ const top = (props) => {
                                     <h1 className="text-left text-sm">MKT Cap</h1>
                                 </th>
                                 <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Delta</h1>
+                                    <h1 className="text-left text-sm">Δ(+/-%)</h1>
 
                                 </th>
                                 <th className="flex w-40" >
-                                    <h1 className="text-left text-sm">Ext</h1>
+                                    <h1 className="text-left text-sm">Links</h1>
 
                                 </th>
                             </tr>

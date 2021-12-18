@@ -11,7 +11,7 @@ import TopNav from "../../components/TopNav";
 import Particles from "react-particles-js";
 import Router from 'next/router';
 import Footer from "../../components/Footer";
-
+import Head from 'next/head';
 
 const getOpenSeaData = async (address, setAssetAmount, setCurrentlyLoadingAssetNumber) => {
     let provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7");;
@@ -125,7 +125,12 @@ const Account = (props) => {
 
     return (
         <div className="font-press-start ">
+            <Head>
+                <title>
+                    {ethAddress}
+                </title>
 
+            </Head>
             {loading ? <div className="flex flex-col h-screen justify-center items-center"><>
                 <Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
                     "background": {

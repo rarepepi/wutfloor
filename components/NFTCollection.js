@@ -51,10 +51,13 @@ const NFTCollection = (props) => {
                             : <p className="bg-danger text-white text-sm rounded-2xl h-8 p-2">{Math.round(props.collection.stats.one_day_change * 100) / 100}%</p>}
                     </td>
 
-                    <td className="flex w-40" >
+                    <td className="flex w-40 space-x-4 p-2" >
                         <Link href={'/c/' + props.collection.slug} target="_blank" className="hover:cursor-pointer hover:text-green-300">
                             <i className="fa fa-external-link-alt"></i>
                         </Link>
+                        <a href={'https://twitter.com/' + props.collection.twitter_username} target="_blank" className="hover:cursor-pointer hover:text-green-300">
+                            <i className="fab fa-twitter"></i>
+                        </a>
                     </td>
                 </tr>
             </>

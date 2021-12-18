@@ -10,6 +10,7 @@ import NFTEvent from "../components/NFTEvent";
 import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
+import Head from 'next/head';
 const getHotCollectionsData = async () => {
 
     const maxOffset = 800;
@@ -116,7 +117,12 @@ const feed = (props) => {
 
     return (
         <div className="font-press-start">
+            <Head>
+                <title>
+                    Feed
+                </title>
 
+            </Head>
 
             <div className="w-full">
                 <div className="shadow-lg">

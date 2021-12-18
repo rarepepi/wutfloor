@@ -11,7 +11,7 @@ import Particles from "react-particles-js";
 import Router from 'next/router';
 import Footer from "../../components/Footer";
 import { CollectionIcon } from "@heroicons/react/outline";
-
+import Head from 'next/head';
 
 const getOpenSeaData = async (collectionSlug, setCollection, setCurrentlyLoadingAssetNumber) => {
     let provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7");;
@@ -64,7 +64,12 @@ const Collection = (props) => {
 
     return (
         <div className="font-press-start ">
+            <Head>
+                <title>
+                    {collection.name}
+                </title>
 
+            </Head>
             {loading ? <div className="flex flex-col h-screen justify-center items-center"><>
                 <Particles className="absolute -z-10 inset-0" id="tsparticles" options={{
                     "background": {
@@ -177,7 +182,7 @@ const Collection = (props) => {
                     <div className="bg-center h-48" style={{ backgroundImage: `url(${collection.banner_image_url})` }}>
                     </div>
                     <div className="flex flex-col justify-center" >
-                        <img className="rounded-full mx-auto -m-12 h-full" src={collection.image_url}></img>
+                        <img className="rounded-full mx-auto -m-12 h-96" src={collection.image_url}></img>
                         <h1 className="text-white lg:text-lg -m-6 text-sm font-bold mt-16 p-4 mb-1 text-center" >
                             {collection.name}'s
                         </h1>
@@ -202,46 +207,47 @@ const Collection = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-8 p-4 shadow-2xl">
                                     <h1 className="text-white pt-4">Floor Price</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{collection.stats.floor_price}</p>
+                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(collection.stats.floor_price * 100) / 100}</p>
                                         <p className="text-green-400 mt-4 ">{ethPrice * collection.stats.floor_price}</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-8 p-4 shadow-2xl">
                                     <h1 className="text-white pt-4">One Day</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{collection.stats.one_day_volume}</p>
-                                        <p className="text-green-400 mt-4 ">{collection.stats.one_day_change}%</p>
-                                        <p className="text-green-400 mt-4 ">Txns: {collection.stats.one_day_sales}</p>
-                                        <p className="text-green-400 mt-4 ">Avg: {collection.stats.one_day_average_price}%</p>
+                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(collection.stats.one_day_volume * 100) / 100}</p>
+                                        <p className="text-green-400 mt-4 ">{Math.round(collection.stats.one_day_change * 100) / 100}%</p>
+                                        <p className="text-white mt-4 ">Txns: <span className="text-green-400"> {Math.round(collection.stats.one_day_sales * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Avg: <span className="text-green-400"> {Math.round(collection.stats.one_day_average_price * 100) / 100}</span>%</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-8 p-4 shadow-2xl">
                                     <h1 className="text-white pt-4">7 Day</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{collection.stats.seven_day_volume}</p>
-                                        <p className="text-green-400 mt-4 ">{collection.stats.seven_day_change}%</p>
-                                        <p className="text-green-400 mt-4 ">Txns: {collection.stats.seven_day_sales}</p>
-                                        <p className="text-green-400 mt-4 ">Avg: {collection.stats.seven_day_average_price}%</p>
+                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(collection.stats.seven_day_volume * 100) / 100}</p>
+                                        <p className="text-green-400 mt-4 ">{Math.round(collection.stats.seven_day_change * 100) / 100}%</p>
+                                        <p className="text-white mt-4 ">Txns: <span className="text-green-400"> {Math.round(collection.stats.seven_day_sales * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Avg: <span className="text-green-400"> {Math.round(collection.stats.seven_day_average_price * 100) / 100}</span>%</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-8 p-4 shadow-2xl">
                                     <h1 className="text-white pt-4">30 Day</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{collection.stats.thirty_day_volume}</p>
-                                        <p className="text-green-400 mt-4 ">{collection.stats.thirty_day_change}%</p>
-                                        <p className="text-green-400 mt-4 ">Txns: {collection.stats.thirty_day_sales}</p>
-                                        <p className="text-green-400 mt-4 ">Avg: {collection.stats.thirty_day_average_price}%</p>
+                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(collection.stats.thirty_day_volume * 100) / 100}</p>
+                                        <p className="text-green-400 mt-4 ">{Math.round(collection.stats.thirty_day_change * 100) / 100}%</p>
+                                        <p className="text-white mt-4 ">Txns: <span className="text-green-400"> {Math.round(collection.stats.thirty_day_sales * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Avg: <span className="text-green-400"> {Math.round(collection.stats.thirty_day_average_price * 100) / 100}</span></p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-8 p-4 shadow-2xl">
                                     <h1 className="text-white pt-4">Total Stats</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4 "><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{collection.stats.total_volume}</p>
-                                        <p className="text-green-400 mt-4 ">Supply: {collection.stats.total_supply}%</p>
-                                        <p className="text-green-400 mt-4 ">Txns: {collection.stats.total_sales}</p>
-                                        <p className="text-green-400 mt-4 ">Owners: {collection.stats.num_owners}%</p>
-                                        <p className="text-green-400 mt-4 ">Hisorial Avg: {collection.stats.average_price}%</p>
-                                        <p className="text-green-400 mt-4 ">MKT Cap Avg: {collection.stats.market_cap}%</p>
+                                        <p className="text-white mt-4 ">MKT Cap: <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" /><span className="text-green-400">{Math.round(collection.stats.total_volume * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Supply: <span className="text-green-400"> {Math.round(collection.stats.total_supply * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Txns: <span className="text-green-400"> {Math.round(collection.stats.total_sales * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">Owners: <span className="text-green-400"> {Math.round(collection.stats.num_owners * 100) / 100}</span></p>
+                                        <p className="text-white">Ratio: <span className="text-green-400">{Math.round((collection.stats.num_owners / collection.stats.total_supply) * 100) / 100}%</span></p>
+                                        <p className="text-white mt-4 ">Hisorial Avg: <span className="text-green-400"> {Math.round(collection.stats.average_price * 100) / 100}</span></p>
+                                        <p className="text-white mt-4 ">MKT Cap Avg: <span className="text-green-400"> {Math.round(collection.stats.market_cap * 100) / 100}</span></p>
 
 
                                     </div>

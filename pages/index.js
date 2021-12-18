@@ -194,9 +194,9 @@ class HomePage extends React.Component {
         </div>
         <>
 
-          <section className="flex flex-col h-screen justify-center items-center">
+          <section className="flex flex-col justify-center h-screen shadow-2xl">
 
-            <div className="flex flex-row justify-center space-x-8 p-16">
+            <div className="flex flex-row justify-center space-x-8 p-16 w-3/4 mx-auto">
               <div className="md:flex md:items-center mb-6 flex-col ">
                 <h1 className="text-white font-bold mb-16 p-4 text-4xl text-center" >
                   <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
@@ -209,7 +209,15 @@ class HomePage extends React.Component {
                     <button className="mt-16 p-1 motion-safe:hover:scale-110 text-white bg-primary w-32 rounded-xl mx-auto" type="submit" onClick={this.handleSumbit}>Go!</button>
                   </form>
                 </div>
+                <div className="mt-16 flex flex-col justify-center border-t-2 border-white pt-8 " >
+                  {/* <h1 className="text-2xl text-white text-center mb-8"><span className="text-purple-500"> NFT Alpha</span></h1>
+                  <p className="text-sm text-gray-200 text-center px-12">Get the latest floor prices, volume, and sale history on NFTs, discover latest trending p rojects being minted, and see transaction history and portfolio value of any wallet.</p> */}
+                  <div classname="flex flex-row justify-center">
+                    <button className="mt-8 p-3 motion-safe:hover:scale-110 flex text-white  mx-auto bg-bg-light bg-opacity-30 rounded-xl" type="submit" onClick={() => Router.push('/top')}>See Top Collections</button>
+                    <button className="mt-8 p-3 motion-safe:hover:scale-110 flex text-white mx-auto bg-bg-light bg-opacity-30 rounded-xl" type="submit" onClick={() => Router.push('/hot')}>View Hot Collections</button>
+                  </div>
 
+                </div>
               </div>
             </div>
 

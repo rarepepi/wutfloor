@@ -62,20 +62,166 @@ const hot = (props) => {
                 </div>
                 <div className="flex flex-col justify-center">
                     <h1 className="text-white font-bold my-8 p-4 text-2xl text-center" >
-                        <span className="text-purple-500">Wut</span>'s the <span className="text-purple-500">Floor </span>price?
+                        Hot Collections
                     </h1>
+                    <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
+
                 </div>
-                {loading ? <p className="text-center mx-auto text-white">loading</p> :
-                    <div className="grid grid-cols-1 align-middle p-6 m-8">
-                        {collections.map((c, i) => {
+                <div className="flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
+                    <div className="flex flex-row shadow-2xl">
+                        <Fade>
+                            <>
+                                <div className="flex flex-row text-left justify-start space-x-32  text-white w-full h-full rounded-xl lg:pt-8 p-4">
+                                    <div classname="flex">
+                                        <h1 className="text-left text-sm">Collection</h1>
+                                    </div>
+
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Floor</h1>
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Avg</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Vol</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Sales</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">MKT Cap</h1>
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Delta</h1>
+
+                                    </div>
+                                    <div className="flex" >
+                                        <h1 className="text-left text-sm">Ext</h1>
+
+                                    </div>
+                                </div>
+                            </>
+                        </Fade >
+                    </div >
+                    <div className="flex flex-col justify-start lg:items-center flex-wrap">
+                        {collections.length > 0 && collections.map((collection, i) => {
                             return (
                                 <>
-                                    <NFTCollection number={i} collection={c} ethPrice={ethPrice} />
+                                    <NFTCollection collection={collection} ethPrice={ethPrice} />
                                 </>
                             );
                         })}
+
                     </div>
-                }
+                </div>
+                {loading && <div className="flex flex-col h-screen justify-center items-center"><>
+                    <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
+                        "background": {
+                            "color": {
+                                "value": "#232741"
+                            },
+                            "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
+                            "position": "50% 50%",
+                            "repeat": "no-repeat",
+                            "size": "100%"
+                        },
+                        "fullScreen": {
+                            "zIndex": 1,
+                            "enable": true,
+                        },
+                        "interactivity": {
+                            "events": {
+                                "onClick": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "onHover": {
+                                    "enable": true,
+                                    "mode": "bubble"
+                                }
+                            },
+                            "modes": {
+                                "bubble": {
+                                    "distance": 250,
+                                    "duration": 2,
+                                    "opacity": 0,
+                                    "size": 0
+                                },
+                                "grab": {
+                                    "distance": 400
+                                },
+                                "repulse": {
+                                    "distance": 400
+                                }
+                            }
+                        },
+                        "particles": {
+                            "color": {
+                                "value": "#ffffff"
+                            },
+                            "links": {
+                                "color": {
+                                    "value": "#ffffff"
+                                },
+                                "distance": 150,
+                                "opacity": 0.4
+                            },
+                            "move": {
+                                "attract": {
+                                    "rotate": {
+                                        "x": 600,
+                                        "y": 600
+                                    }
+                                },
+                                "enable": true,
+                                "outModes": {
+                                    "bottom": "out",
+                                    "left": "out",
+                                    "right": "out",
+                                    "top": "out"
+                                },
+                                "random": true,
+                                "speed": 1
+                            },
+                            "number": {
+                                "density": {
+                                    "enable": true
+                                },
+                                "value": 160
+                            },
+                            "opacity": {
+                                "random": {
+                                    "enable": true
+                                },
+                                "value": {
+                                    "min": 0,
+                                    "max": 1
+                                },
+                                "animation": {
+                                    "enable": true,
+                                    "speed": 1,
+                                    "minimumValue": 0
+                                }
+                            },
+                            "size": {
+                                "random": {
+                                    "enable": true
+                                },
+                                "value": {
+                                    "min": 1,
+                                    "max": 3
+                                },
+                                "animation": {
+                                    "speed": 4,
+                                    "minimumValue": 0.3
+                                }
+                            }
+                        }
+                    }} />
+                    <p className="text-white p-8 text-center" >Loading...</p></></div>}
                 <Footer></Footer>
             </div>
 

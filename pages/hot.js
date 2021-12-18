@@ -73,56 +73,51 @@ const hot = (props) => {
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
 
                 </div>
-                <table className="table-auto flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
-                    {/* <div className="flex flex-row shadow-2xl"> */}
-                    <Fade>
-                        <>
-                            <tr className="flex flex-row text-left justify-start space-x-32  text-white w-full h-full rounded-xl p-8 shadow-4xl">
-                                <th classname="flex w-40">
-                                    <h1 className="text-left text-sm">Collection</h1>
+                <Fade>
+                    <table className="table-auto mx-auto overflow-x-scroll ">
+                        {/* <div className="flex flex-row shadow-2xl"> */}
+                        <thead>
+                            <tr className="text-white">
+                                <th classname="">
+                                    Collection
                                 </th>
-
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Floor</h1>
+                                <th className="">
+                                    Floor
                                 </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Avg</h1>
-
+                                <th className="">
+                                    Avg
                                 </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Vol</h1>
-
+                                <th className="">
+                                    Vol
                                 </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Sales</h1>
-
+                                <th className="">
+                                    Sales
                                 </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">MKT Cap</h1>
+                                <th className="">
+                                    MKT Cap
                                 </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Δ(+/-%)</h1>
-
+                                <th className="">
+                                    Δ(+/-%)
                                 </th>
-                                <th className="flex w-40" >
-                                    <h1 className="text-left text-sm">Ext</h1>
-
+                                <th className="" >
+                                    Ext
                                 </th>
                             </tr>
-                        </>
-                    </Fade >
-                    {/* </div > */}
-                    {/* <div className="flex flex-col justify-start lg:items-center flex-wrap"> */}
-                    {collections.length > 0 && collections.map((collection, i) => {
-                        return (
-                            <>
-                                <NFTCollection collection={collection} ethPrice={ethPrice} />
-                            </>
-                        );
-                    })}
+                        </thead>
+                        <tbody>
+                            {collections.length > 0 && collections.map((collection, i) => {
+                                return (
+                                    <tr className="text-white">
 
-                    {/* </div> */}
-                </table>
+                                        <NFTCollection collection={collection} ethPrice={ethPrice} />
+                                    </tr>
+
+                                );
+                            })}
+                        </tbody>
+
+                    </table>
+                </Fade >
                 {loading && <div className="flex flex-col h-screen justify-center items-center"><>
                     <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
                         "background": {

@@ -8,6 +8,7 @@ import Router from 'next/router';
 import Footer from "../components/Footer";
 import NFTCollection from "../components/NFTCollection";
 import Head from 'next/head';
+import Link from 'next/link';
 const getHotCollectionsData = async () => {
 
     const maxOffset = 200;
@@ -66,57 +67,58 @@ const hot = (props) => {
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
-                <div className="flex flex-col justify-center">
-                    <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
-                        Hot Collections
-                    </h1>
-                    <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
-
-                </div>
                 <Fade>
-                    <table className="table-auto mx-auto overflow-x-scroll ">
-                        {/* <div className="flex flex-row shadow-2xl"> */}
-                        <thead>
-                            <tr className="text-white">
-                                <th classname="">
-                                    Collection
-                                </th>
-                                <th className="">
-                                    Floor
-                                </th>
-                                <th className="">
-                                    Avg
-                                </th>
-                                <th className="">
-                                    Vol
-                                </th>
-                                <th className="">
-                                    Sales
-                                </th>
-                                <th className="">
-                                    MKT Cap
-                                </th>
-                                <th className="">
-                                    Δ(+/-%)
-                                </th>
-                                <th className="" >
-                                    Ext
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {collections.length > 0 && collections.map((collection, i) => {
-                                return (
-                                    <tr className="text-white">
+                    <div className="mx-auto px-16 mt-4">
+                        <div className="flex flex-col justify-center  p-4">
+                            <h1 className="text-white font-bold mb-1 text-2xl text-center" >
+                                Hot Collections
+                            </h1>
+                            <p className="text-gray-300 text-sm text-center ml-2">v.0.1 (beta)</p>
+                        </div>
+                        <table className="table-auto overflow-x-scroll p-4 mx-auto">
+                            {/* <div className="flex flex-row shadow-2xl"> */}
+                            <thead className="rounded-t-2xl bg-bg-light  h-12">
+                                <tr className="text-white p-8">
+                                    <th classname="px-8">
+                                        Collection
+                                    </th>
+                                    <th className="px-8">
+                                        Floor
+                                    </th>
+                                    <th className="px-8">
+                                        Avg
+                                    </th>
+                                    <th className="px-8">
+                                        Vol
+                                    </th>
+                                    <th className="px-8">
+                                        Sales
+                                    </th>
+                                    <th className="px-8">
+                                        MKT Cap
+                                    </th>
+                                    <th className="px-8">
+                                        Δ(+/-%)
+                                    </th>
 
-                                        <NFTCollection collection={collection} ethPrice={ethPrice} />
-                                    </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {collections.length > 0 && collections.map((collection, i) => {
+                                    return (
+                                        <Link href={'/c/' + collection.slug} >
+                                            <tr className="text-white hover:bg-bg-light p-8 rounded-2xl">
 
-                                );
-                            })}
-                        </tbody>
+                                                <NFTCollection collection={collection} ethPrice={ethPrice} />
+                                            </tr>
+                                        </Link>
 
-                    </table>
+                                    );
+                                })}
+                            </tbody>
+
+                        </table>
+                    </div>
                 </Fade >
                 {loading && <div className="flex flex-col h-screen justify-center items-center"><>
                     <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{

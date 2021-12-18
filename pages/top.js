@@ -12,10 +12,18 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import randomColor from 'randomcolor';
 import NFTCollection from "../components/NFTCollection";
 import Head from 'next/head';
-
+import Link from 'next/link';
 const getTopCollectionsData = async () => {
     let collections = [];
-    const collectionSlugs = ["fidenza-by-tyler-hobbs", "autoglyphs", "twinflames", "cyberkongz", "boredapeyachtclub", "neo-tokyo-identities", "cool-cats-nft", "mutant-ape-yacht-club", "veefriends", "galacticapesgenesis"];
+    const collectionSlugs = [
+        "fidenza-by-tyler-hobbs",
+        "autoglyphs", "twinflames",
+        "cyberkongz", "boredapeyachtclub",
+        "neo-tokyo-identities", "cool-cats-nft",
+        "mutant-ape-yacht-club", "veefriends",
+        "cryptoadz-by-gremplin", "hashmasks",
+        "world-of-women-nft",
+        "galacticapesgenesis", "sandbox", "clonex", "clonex-mintvial", "doodles-official", "punks-comic", "decentraland", "art-blocks", "lootproject"];
     await Promise.all(collectionSlugs.map(async (slug, i) => {
 
         const data = await axios.get(`https://api.opensea.io/api/v1/collection/${slug}`);
@@ -82,171 +90,170 @@ const top = (props) => {
                 <div className="shadow-lg">
                     <TopNav />
                 </div>
-                <div className="flex flex-col justify-center">
-                    <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
-                        Top Collections
-                    </h1>
-                    <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
-                </div>
-                <table className="flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
-                    {/* <div className="flex flex-row shadow-2xl"> */}
-                    <Fade>
-                        <>
-                            <tr className="flex flex-row text-left justify-start space-x-32  text-white w-full h-full rounded-xl p-8 shadow-4xl">
-                                <th classname="flex w-40">
-                                    <h1 className="text-left text-sm">Collection</h1>
-                                </th>
+                <Fade>
+                    <div className="mx-auto px-16 mt-4">
+                        <div className="flex flex-col justify-center  p-4">
+                            <h1 className="text-white font-bold mb-1 text-2xl text-center" >
+                                Top Collections
+                            </h1>
+                            <p className="text-gray-300 text-sm text-center ml-2">v.0.1 (beta)</p>
+                        </div>
+                        <table className="table-auto overflow-x-scroll p-4 mx-auto">
+                            {/* <div className="flex flex-row shadow-2xl"> */}
+                            <thead className="rounded-t-2xl bg-bg-light  h-12">
+                                <tr className="text-white p-8">
+                                    <th classname="px-8">
+                                        Collection
+                                    </th>
+                                    <th className="px-8">
+                                        Floor
+                                    </th>
+                                    <th className="px-8">
+                                        Avg
+                                    </th>
+                                    <th className="px-8">
+                                        Vol
+                                    </th>
+                                    <th className="px-8">
+                                        Sales
+                                    </th>
+                                    <th className="px-8">
+                                        MKT Cap
+                                    </th>
+                                    <th className="px-8">
+                                        Δ(+/-%)
+                                    </th>
 
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Floor</h1>
-                                </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Avg</h1>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {collections.length > 0 && collections.map((collection, i) => {
+                                    return (
+                                        <Link href={'/c/' + collection.slug} >
+                                            <tr className="text-white hover:bg-bg-light rounded-2xl">
 
-                                </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Vol</h1>
+                                                <NFTCollection collection={collection} ethPrice={ethPrice} />
+                                            </tr>
+                                        </Link>
 
-                                </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Sales</h1>
+                                    );
+                                })}
+                            </tbody>
 
-                                </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">MKT Cap</h1>
-                                </th>
-                                <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Δ(+/-%)</h1>
-
-                                </th>
-                                <th className="flex w-40" >
-                                    <h1 className="text-left text-sm">Links</h1>
-
-                                </th>
-                            </tr>
-                        </>
-                    </Fade >
-                    {/* </div > */}
-                    {/* <div className="flex flex-col justify-start lg:items-center flex-wrap"> */}
-                    {collections.length > 0 && collections.map((collection, i) => {
-                        return (
-                            <>
-                                <NFTCollection collection={collection} ethPrice={ethPrice} />
-                            </>
-                        );
-                    })}
-
-                    {/* </div> */}
-                </table>
-                {loading && <div className="flex flex-col h-screen justify-center items-center"><>
-                    <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
-                        "background": {
-                            "color": {
-                                "value": "#232741"
-                            },
-                            "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
-                            "position": "50% 50%",
-                            "repeat": "no-repeat",
-                            "size": "100%"
-                        },
-                        "fullScreen": {
-                            "zIndex": 1,
-                            "enable": true,
-                        },
-                        "interactivity": {
-                            "events": {
-                                "onClick": {
-                                    "enable": true,
-                                    "mode": "repulse"
+                        </table>
+                    </div>
+                </Fade >
+                {
+                    loading && <div className="flex flex-col h-screen justify-center items-center"><>
+                        <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
+                            "background": {
+                                "color": {
+                                    "value": "#232741"
                                 },
-                                "onHover": {
-                                    "enable": true,
-                                    "mode": "bubble"
+                                "image": "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
+                                "position": "50% 50%",
+                                "repeat": "no-repeat",
+                                "size": "100%"
+                            },
+                            "fullScreen": {
+                                "zIndex": 1,
+                                "enable": true,
+                            },
+                            "interactivity": {
+                                "events": {
+                                    "onClick": {
+                                        "enable": true,
+                                        "mode": "repulse"
+                                    },
+                                    "onHover": {
+                                        "enable": true,
+                                        "mode": "bubble"
+                                    }
+                                },
+                                "modes": {
+                                    "bubble": {
+                                        "distance": 250,
+                                        "duration": 2,
+                                        "opacity": 0,
+                                        "size": 0
+                                    },
+                                    "grab": {
+                                        "distance": 400
+                                    },
+                                    "repulse": {
+                                        "distance": 400
+                                    }
                                 }
                             },
-                            "modes": {
-                                "bubble": {
-                                    "distance": 250,
-                                    "duration": 2,
-                                    "opacity": 0,
-                                    "size": 0
-                                },
-                                "grab": {
-                                    "distance": 400
-                                },
-                                "repulse": {
-                                    "distance": 400
-                                }
-                            }
-                        },
-                        "particles": {
-                            "color": {
-                                "value": "#ffffff"
-                            },
-                            "links": {
+                            "particles": {
                                 "color": {
                                     "value": "#ffffff"
                                 },
-                                "distance": 150,
-                                "opacity": 0.4
-                            },
-                            "move": {
-                                "attract": {
-                                    "rotate": {
-                                        "x": 600,
-                                        "y": 600
+                                "links": {
+                                    "color": {
+                                        "value": "#ffffff"
+                                    },
+                                    "distance": 150,
+                                    "opacity": 0.4
+                                },
+                                "move": {
+                                    "attract": {
+                                        "rotate": {
+                                            "x": 600,
+                                            "y": 600
+                                        }
+                                    },
+                                    "enable": true,
+                                    "outModes": {
+                                        "bottom": "out",
+                                        "left": "out",
+                                        "right": "out",
+                                        "top": "out"
+                                    },
+                                    "random": true,
+                                    "speed": 1
+                                },
+                                "number": {
+                                    "density": {
+                                        "enable": true
+                                    },
+                                    "value": 160
+                                },
+                                "opacity": {
+                                    "random": {
+                                        "enable": true
+                                    },
+                                    "value": {
+                                        "min": 0,
+                                        "max": 1
+                                    },
+                                    "animation": {
+                                        "enable": true,
+                                        "speed": 1,
+                                        "minimumValue": 0
                                     }
                                 },
-                                "enable": true,
-                                "outModes": {
-                                    "bottom": "out",
-                                    "left": "out",
-                                    "right": "out",
-                                    "top": "out"
-                                },
-                                "random": true,
-                                "speed": 1
-                            },
-                            "number": {
-                                "density": {
-                                    "enable": true
-                                },
-                                "value": 160
-                            },
-                            "opacity": {
-                                "random": {
-                                    "enable": true
-                                },
-                                "value": {
-                                    "min": 0,
-                                    "max": 1
-                                },
-                                "animation": {
-                                    "enable": true,
-                                    "speed": 1,
-                                    "minimumValue": 0
-                                }
-                            },
-                            "size": {
-                                "random": {
-                                    "enable": true
-                                },
-                                "value": {
-                                    "min": 1,
-                                    "max": 3
-                                },
-                                "animation": {
-                                    "speed": 4,
-                                    "minimumValue": 0.3
+                                "size": {
+                                    "random": {
+                                        "enable": true
+                                    },
+                                    "value": {
+                                        "min": 1,
+                                        "max": 3
+                                    },
+                                    "animation": {
+                                        "speed": 4,
+                                        "minimumValue": 0.3
+                                    }
                                 }
                             }
-                        }
-                    }} />
-                    <p className="text-white p-8 text-center" >Loading...</p></></div>}
+                        }} />
+                        <p className="text-white p-8 text-center" >Loading...</p></></div>
+                }
                 <Footer></Footer>
-            </div>
+            </div >
 
-        </div>
+        </div >
 
     );
 };

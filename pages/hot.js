@@ -101,7 +101,7 @@ const hot = (props) => {
                                     <h1 className="text-left text-sm">MKT Cap</h1>
                                 </th>
                                 <th className="flex w-40">
-                                    <h1 className="text-left text-sm">Delta</h1>
+                                    <h1 className="text-left text-sm">Δ(+/-%)</h1>
 
                                 </th>
                                 <th className="flex w-40" >

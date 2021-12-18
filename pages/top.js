@@ -10,74 +10,33 @@ import NFTEvent from "../components/NFTEvent";
 import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
-const getHotCollectionsData = async () => {
+import NFTCollection from "../components/NFTCollection";
 
-    const maxOffset = 800;
-    const bundleSize = 20;
-    let events = [];
-    for (let i = 0; i < maxOffset / bundleSize; i++) {
-        let offset = bundleSize * i;
-        const data = await axios.get(`https://api.opensea.io/api/v1/events?event_type=successful&only_opensea=false&offset=${offset}&limit=${bundleSize}`, { headers: { 'X-API-KEY': process.env.OS_KEY } });
+
+const getTopCollectionsData = async () => {
+    let collections = [];
+    const collectionSlugs = ["fidenza-by-tyler-hobbs", "autoglyphs", "twinflames", "cyberkongz", "boredapeyachtclub", "neo-tokyo-identities", "cool-cats-nft", "mutant-ape-yacht-club", "veefriends", "galacticapesgenesis"];
+    await Promise.all(collectionSlugs.map(async (slug, i) => {
+
+        const data = await axios.get(`https://api.opensea.io/api/v1/collection/${slug}`);
         if (!data) return;
         // console.log(data.data.asset_events);
-        events.push(...data.data.asset_events);
-    }
-    console.log(events);
-    let newEvents = [];
-    await Promise.all(events.map(async (e, i) => {
-        if (e.asset && ethers.utils.formatEther(e.total_price) > 0.01) {
-            newEvents.push(e);
-        }
-    }));
+        collections.push(data.data.collection);
 
+    }));
     // const web3 = new Web3(provider);
     // const result = await web3.eth.getBalance(address);
     // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
     // console.log(`There are ${collections.length} collections`);
 
-    return { newEvents };
+    return collections;
 };
 
-function findOcc(arr, key) {
-    let arr2 = [];
-
-    arr.forEach((x) => {
-
-        // Checking if there is any object in arr2
-        // which contains the key value
-        if (arr2.some((val) => { return val[key] == x[key]; })) {
-
-            // If yes! then increase the occurrence by 1
-            arr2.forEach((k) => {
-                if (k[key] === x[key]) {
-                    k["ocurrance"]++;
-                    k["amt"]++;
-
-                }
-            });
-
-        } else {
-            // If not! Then create a new object initialize 
-            // it with the present iteration key's value and 
-            // set the occurrence to 1
-            let a = {};
-            a[key] = x[key];
-            a["name"] = x[key];
-            a["ocurrance"] = 1;
-            a["amt"] = 1;
-            arr2.push(a);
-        }
-    });
-
-    return arr2;
-}
-
-const feed = (props) => {
+const top = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
-    const [events, setEvents] = useState([]);
+    const [collections, setCollections] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [occurances, setOccurances] = useState([]);
 
 
     useEffect(async () => {
@@ -87,25 +46,21 @@ const feed = (props) => {
             setETHPrice(data.data.USD);
             setLoading(true);
 
-            const results = await getHotCollectionsData();
+            const results = await getTopCollectionsData();
             if (!results) {
                 Router.push('/');
                 return;
             }
-            if (results.address == "0x0000000000000000000000000000000000000000") {
-                Router.push('/');
-                console.log("no resolver / ens returned 0x000dead");
-                return;
-            }
-            setEvents(results.newEvents.slice(0, 20));
-            console.log(results.events);
-            let occur = findOcc(results.newEvents, "collection_slug");
-            occur = occur.sort((a, b) => (a.ocurrance > b.ocurrance) ? -1 : 1);
-            setOccurances(occur.splice(0, 5));
-            console.log({ occur });
+            console.log(results);
+
+            setCollections(results);
+            console.log(collections);
             setLoading(false);
+
+            console.log(collections);
+
         };
-        getData();
+        await getData();
 
         const interval = setInterval(() => {
             getData();
@@ -124,59 +79,59 @@ const feed = (props) => {
                 </div>
                 <div className="flex flex-col justify-center p-4 my-8">
                     <h1 className="text-white font-bold mb-2 text-2xl text-center" >
-                        Live Feed
+                        Top Collections
                     </h1>
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
                 </div>
-                {/* <div className="flex flex-row justify-evenly w-full bg-secondary">
-                    <div classname="flex">
-                        Name
-                    </div>
-                    <div classname="flex">
-                        Floor
-                    </div>
-                    <div classname="flex">
-                        Volume
-                    </div>
-                    <div classname="flex">
-                        Activity
-                    </div>
-                </div> */}
-                <div className="flex flex-row flex-wrap justify-between w-2/3 mx-auto">
-
-                    {occurances.length > 0 && <div className="overflow-x-auto shadow-2xl flex w-full h-full">
-                        <ResponsiveContainer width="100%" height={300}>
-                            <AreaChart
-                                width={500}
-                                height={400}
-                                data={occurances}
-                                margin={{
-                                    top: 10,
-                                    right: 30,
-                                    left: 0,
-                                    bottom: 0,
-                                }}
-                            >
-                                {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Area type="monotone" dataKey="amt" stackId="1" fill="#34d399" />;
-                            </AreaChart>
-                        </ResponsiveContainer>
-
-                    </div>}
-
-                </div>
-                <div className="flex flex-col w-full align-middle m-8 overflow-x-auto">
-
-                    {events.map((event, i) => {
-                        return (
+                <div className="flex flex-col justify-start  lg:items-center  m-8 overflow-x-scroll w-full">
+                    <div className="flex flex-row shadow-2xl">
+                        <Fade>
                             <>
-                                <NFTEvent number={i} event={event} ethPrice={ethPrice} />
+                                <div className="flex flex-row text-left justify-start space-x-32  text-white w-full h-full rounded-xl lg:pt-8 p-4">
+                                    <div classname="flex">
+                                        <h1 className="text-left text-sm">Collection</h1>
+                                    </div>
+
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Floor</h1>
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Avg</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Vol</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Sales</h1>
+
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">MKT Cap</h1>
+                                    </div>
+                                    <div className="flex">
+                                        <h1 className="text-left text-sm">Delta</h1>
+
+                                    </div>
+                                    <div className="flex" >
+                                        <h1 className="text-left text-sm">Ext</h1>
+
+                                    </div>
+                                </div>
                             </>
-                        );
-                    })}
+                        </Fade >
+                    </div >
+                    <div className="flex flex-col justify-start lg:items-center flex-wrap">
+                        {collections.length > 0 && collections.map((collection, i) => {
+                            return (
+                                <>
+                                    <NFTCollection collection={collection} ethPrice={ethPrice} />
+                                </>
+                            );
+                        })}
+
+                    </div>
                 </div>
                 {loading && <div className="flex flex-col h-screen justify-center items-center"><>
                     <Particles className="absolute -z-10 top-50 left-50 h-screen px-16" id="tsparticles" options={{
@@ -291,4 +246,4 @@ const feed = (props) => {
     );
 };
 
-export default feed;
+export default top;

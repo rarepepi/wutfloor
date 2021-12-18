@@ -72,7 +72,7 @@ function findOcc(arr, key) {
     return arr2;
 }
 
-const feed = (props) => {
+const discover = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
     const [events, setEvents] = useState([]);
@@ -124,7 +124,7 @@ const feed = (props) => {
                 </div>
                 <div className="flex flex-col justify-center p-4 my-8">
                     <h1 className="text-white font-bold mb-2 text-2xl text-center" >
-                        Live Feed
+                        Discover Mints
                     </h1>
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
                 </div>
@@ -291,4 +291,4 @@ const feed = (props) => {
     );
 };
 
-export default feed;
+export default discover;

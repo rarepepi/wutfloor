@@ -13,9 +13,9 @@ const NFTEvent = (props) => {
                         <div classname="flex">
                             <img className="w-8 h-8 rounded-full" src={props.event.asset.image_url}></img>
                         </div>
-                        <div className="flex align-middle w-32">
-                            <Link href={'/c/' + props.event.asset.collection.slug} className="hover:cursor_pointer hover:text-green-300">
-                                <h1 className="text-white text-xs text-left ml-2  overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                        <div className="flex align-middle w-32 hover:cursor-pointer">
+                            <Link href={'/c/' + props.event.asset.collection.slug} className="">
+                                <h1 className="text-white hover:text-green-300 hover:cursor-pointer text-xs text-left ml-2 overflow-ellipsis">{props.event.asset.collection.name}</h1>
                             </Link>
                         </div>
                         <div className="flex space-x-8">
@@ -30,9 +30,9 @@ const NFTEvent = (props) => {
 
                         <div className="flex" >
                             {/* <h1 className="text-white text-xs">{props.event.listing_time}</h1> */}
-                            <a href={props.event.asset.permalink} target="_blank">
+                            <Link href={'/c/' + props.event.asset.collection.slug} target="_blank" className="hover:cursor-pointer hover:text-green-300">
                                 <i className="fa fa-external-link-alt"></i>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* 

@@ -72,7 +72,7 @@ function findOcc(arr, key) {
     return arr2;
 }
 
-const feed = (props) => {
+const watch = (props) => {
     const [ethPrice, setETHPrice] = useState(0);
 
     const [events, setEvents] = useState([]);
@@ -291,4 +291,4 @@ const feed = (props) => {
     );
 };
 
-export default feed;
+export default watch;

@@ -28,30 +28,61 @@ function TopNav() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <a className="" href="https://wutfloor.xyz">
-                  <img
-                    className="h-8 w-8 "
-                    src="/img/logo-transparent.png"
-                    alt="Workflow"
-                  />
-                </a>
+                <Link className="" href="/">
+                  <a>
+                    <img
+                      className="h-8 w-8 "
+                      src="/img/logo-transparent.png"
+                      alt="Workflow"
+                    />
+                  </a>
+
+                </Link>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <Link href="/">
+
+                  <Link href="/top">
                     <a
-                      className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >Wut Floor                </a>
-                  </Link>
-                  <Link href="/feed">
-                    <a
-                      className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
-                      Feed
+                      Top
                     </a>
 
                   </Link>
-                  <a
+
+                  <Link href="/hot">
+                    <a
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Hot
+                    </a>
+
+                  </Link>
+                  <Link href="/discover">
+                    <a
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Discover
+                    </a>
+
+                  </Link>
+                  <Link href="/watch">
+                    <a
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Watch
+                    </a>
+
+                  </Link>
+                  <Link href="/feed">
+                    <a
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Feed
+                    </a>
+                  </Link>
+                  {/* <a
                     className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     <ScrollLink
@@ -80,7 +111,7 @@ function TopNav() {
                     >
                       FAQ
                     </ScrollLink>
-                  </a>
+                  </a> */}
 
                 </div>
 
@@ -164,14 +195,39 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="https://wutfloor.xyz/feed"
-                  target="_blank"
-                  className="text-purple-400 animate-pulse flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Feed
-                </a>
-                <a
+                <Link href="/top">
+                  <a
+                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Top
+                  </a>
+
+                </Link>
+                <Link href="/discover">
+                  <a
+                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Discover
+                  </a>
+
+                </Link>
+                <Link href="/watch">
+                  <a
+                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Watch
+                  </a>
+
+                </Link>
+                <Link href="/feed">
+                  <a
+                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Feed
+                  </a>
+
+                </Link>
+                {/* <a
                   href="#"
                   className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
                 >
@@ -204,7 +260,7 @@ function TopNav() {
                     FAQ
                   </ScrollLink>
 
-                </a>
+                </a> */}
 
                 <a
                   href="https://twitter.com/wutfloorxyz"

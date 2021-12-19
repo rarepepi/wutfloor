@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html className="bg-background">
+      <Html className="bg-background font-poppins">
         <Head>
           <script
             async

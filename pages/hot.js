@@ -56,7 +56,7 @@ const hot = (props) => {
     }, []);
 
     return (
-        <div className="font-poppins">
+        <div className="">
             <Head>
                 <title>
                     Hot
@@ -77,7 +77,7 @@ const hot = (props) => {
                         </div>
                         <table className="table-auto overflow-x-scroll p-4 mx-auto">
                             {/* <div className="flex flex-row shadow-2xl"> */}
-                            <thead className="rounded-t-2xl bg-bg-light  h-12">
+                            <thead className="rounded-t-2xl bg-bg-light  h-12 mb-1">
                                 <tr className="text-white p-8">
                                     <th classname="px-8">
                                         Collection
@@ -95,7 +95,7 @@ const hot = (props) => {
                                         Sales
                                     </th>
                                     <th className="px-8">
-                                        MKT Cap
+                                        Market Cap
                                     </th>
                                     <th className="px-8">
                                         Δ(+/-%)
@@ -106,8 +106,8 @@ const hot = (props) => {
                             <tbody>
                                 {collections.length > 0 && collections.map((collection, i) => {
                                     return (
-                                        <Link href={'/c/' + collection.slug} >
-                                            <tr className="text-white hover:bg-bg-light p-8 rounded-2xl">
+                                                <Link href={'/c/' + collection.slug} >
+                                        <tr className="text-white hover:bg-bg-light p-8 rounded-2xl align-baseline">
 
                                                 <NFTCollection collection={collection} ethPrice={ethPrice} />
                                             </tr>

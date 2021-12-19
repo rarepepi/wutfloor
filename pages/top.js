@@ -78,7 +78,7 @@ const top = (props) => {
     }, []);
 
     return (
-        <div className="font-poppins">
+        <div className="">
             <Head>
                 <title>
                     Top
@@ -113,16 +113,16 @@ const top = (props) => {
                                         Avg
                                     </th>
                                     <th className="px-8">
-                                        Vol
+                                        1D Vol
                                     </th>
                                     <th className="px-8">
-                                        Sales
+                                        1D Sales
                                     </th>
                                     <th className="px-8">
-                                        MKT Cap
+                                        Market Cap
                                     </th>
                                     <th className="px-8">
-                                        Δ(+/-%)
+                                       1D Δ(+/-%)
                                     </th>
 
                                 </tr>

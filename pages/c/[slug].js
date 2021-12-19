@@ -63,7 +63,7 @@ const Collection = (props) => {
     }, [router]);
 
     return (
-        <div className="font-poppins ">
+        <div className=" ">
             <Head>
                 <title>
                     {collection.name}

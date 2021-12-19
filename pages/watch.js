@@ -116,7 +116,7 @@ const watch = (props) => {
     }, []);
 
     return (
-        <div className="font-poppins">
+        <div className="">
             <Head>
                 <title>
                     Watch

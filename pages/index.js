@@ -85,7 +85,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="font-poppins min-h-screen relative bg-background">
+      <div className=" min-h-screen relative bg-background">
         <Head>
           <title>
             Wut Floor

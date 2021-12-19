@@ -116,7 +116,7 @@ const feed = (props) => {
     }, []);
 
     return (
-        <div className="font-press-start">
+        <div className="font-poppins">
             <Head>
                 <title>
                     Feed

@@ -78,7 +78,7 @@ const top = (props) => {
     }, []);
 
     return (
-        <div className="font-press-start">
+        <div className="font-poppins">
             <Head>
                 <title>
                     Top

@@ -25,16 +25,12 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Wut Floor</title>
         <meta property="og:title" content="Wut Floor" key="title" />
-      </Head>
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-        rel="stylesheet"
-      />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link rel="preload" rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+        <link rel="preload" rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+      </Head>
       <NextSeo
         openGraph={{
           type: "Wut Floor",

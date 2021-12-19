@@ -38,8 +38,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      'press-start': ['"Press Start 2P"', 'cursive'],
-      'share-tech': ['"Share Tech"', 'sans-serif']
+      'poppins': ['Poppins', 'sans-serif']
     }
   },
   variants: {

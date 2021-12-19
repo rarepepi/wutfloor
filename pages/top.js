@@ -105,7 +105,8 @@ const top = (props) => {
                                     <th classname="px-8">
                                         Collection
                                     </th>
-                                    <th className="px-8">
+                                    <th className="px-8" onClick={() => { collections.sort((ca, cb) => ca.floor_price - cb.floor_price); }}>
+
                                         Floor
                                     </th>
                                     <th className="px-8">

@@ -131,7 +131,7 @@ const top = (props) => {
                                 {collections.length > 0 && collections.map((collection, i) => {
                                     return (
                                         <Link href={'/c/' + collection.slug} >
-                                            <tr className="text-white hover:bg-bg-light rounded-2xl">
+                                            <tr className="text-white hover:bg-bg-light rounded-2xl text-sm">
 
                                                 <NFTCollection collection={collection} ethPrice={ethPrice} />
                                             </tr>

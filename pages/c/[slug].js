@@ -258,7 +258,7 @@ const Collection = (props) => {
                   <h1 className="text-white pt-4">One Day</h1>
                   <div className="flex flex-col jusitfy-center text-center space-x-2">
                     <p className="text-white mt-4 ">
-                      Price: Ξ{" "}
+                      Vol: Ξ{" "}
                       <span className="text-green-300">
                         {Math.round(collection.stats.one_day_volume * 100) /
                           100}
@@ -294,7 +294,7 @@ const Collection = (props) => {
                   <h1 className="text-white pt-4">7 Day</h1>
                   <div className="flex flex-col jusitfy-center text-center space-x-2">
                     <p className="text-white mt-4 ">
-                      Price: Ξ{" "}
+                      Vol: Ξ{" "}
                       <span className="text-green-300">
                         {Math.round(collection.stats.seven_day_volume * 100) /
                           100}
@@ -332,7 +332,7 @@ const Collection = (props) => {
                   <h1 className="text-white pt-4">30 Day</h1>
                   <div className="flex flex-col jusitfy-center text-center space-x-2">
                     <p className="text-white mt-4 ">
-                      Price: Ξ{" "}
+                      Vol: Ξ{" "}
                       <span className="text-green-300">
                         {Math.round(collection.stats.thirty_day_volume * 100) /
                           100}

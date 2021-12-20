@@ -6,7 +6,7 @@ const MainContent = () => {
   return (
     <div id="Why" className="space-y-12 ">
       <Fade>
-        <div className="flex flex-col justify-center shadow-2xl p-8">
+        <div className="flex flex-col justify-center p-8">
           <h1 className="xl:text-4xl text-2xl font-bold text-white mt-16 px-2 text-center">
             Everything you need to research NFTs
           </h1>

@@ -3,18 +3,22 @@ import { Zoom, Fade, Flip, Slide } from "react-reveal";
 
 const Footer = () => {
   return (
-    <div className="lg:p-12 flex justify-evenly max-w-full p-4 space-x-8">
+    <div className="flex justify-evenly max-w-full p-4 space-x-8">
       <Fade>
-        <div className="flex justify-start">
+        <div className="flex justify-start ">
           <p className="text-purple-500 text-sm">
-            <img src="/img/logo-transparent.png" className="w-4 pb-2 inline" /> Wut Floor <br /><span className="text-xs">by {" "}
+            <img src="/img/logo-transparent.png" className="w-4 pb-2 inline" />{" "}
+            Wut Floor <br />
+            <span className="text-xs">
+              by{" "}
               <a
                 className="text-purple-500 animate-pulse"
                 target="_blank"
                 href="https://twitter.com/realrarestpepe"
               >
                 Pepi
-              </a></span>
+              </a>
+            </span>
           </p>
         </div>
         <div className="flex justify-end flex-row flex-wrap text-right space-x-4">
@@ -22,7 +26,8 @@ const Footer = () => {
             className="text-purple-500 animate-pulse"
             target="_blank"
             href="https://github.com/pepimartinez/wutfloor"
-          ><i className="fab fa-github text-xl mr-2" />
+          >
+            <i className="fab fa-github text-xl mr-2" />
             Github
           </a>
           <a

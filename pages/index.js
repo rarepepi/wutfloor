@@ -90,7 +90,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className=" relative bg-background">
+      <div className="relative bg-background w-full">
         <Head>
           <title>Wut Floor</title>
         </Head>
@@ -98,74 +98,52 @@ class HomePage extends React.Component {
         <div className="shadow-lg">
           <TopNav />
         </div>
-        <>
-          <section className="flex flex-col justify-center">
-            <div className="flex flex-row justify-center space-x-8 p-8 mx-auto">
-              <div className="md:flex md:items-center mb-6 flex-col ">
-                <h1 className="text-white font-bold mb-8 p-4 text-4xl text-center ">
-                  <span className="text-purple-500">Wut</span>'s the{" "}
-                  <span className="text-purple-500">Floor </span>price?
-                </h1>
-                <p className="text-gray-400 text-center text-xs">
-                  Enter your ENS address or use your ETH address below
-                </p>
-                <div className="md:w-2/3 ">
-                  <form className="flex justify-center flex-col">
-                    <input
-                      className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                      placeholder="vb.eth or 0x..."
-                      id="inline-full-name"
-                      type="text"
-                      value={this.state.userAddress}
-                      onChange={this.handleChange}
-                    />
-                    {this.state.wrongAddress && (
-                      <Fade top>
-                        <p className="text-red-500 text-center mt-8">
-                          Not an ETH address, try again
-                        </p>
-                      </Fade>
-                    )}
-                    <button
-                      className="mt-16 p-1 motion-safe:hover:scale-110 text-white bg-primary w-32 rounded-xl mx-auto"
-                      type="submit"
-                      onClick={this.handleSumbit}
-                    >
-                      Go!
-                    </button>
-                  </form>
-                </div>
-                <div className="mt-16 flex flex-col justify-center border-t-2 border-purple-500 pt-8 ">
-                  <div classname="flex flex-row justify-center">
-                    <button
-                      className="mt-8 p-3 motion-safe:hover:scale-110 flex text-white  mx-auto bg-bg-light bg-opacity-30 rounded-xl"
-                      type="submit"
-                      onClick={() => Router.push("/top")}
-                    >
-                      See Top Collections
-                    </button>
-                    <button
-                      className="mt-8 p-3 motion-safe:hover:scale-110 flex text-white mx-auto bg-bg-light bg-opacity-30 rounded-xl"
-                      type="submit"
-                      onClick={() => Router.push("/hot")}
-                    >
-                      View Hot Collections
-                    </button>
-                  </div>
-                </div>
-              </div>
+        <section className="flex flex-col justify-center mt-12 p8">
+          <div className="flex flex-col items-center justify-center ">
+            <h1 className="text-white xl:text-6xl text-4xl font-bold text-center mb-4">
+              <span className="text-purple-500">Wut</span>'s the{" "}
+              <span className="text-purple-500">Floor </span>price?
+            </h1>
+            <p className="text-gray-400 text-center text-xs">
+              Enter your ENS address or use your ETH address below
+            </p>
+            <div className="">
+              <form className="flex justify-center flex-col">
+                <input
+                  className="mt-16 focus:border-green-300 appearance-none border-4 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  placeholder="vb.eth or 0x..."
+                  id="inline-full-name"
+                  type="text"
+                  value={this.state.userAddress}
+                  onChange={this.handleChange}
+                />
+                {this.state.wrongAddress && (
+                  <Fade top>
+                    <p className="text-red-500 text-center mt-8">
+                      Not an ETH address, try again
+                    </p>
+                  </Fade>
+                )}
+                <button
+                  className="mt-16 p-1 motion-safe:hover:scale-110 text-white bg-primary w-32 rounded-xl mx-auto"
+                  type="submit"
+                  onClick={this.handleSumbit}
+                >
+                  Go!
+                </button>
+              </form>
             </div>
-          </section>
-          <section className="mt-16 p-16 ">
-            <MainContent />
-          </section>
-          <section className="mt-16 p-16">
-            <FAQ />
-          </section>
-          <section className="mt-16">
-            <Footer />
-          </section>
-        </>
+          </div>
+        </section>
+        <section className="-mt-6 p-16 ">
+          <MainContent />
+        </section>
+        <section className="mt-16 p-16">
+          <FAQ />
+        </section>
+        <section className="mt-16 bg-bg-light">
+          <Footer />
+        </section>
       </div>
     );
   }

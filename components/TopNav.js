@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { AdjustmentsIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link as ScrollLink } from "react-scroll";
-import Link from 'next/link';
+import Link from "next/link";
 const navigation = [
   { name: "Twitter", href: "#", current: false },
   { name: "Github", href: "#", current: false },
@@ -17,13 +17,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-
 function TopNav() {
   const [open, setOpen] = React.useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <nav className="">
+      <nav className="bg-bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -36,85 +35,55 @@ function TopNav() {
                       alt="Workflow"
                     />
                   </a>
-
                 </Link>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-
+                  <div class="flex justify-center">
+                    <div class="xl:w-96">
+                      <input
+                        type="text"
+                        className="
+                            w-full
+                            px-2
+                            py-1.5
+                            text-white
+                            bg-background bg-clip-padding
+                            rounded
+                            
+                            focus:text-purple-500 focus:outline-none"
+                        id="search"
+                        placeholder="Search for collections or wallets..."
+                      />
+                    </div>
+                  </div>
                   <Link href="/top">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
+                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Top
                     </a>
-
                   </Link>
 
                   <Link href="/hot">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
+                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
                       Hot
                     </a>
-
                   </Link>
                   <Link href="/discover">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
+                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Discover
                     </a>
-
                   </Link>
                   <Link href="/watch">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
+                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
                       Watch
                     </a>
-
                   </Link>
                   <Link href="/feed">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
+                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Feed
                     </a>
                   </Link>
-                  {/* <a
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    <ScrollLink
-                      to="Why"
-                      spy={true}
-                      smooth={true}
-                      offset={-50}
-                      duration={500}
-                      className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Why
-                    </ScrollLink>
-
-                  </a>
-
-                  <a
-                    className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    <ScrollLink
-                      to="FAQ"
-                      spy={true}
-                      smooth={true}
-                      offset={-50}
-                      duration={500}
-                      className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      FAQ
-                    </ScrollLink>
-                  </a> */}
-
                 </div>
-
               </div>
               <div className="hidden md:block right-0 absolute">
                 <a
@@ -123,7 +92,6 @@ function TopNav() {
                   className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-twitter text-xl mr-2" />
-
                 </a>
                 <a
                   href="https://github.com/pepimartinez/wutfloor"
@@ -131,10 +99,8 @@ function TopNav() {
                   className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-github text-xl mr-2" />
-
                 </a>
               </div>
-
             </div>
             <div className="-mr-2 flex md:hidden">
               <button
@@ -195,81 +161,49 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                
+                <div class="flex justify-center">
+                  <div class="w-96 px-8">
+                    <input
+                      type="text"
+                      className="
+                            w-full
+                            px-2
+                            py-1.5
+                            text-white
+                            bg-background bg-clip-padding
+                            rounded
+                            
+                            focus:text-purple-500 focus:outline-none"
+                      id="search"
+                      placeholder="Search for collections or wallets..."
+                    />
+                  </div>
+                </div>
                 <Link href="/top">
-                  <a
-                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Top
                   </a>
-
                 </Link>
                 <Link href="/hot">
-                    <a
-                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Hot
-                    </a>
-
-                  </Link>
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
+                    Hot
+                  </a>
+                </Link>
                 <Link href="/discover">
-                  <a
-                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Discover
                   </a>
-
                 </Link>
                 <Link href="/watch">
-                  <a
-                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Watch
                   </a>
-
                 </Link>
                 <Link href="/feed">
-                  <a
-                    className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Feed
                   </a>
-
                 </Link>
-                {/* <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
-                >
-
-                  <ScrollLink
-                    to="Why"
-                    spy={true}
-                    smooth={true}
-                    offset={-50}
-                    duration={500}
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Why
-                  </ScrollLink>
-
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center"
-                >
-                  <ScrollLink
-                    to="FAQ"
-                    spy={true}
-                    smooth={true}
-                    offset={-50}
-                    duration={500}
-                    className="text-gray-200 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    FAQ
-                  </ScrollLink>
-
-                </a> */}
 
                 <a
                   href="https://twitter.com/wutfloorxyz"
@@ -277,7 +211,6 @@ function TopNav() {
                   className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-twitter text-xl mr-2" />
-
                 </a>
                 <a
                   href="https://github.com/pepimartinez/wutfloor"
@@ -285,7 +218,6 @@ function TopNav() {
                   className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <i className="fab fa-github text-xl mr-2" />
-
                 </a>
               </div>
             </div>

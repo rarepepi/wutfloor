@@ -10,7 +10,7 @@ module.exports = {
       'secondary': '#8a5cf6',
       'danger': '#e3342f',
       'background': '#181818',
-      'bg-light': '#303048'
+      'bg-light': '#282828'
     }),
     extend: {
       backgroundImage: (theme) => ({

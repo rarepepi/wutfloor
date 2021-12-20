@@ -57,6 +57,11 @@ function TopNav() {
                       />
                     </div>
                   </div>
+                  <Link href="/features">
+                    <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
+                      Features
+                    </a>
+                  </Link>
                   <Link href="/top">
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Top
@@ -179,6 +184,11 @@ function TopNav() {
                     />
                   </div>
                 </div>
+                <Link href="/features">
+                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
+                    Features
+                  </a>
+                </Link>
                 <Link href="/top">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Top

@@ -13,6 +13,8 @@ import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import detectEthereumProvider from "@metamask/detect-provider";
 import axios from "axios";
 import NFTAsset from "../components/NFTAsset";
+import NFTCollection from "../components/NFTCollection";
+import Link from "next/link";
 const request = rateLimit(axios.create(), {
   maxRequests: 5,
   perMilliseconds: 1000,
@@ -35,6 +37,8 @@ class HomePage extends React.Component {
       signedIn: false,
       userAddress: "",
       wrongAddress: false,
+      collections: [],
+      loading: true,
     };
     this.updatePredicate = this.updatePredicate.bind(this);
     this.myRef = React.createRef();
@@ -46,16 +50,56 @@ class HomePage extends React.Component {
     this.updatePredicate();
     window.addEventListener("resize", this.updatePredicate);
 
-    sleep(2000).then(() => {
-      this.setState({ loading: false });
-    });
-
     const data = await axios.get(
       "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
     );
 
     this.setState({ ethPrice: data.data.USD });
+    const results = await this.getTopCollectionsData();
+    this.setState({ collections: results });
   }
+  getTopCollectionsData = async () => {
+    let collections = [];
+    const collectionSlugs = [
+      "fidenza-by-tyler-hobbs",
+      "autoglyphs",
+      "twinflames",
+      "cyberkongz",
+      "boredapeyachtclub",
+      "neo-tokyo-identities",
+      "cool-cats-nft",
+      "mutant-ape-yacht-club",
+      "veefriends",
+      "cryptoadz-by-gremplin",
+      "hashmasks",
+      "world-of-women-nft",
+      "galacticapesgenesis",
+      "sandbox",
+      "clonex",
+      "clonex-mintvial",
+      "doodles-official",
+      "punks-comic",
+      "decentraland",
+      "art-blocks",
+      "lootproject",
+    ];
+    await Promise.all(
+      collectionSlugs.map(async (slug, i) => {
+        const data = await axios.get(
+          `https://api.opensea.io/api/v1/collection/${slug}`
+        );
+        if (!data) return;
+        // console.log(data.data.asset_events);
+        collections.push(data.data.collection);
+      })
+    );
+    // const web3 = new Web3(provider);
+    // const result = await web3.eth.getBalance(address);
+    // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
+    // console.log(`There are ${collections.length} collections`);
+
+    return collections;
+  };
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updatePredicate);
@@ -98,7 +142,46 @@ class HomePage extends React.Component {
         <div className="shadow-lg">
           <TopNav />
         </div>
-        <section className="flex flex-col justify-center mt-12 p8">
+        <Fade>
+          <div className="mx-auto px-16 mt-4">
+            <div className="flex flex-col justify-center  p-4">
+              <h1 className="text-white font-bold mb-1 text-2xl text-center">
+                Top Collections
+              </h1>
+            </div>
+            <div class="container">
+              <table className="table-auto mx-auto w-full">
+                <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
+                  <tr className="text-white">
+                    <th classname="">Collection</th>
+                    <th className="">Floor</th>
+                    <th className="">Avg</th>
+                    <th className="">1D Vol</th>
+                    <th className="">1D Sales</th>
+                    <th className="">Market Cap</th>
+                    <th className="">1D Δ(+/-%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.collections.length > 0 &&
+                    this.state.collections.map((collection, i) => {
+                      return (
+                        <Link href={"/c/" + collection.slug}>
+                          <tr className="text-white hover:bg-bg-light cursor-pointer rounded-2xl">
+                            <NFTCollection
+                              collection={collection}
+                              ethPrice={this.state.ethPrice}
+                            />
+                          </tr>
+                        </Link>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Fade>
+        {/* <section className="flex flex-col justify-center mt-12 p8">
           <div className="flex flex-col items-center justify-center ">
             <h1 className="text-white xl:text-6xl text-4xl font-bold text-center mb-4">
               <span className="text-purple-500">Wut</span>'s the{" "}
@@ -134,13 +217,7 @@ class HomePage extends React.Component {
               </form>
             </div>
           </div>
-        </section>
-        <section className="-mt-6 p-16 ">
-          <MainContent />
-        </section>
-        <section className="mt-16 p-16">
-          <FAQ />
-        </section>
+        </section> */}
         <section className="mt-16 bg-bg-light">
           <Footer />
         </section>

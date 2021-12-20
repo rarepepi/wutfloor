@@ -258,7 +258,7 @@ const Account = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">Total Balance</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{(parseFloat(ethBalance) + parseFloat(totalETHValue)).toLocaleString()}</p>
+                                        <p className="text-green-400 mt-4">Ξ {(parseFloat(ethBalance) + parseFloat(totalETHValue)).toLocaleString()}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round(((ethBalance * ethPrice) + (totalETHValue * ethPrice)) * 100) / 100).toLocaleString()})</p>
                                     </div>
                                 </div>
@@ -266,14 +266,14 @@ const Account = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">ETH Balance</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{ethBalance.toLocaleString()}</p>
+                                        <p className="text-green-400 mt-4">Ξ {ethBalance.toLocaleString()}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round((ethBalance * ethPrice) * 100) / 100).toLocaleString()})</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className=" text-white text-lg pt-4">Floor Value</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{totalETHValue.toLocaleString()}</p>
+                                        <p className="text-green-400 mt-4">Ξ {totalETHValue.toLocaleString()}</p>
                                         <p className="text-green-400 mt-4">(${(totalETHValue * ethPrice).toLocaleString()})</p>
                                     </div>
                                 </div>
@@ -285,7 +285,7 @@ const Account = (props) => {
                                 <div className="flex flex-col justify-center text-center lg:p-10 p-8 shadow-2xl">
                                     <h1 className="text-white text-lg pt-4">7 Day Avg</h1>
                                     <div className="flex flex-col jusitfy-center text-center space-x-2">
-                                        <p className="text-green-400 mt-4"><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-6 w-6 inline mr-2" />{Math.round(totalETHValue7Day * 100) / 100}</p>
+                                        <p className="text-green-400 mt-4">Ξ {Math.round(totalETHValue7Day * 100) / 100}</p>
                                         <p className="text-green-400 mt-4">(${(Math.round((totalETHValue7Day * ethPrice) * 100) / 100).toLocaleString()})</p>
                                     </div>
                                 </div>

@@ -83,6 +83,7 @@ const top = (props) => {
                 <title>
                     Top
                 </title>
+                <meta name="description" content="View the Top NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."/>
 
             </Head>
 
@@ -96,32 +97,31 @@ const top = (props) => {
                             <h1 className="text-white font-bold mb-1 text-2xl text-center" >
                                 Top Collections
                             </h1>
-                            <p className="text-gray-300 text-sm text-center ml-2">v.0.1 (beta)</p>
                         </div>
-                        <table className="table-auto overflow-x-scroll p-4 mx-auto">
-                            {/* <div className="flex flex-row shadow-2xl"> */}
-                            <thead className="rounded-t-2xl bg-bg-light  h-12">
-                                <tr className="text-white p-8">
-                                    <th classname="px-8">
+                        <div class="container">
+
+                        <table className="table-auto mx-auto w-full">
+                            <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
+                                <tr className="text-white">
+                                    <th classname="">
                                         Collection
                                     </th>
-                                    <th className="px-8">
-
+                                    <th className="">
                                         Floor
                                     </th>
-                                    <th className="px-8">
+                                    <th className="">
                                         Avg
                                     </th>
-                                    <th className="px-8">
+                                    <th className="">
                                         1D Vol
                                     </th>
-                                    <th className="px-8">
+                                    <th className="">
                                         1D Sales
                                     </th>
-                                    <th className="px-8">
+                                    <th className="">
                                         Market Cap
                                     </th>
-                                    <th className="px-8">
+                                    <th className="">
                                        1D Δ(+/-%)
                                     </th>
 
@@ -131,7 +131,7 @@ const top = (props) => {
                                 {collections.length > 0 && collections.map((collection, i) => {
                                     return (
                                         <Link href={'/c/' + collection.slug} >
-                                            <tr className="text-white hover:bg-bg-light rounded-2xl text-sm">
+                                            <tr className="text-white hover:bg-bg-light rounded-2xl">
 
                                                 <NFTCollection collection={collection} ethPrice={ethPrice} />
                                             </tr>
@@ -142,6 +142,7 @@ const top = (props) => {
                             </tbody>
 
                         </table>
+                    </div>
                     </div>
                 </Fade >
                 {

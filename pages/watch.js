@@ -106,10 +106,10 @@ const watch = (props) => {
             console.log({ occur });
             setLoading(false);
         };
-        getData();
+        // getData();
 
         const interval = setInterval(() => {
-            getData();
+            // getData();
         }, 60000);
 
         return () => clearInterval(interval);
@@ -132,7 +132,7 @@ const watch = (props) => {
                     <h1 className="text-white font-bold mb-1 my-8 p-4 text-2xl text-center" >
                         Watch Lists
                     </h1>
-                    <p className="text-gray-300 text-sm text-center">coming soon follow twitter for more</p>
+                    <p className="text-gray-300 text-sm text-center">coming soon follow our <a className="text-green-300" href="https://twitter.com/wutfloorxyz">twitter</a> for updates</p>
                 </div>
 
                 <Footer></Footer>

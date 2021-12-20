@@ -195,6 +195,7 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                
                 <Link href="/top">
                   <a
                     className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -203,6 +204,14 @@ function TopNav() {
                   </a>
 
                 </Link>
+                <Link href="/hot">
+                    <a
+                      className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Hot
+                    </a>
+
+                  </Link>
                 <Link href="/discover">
                   <a
                     className="text-white flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"

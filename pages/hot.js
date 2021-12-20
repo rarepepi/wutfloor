@@ -61,7 +61,7 @@ const hot = (props) => {
                 <title>
                     Hot
                 </title>
-
+                <meta name="description" content="View the hottest NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."/>
             </Head>
             <div className="w-full">
                 <div className="shadow-lg">
@@ -75,49 +75,51 @@ const hot = (props) => {
                             </h1>
                             <p className="text-gray-300 text-sm text-center ml-2">v.0.1 (beta)</p>
                         </div>
-                        <table className="table-auto overflow-x-scroll p-4 mx-auto">
-                            {/* <div className="flex flex-row shadow-2xl"> */}
-                            <thead className="rounded-t-2xl bg-bg-light  h-12 mb-1">
-                                <tr className="text-white p-8">
-                                    <th classname="px-8">
-                                        Collection
-                                    </th>
-                                    <th className="px-8">
-                                        Floor
-                                    </th>
-                                    <th className="px-8">
-                                        Avg
-                                    </th>
-                                    <th className="px-8">
-                                        Vol
-                                    </th>
-                                    <th className="px-8">
-                                        Sales
-                                    </th>
-                                    <th className="px-8">
-                                        Market Cap
-                                    </th>
-                                    <th className="px-8">
-                                        Δ(+/-%)
-                                    </th>
+                        <div class="container">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {collections.length > 0 && collections.map((collection, i) => {
-                                    return (
-                                                <Link href={'/c/' + collection.slug} >
-                                        <tr className="text-white hover:bg-bg-light p-8 rounded-2xl align-baseline">
+<table className="table-auto mx-auto w-full">
+    <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
+        <tr className="text-white">
+            <th classname="">
+                Collection
+            </th>
+            <th className="">
+                Floor
+            </th>
+            <th className="">
+                Avg
+            </th>
+            <th className="">
+                1D Vol
+            </th>
+            <th className="">
+                1D Sales
+            </th>
+            <th className="">
+                Market Cap
+            </th>
+            <th className="">
+               1D Δ(+/-%)
+            </th>
 
-                                                <NFTCollection collection={collection} ethPrice={ethPrice} />
-                                            </tr>
-                                        </Link>
+        </tr>
+    </thead>
+    <tbody>
+        {collections.length > 0 && collections.map((collection, i) => {
+            return (
+                <Link href={'/c/' + collection.slug} >
+                    <tr className="text-white hover:bg-bg-light rounded-2xl">
 
-                                    );
-                                })}
-                            </tbody>
+                        <NFTCollection collection={collection} ethPrice={ethPrice} />
+                    </tr>
+                </Link>
 
-                        </table>
+            );
+        })}
+    </tbody>
+
+</table>
+</div>
                     </div>
                 </Fade >
                 {loading && <div className="flex flex-col h-screen justify-center items-center"><>

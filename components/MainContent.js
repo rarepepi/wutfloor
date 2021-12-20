@@ -39,11 +39,11 @@ const MainContent = () => {
             </h2>
 
             <p className="pt-4">
-              Research floor, volume, and sales trends and charts on
-              <span className="text-green-300"> any </span>
-              collection you wish! Gain
+              Research floor, volume, and sales trends and charts on any
+              <span className="text-green-300"> collection </span>
+              you wish! Gain
               <span className="text-purple-500"> alpha </span> by discovering
-              hidden data.
+              special data.
             </p>
           </div>
           <div className="flex flex-col justify-center">
@@ -88,11 +88,10 @@ const MainContent = () => {
             </h2>
 
             <p className="pt-4">
-              We got hourly, daily, monthly, and all time data
-              <span className="text-green-300"> statistics </span> you could
-              dream of. Check out a
-              <span className="text-purple-500"> collection or wallet</span> to
-              see all kinds of alpha stats.
+              Get hourly, daily, monthly, and all time data
+              <span className="text-green-300"> statistics </span> you've ever
+              dreamed of. Check out a collection or wallet to see all kinds of{" "}
+              <span className="text-purple-500">alpha stats.</span>
             </p>
           </div>
           <div className="pt-4 motion-safe:hover:scale-110">

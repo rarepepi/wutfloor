@@ -6,7 +6,7 @@ import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { ethers } from "ethers";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
-
+import Router from "next/router";
 import Head from "next/head";
 
 const getHotCollectionsData = async () => {

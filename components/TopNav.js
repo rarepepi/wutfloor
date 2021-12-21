@@ -38,7 +38,7 @@ function TopNav() {
                 </Link>
               </div>
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="ml-10 flex items-baseline space-x-1">
                   <div class="flex justify-center">
                     <div class="xl:w-96">
                       <input
@@ -53,7 +53,7 @@ function TopNav() {
                             
                             focus:text-purple-500 focus:outline-none"
                         id="search"
-                        placeholder="Search for collections or wallets..."
+                        placeholder="Coming soon..."
                       />
                     </div>
                   </div>
@@ -78,9 +78,9 @@ function TopNav() {
                       Discover
                     </a>
                   </Link>
-                  <Link href="/watch">
+                  <Link href="/wallet">
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
-                      Watch
+                      Wallet
                     </a>
                   </Link>
                   <Link href="/feed">
@@ -180,7 +180,7 @@ function TopNav() {
                             
                             focus:text-purple-500 focus:outline-none"
                       id="search"
-                      placeholder="Search for collections or wallets..."
+                      placeholder="Coming soon..."
                     />
                   </div>
                 </div>
@@ -204,9 +204,9 @@ function TopNav() {
                     Discover
                   </a>
                 </Link>
-                <Link href="/watch">
+                <Link href="/wallet">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
-                    Watch
+                    Wallet
                   </a>
                 </Link>
                 <Link href="/feed">

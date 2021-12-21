@@ -7,13 +7,13 @@ const MainContent = () => {
     <div id="Why" className="space-y-12 ">
       <Fade>
         <div className="flex flex-col justify-center p-8">
-          <h1 className="xl:text-4xl text-2xl font-bold text-white mt-16 px-2 text-center">
+          <h1 className="xl:text-6xl text-4xl font-bold text-white  px-2 text-center">
             Everything you need to research NFTs
           </h1>
           <h2 className="text-gray-300 text-center mt-4">
             Built for apes, by apes.
           </h2>
-          <div className="flex flex-row flex-wrap justify-center mt-8 space-x-6">
+          <div className="flex flex-row flex-wrap justify-center mt-8 sm:space-x-6 sm:space-y-0 space-y-4">
             <button
               className=" p-3 motion-safe:hover:scale-110 flex text-white  bg-bg-light rounded-xl"
               type="submit"

@@ -25,11 +25,27 @@ import Link from "next/link";
 const getTopCollectionsData = async () => {
   let collections = [];
   const collectionSlugs = [
+    "fidenza-by-tyler-hobbs",
+    "autoglyphs",
+    "twinflames",
     "cyberkongz",
     "boredapeyachtclub",
+    "neo-tokyo-identities",
     "cool-cats-nft",
+    "mutant-ape-yacht-club",
+    "veefriends",
     "cryptoadz-by-gremplin",
+    "hashmasks",
+    "world-of-women-nft",
+    "galacticapesgenesis",
+    "sandbox",
+    "clonex",
+    "clonex-mintvial",
     "doodles-official",
+    "punks-comic",
+    "decentraland",
+    "art-blocks",
+    "lootproject",
   ];
   await Promise.all(
     collectionSlugs.map(async (slug, i) => {
@@ -88,7 +104,7 @@ const top = (props) => {
   return (
     <div className="">
       <Head>
-        <title>Top 5</title>
+        <title>Top Collections</title>
         <meta
           name="description"
           content="View the Top NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."

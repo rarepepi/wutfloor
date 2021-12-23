@@ -51,27 +51,12 @@ class HomePage extends React.Component {
   getTopCollectionsData = async () => {
     let collections = [];
     const collectionSlugs = [
-      "fidenza-by-tyler-hobbs",
-      "autoglyphs",
-      "twinflames",
       "cyberkongz",
       "boredapeyachtclub",
-      "neo-tokyo-identities",
       "cool-cats-nft",
-      "mutant-ape-yacht-club",
-      "veefriends",
       "cryptoadz-by-gremplin",
-      "hashmasks",
-      "world-of-women-nft",
-      "galacticapesgenesis",
-      "sandbox",
-      "clonex",
-      "clonex-mintvial",
       "doodles-official",
-      "punks-comic",
-      "decentraland",
-      "art-blocks",
-      "lootproject",
+
     ];
     await Promise.all(
       collectionSlugs.map(async (slug, i) => {
@@ -110,23 +95,23 @@ class HomePage extends React.Component {
           <TopNav />
         </div>
         <Fade>
-          <div className="mx-auto px-16 mt-4">
+          <div className="mx-auto sm:px-16 mt-4">
             <div className="flex flex-col justify-center  p-4">
               <h1 className="text-white font-bold mb-1 text-2xl text-center">
-                Top Collections
+                Top 5 Collections
               </h1>
             </div>
-            <div class="container">
-              <table className="table-auto mx-auto w-full">
+            <div class="flex sm:justify-center">
+              <table className="table-auto mx-auto w-full overflow-x-scroll">
                 <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
                   <tr className="text-white">
-                    <th classname="">Collection</th>
-                    <th className="">Floor</th>
-                    <th className="">Avg</th>
-                    <th className="">1D Vol</th>
-                    <th className="">1D Sales</th>
-                    <th className="">Market Cap</th>
-                    <th className="">1D Δ(+/-%)</th>
+                    <th className="p-6">Collection</th>
+                    <th className="p-6">Floor</th>
+                    <th className="p-6">Avg</th>
+                    <th className="p-6">1D Vol</th>
+                    <th className="p-6">1D Sales</th>
+                    <th className="p-6">Market Cap</th>
+                    <th className="p-6">1D Δ(+/-%)</th>
                   </tr>
                 </thead>
                 <tbody>

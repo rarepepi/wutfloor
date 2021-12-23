@@ -47,7 +47,7 @@ const MainContent = () => {
               special data.
             </p>
           </div>
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center motion-safe:hover:scale-110">
             <img
               src="https://media2.giphy.com/media/6DdzrWQZ97PmQVy6oi/giphy.gif?cid=ecf05e47ph9gjjzom4dihhoy53yt1jqbrbb58eozklif2d5x&rid=giphy.gif&ct=g"
               width={300}

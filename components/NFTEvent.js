@@ -10,7 +10,7 @@ const NFTEvent = (props) => {
             <Fade>
                 <>
                     <div className="flex flex-row flex-wrap text-left justify-evenly space-x-24  text-white w-full h-full rounded-xl lg:pt-8 p-4">
-                        <div classname="flex">
+                        <div className="flex">
                             <img className="w-8 h-8 rounded-full" src={props.event.asset.image_url}></img>
                         </div>
                         <div className="flex align-middle w-32 hover:cursor-pointer">

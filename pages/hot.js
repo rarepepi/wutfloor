@@ -11,15 +11,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 const getHotCollectionsData = async () => {
 
-    const maxOffset = 200;
-    const bundleSize = 20;
     let collections = [];
     const collectionSlugs = ["fidenza-by-tyler-hobbs", "autoglyphs", "twinflames", "cyberkongz", "boredapeyachtclub", "neo-tokyo-identities", "cool-cats-nft", "mutant-ape-yacht-club", "veefriends", "galacticapesgenesis"];
     await Promise.all(collectionSlugs.map(async (slug, i) => {
 
         const { data } = await axios.get(`https://api.opensea.io/api/v1/collection/${slug}`);
         if (!data) return;
-        // console.log(data.data.asset_events);
         collections.push(data.collection);
 
     }));
@@ -61,7 +58,7 @@ const hot = (props) => {
                 <title>
                     Hot
                 </title>
-                <meta name="description" content="View the hottest NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."/>
+                <meta name="description" content="View the hottest NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools." />
             </Head>
             <div className="w-full">
                 <div className="shadow-lg">
@@ -77,49 +74,49 @@ const hot = (props) => {
                         </div>
                         <div class="container">
 
-<table className="table-auto mx-auto w-full">
-    <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
-        <tr className="text-white">
-            <th classname="">
-                Collection
-            </th>
-            <th className="">
-                Floor
-            </th>
-            <th className="">
-                Avg
-            </th>
-            <th className="">
-                1D Vol
-            </th>
-            <th className="">
-                1D Sales
-            </th>
-            <th className="">
-                Market Cap
-            </th>
-            <th className="">
-               1D Δ(+/-%)
-            </th>
+                            <table className="table-auto mx-auto w-full">
+                                <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
+                                    <tr className="text-white">
+                                        <th className="">
+                                            Collection
+                                        </th>
+                                        <th className="">
+                                            Floor
+                                        </th>
+                                        <th className="">
+                                            Avg
+                                        </th>
+                                        <th className="">
+                                            1D Vol
+                                        </th>
+                                        <th className="">
+                                            1D Sales
+                                        </th>
+                                        <th className="">
+                                            Market Cap
+                                        </th>
+                                        <th className="">
+                                            1D Δ(+/-%)
+                                        </th>
 
-        </tr>
-    </thead>
-    <tbody>
-        {collections.length > 0 && collections.map((collection, i) => {
-            return (
-                <Link href={'/c/' + collection.slug} >
-                    <tr className="text-white hover:bg-bg-light rounded-2xl">
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {collections.length > 0 && collections.map((collection, i) => {
+                                        return (
+                                            <Link href={'/c/' + collection.slug} >
+                                                <tr className="text-white hover:bg-bg-light rounded-2xl">
 
-                        <NFTCollection collection={collection} ethPrice={ethPrice} />
-                    </tr>
-                </Link>
+                                                    <NFTCollection collection={collection} ethPrice={ethPrice} />
+                                                </tr>
+                                            </Link>
 
-            );
-        })}
-    </tbody>
+                                        );
+                                    })}
+                                </tbody>
 
-</table>
-</div>
+                            </table>
+                        </div>
                     </div>
                 </Fade >
                 {loading && <div className="flex flex-col h-screen justify-center items-center"><>

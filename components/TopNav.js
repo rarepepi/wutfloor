@@ -89,11 +89,11 @@ function TopNav() {
                       Hot
                     </a>
                   </Link>
-                  <Link href="/discover">
+                  {/* <Link href="/discover">
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Discover
                     </a>
-                  </Link>
+                  </Link> */}
                   <Link href="/wallet">
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
                       Wallet
@@ -220,11 +220,11 @@ function TopNav() {
                     Hot
                   </a>
                 </Link>
-                <Link href="/discover">
+                {/* <Link href="/discover">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Discover
                   </a>
-                </Link>
+                </Link> */}
                 <Link href="/wallet">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Wallet

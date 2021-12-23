@@ -135,16 +135,16 @@ const feed = (props) => {
                     <p className="text-gray-300 text-sm text-center">v.0.1 (beta)</p>
                 </div>
                 {/* <div className="flex flex-row justify-evenly w-full bg-secondary">
-                    <div classname="flex">
+                    <div className="flex">
                         Name
                     </div>
-                    <div classname="flex">
+                    <div className="flex">
                         Floor
                     </div>
-                    <div classname="flex">
+                    <div className="flex">
                         Volume
                     </div>
-                    <div classname="flex">
+                    <div className="flex">
                         Activity
                     </div>
                 </div> */}

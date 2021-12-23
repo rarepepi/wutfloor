@@ -1,15 +1,16 @@
+
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
 import TopNav from "../components/TopNav";
-import Particles from "react-particles-js";
-import Router from "next/router";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
 import FAQ from "../components/FAQ";
 import Head from "next/head";
 import Link from "next/link";
+import Router from "next/router";
+
 const getHotCollectionsData = async () => {
   const maxOffset = 200;
   const bundleSize = 20;

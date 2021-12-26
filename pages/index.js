@@ -20,7 +20,7 @@ import TypeIt from "typeit-react";
 import Router from "next/router";
 import Particles from "react-particles-js";
 import Head from "next/head";
-import Feed from "../components/feed";
+import Feed from "../components/Feed";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

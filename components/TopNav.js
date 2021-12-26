@@ -10,6 +10,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 import { PieChart } from "recharts";
 import axios from "axios";
+import SearchBar from "./SearchBar";
 const navigation = [
   { name: "Twitter", href: "#", current: false },
   { name: "Github", href: "#", current: false },
@@ -19,15 +20,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-
 function TopNav() {
   const [open, setOpen] = React.useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [gas, setGas] = useState(0);
   useEffect(async () => {
     const getData = async () => {
-      const { data } = await axios.get('https://ethgas.watch/api/gas');
-      setGas(data.normal.gwei);;
+      const { data } = await axios.get("https://ethgas.watch/api/gas");
+      setGas(data.normal.gwei);
     };
     await getData();
     const interval = setInterval(() => {
@@ -55,24 +55,6 @@ function TopNav() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-1">
-                  <div class="flex justify-center">
-                    <div class="xl:w-96">
-                      <input
-                        type="text"
-                        className="
-                            w-full
-                            px-2
-                            py-1.5
-                            text-white
-                            bg-background bg-clip-padding
-                            rounded
-                            
-                            focus:text-purple-500 focus:outline-none"
-                        id="search"
-                        placeholder="Coming soon..."
-                      />
-                    </div>
-                  </div>
                   <Link href="/features">
                     <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Features
@@ -94,23 +76,18 @@ function TopNav() {
                       Discover
                     </a>
                   </Link> */}
-                  <Link href="/wallet">
+                  {/* <Link href="/wallet">
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
                       Wallet
                     </a>
-                  </Link>
-                  <Link href="/feed">
-                    <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
-                      Feed
-                    </a>
-                  </Link>
+                  </Link> */}
+                  <SearchBar />
                 </div>
               </div>
               <div className="hidden md:block right-0 absolute">
                 <a className="text-gray-200 hover:bg-gray-700  font-bold text-lg	 hover:text-white px-3 py-2 rounded-md ">
                   {gas}
                   <i className="fas fa-gas-pump text-lg ml-2" />
-
                 </a>
                 <a
                   href="https://twitter.com/wutfloorxyz"
@@ -187,24 +164,6 @@ function TopNav() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <div class="flex justify-center">
-                  <div class="w-96 px-8">
-                    <input
-                      type="text"
-                      className="
-                            w-full
-                            px-2
-                            py-1.5
-                            text-white
-                            bg-background bg-clip-padding
-                            rounded
-                            
-                            focus:text-purple-500 focus:outline-none"
-                      id="search"
-                      placeholder="Coming soon..."
-                    />
-                  </div>
-                </div>
                 <Link href="/features">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Features
@@ -220,25 +179,17 @@ function TopNav() {
                     Hot
                   </a>
                 </Link>
-                {/* <Link href="/discover">
-                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
-                    Discover
-                  </a>
-                </Link> */}
-                <Link href="/wallet">
+
+                {/* <Link href="/wallet">
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Wallet
                   </a>
-                </Link>
-                <Link href="/feed">
-                  <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
-                    Feed
-                  </a>
-                </Link>
+                </Link> */}
+                <SearchBar />
+
                 <a className="text-gray-200 hover:bg-gray-700 flex justify-center font-bold text-lg	 hover:text-white px-3 py-2 rounded-md ">
                   {gas}
                   <i className="fas fa-gas-pump text-lg ml-2" />
-
                 </a>
                 <a
                   href="https://twitter.com/wutfloorxyz"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
+import { Fade } from "react-reveal";
 
 const Footer = () => {
   return (

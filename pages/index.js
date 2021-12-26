@@ -20,6 +20,7 @@ import TypeIt from "typeit-react";
 import Router from "next/router";
 import Particles from "react-particles-js";
 import Head from "next/head";
+import Feed from "../components/feed";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -56,7 +57,6 @@ class HomePage extends React.Component {
       "cool-cats-nft",
       "cryptoadz-by-gremplin",
       "doodles-official",
-
     ];
     await Promise.all(
       collectionSlugs.map(async (slug, i) => {
@@ -86,7 +86,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="relative bg-background w-full">
+      <div className="bg-background">
         <Head>
           <title>Wut Floor</title>
         </Head>
@@ -94,45 +94,55 @@ class HomePage extends React.Component {
         <div className="shadow-lg">
           <TopNav />
         </div>
-        <Fade>
-          <div className="mx-auto sm:px-16 mt-4">
-            <div className="flex flex-col justify-center  p-4">
-              <h1 className="text-white font-bold mb-1 text-2xl text-center">
-                Top 5 Collections
-              </h1>
+        <section>
+          <Fade>
+            <div className="mx-auto sm:px-16 mt-4">
+              <div className="flex flex-col justify-center  p-4">
+                <h1 className="text-white font-bold mb-1 text-2xl text-center">
+                  Top 5 Collections
+                </h1>
+              </div>
+              <div class="flex sm:justify-center">
+                <table className="table-auto mx-auto w-full overflow-x-scroll">
+                  <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
+                    <tr className="text-white">
+                      <th className="p-6">Collection</th>
+                      <th className="p-6">Floor</th>
+                      <th className="p-6">Avg</th>
+                      <th className="p-6">1D Vol</th>
+                      <th className="p-6">1D Sales</th>
+                      <th className="p-6">Market Cap</th>
+                      <th className="p-6">1D Δ(+/-%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.collections.length > 0 &&
+                      this.state.collections.map((collection, i) => {
+                        return (
+                          <Link href={"/c/" + collection.slug}>
+                            <tr className="text-white hover:bg-bg-light cursor-pointer rounded-2xl">
+                              <NFTCollection
+                                collection={collection}
+                                ethPrice={this.state.ethPrice}
+                              />
+                            </tr>
+                          </Link>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="flex sm:justify-center">
-              <table className="table-auto mx-auto w-full overflow-x-scroll">
-                <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
-                  <tr className="text-white">
-                    <th className="p-6">Collection</th>
-                    <th className="p-6">Floor</th>
-                    <th className="p-6">Avg</th>
-                    <th className="p-6">1D Vol</th>
-                    <th className="p-6">1D Sales</th>
-                    <th className="p-6">Market Cap</th>
-                    <th className="p-6">1D Δ(+/-%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.collections.length > 0 &&
-                    this.state.collections.map((collection, i) => {
-                      return (
-                        <Link href={"/c/" + collection.slug}>
-                          <tr className="text-white hover:bg-bg-light cursor-pointer rounded-2xl">
-                            <NFTCollection
-                              collection={collection}
-                              ethPrice={this.state.ethPrice}
-                            />
-                          </tr>
-                        </Link>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </div>
+          </Fade>
+        </section>
+
+        <section>
+          <div>
+            <Fade>
+              <Feed />
+            </Fade>
           </div>
-        </Fade>
+        </section>
 
         <section className="mt-16 bg-bg-light">
           <Footer />

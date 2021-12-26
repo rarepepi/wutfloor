@@ -113,11 +113,17 @@ const Collection = (props) => {
             <h1 className="text-white font-bold  text-xl mt-16 p-4 mb-1 text-center">
               {collection.name}'s
             </h1>
-            <p className="text-white my-4 text-center ">
+            <p className="text-white mt-4 text-center ">
               Floor: Ξ{" "}
               <span className="text-green-300">
                 {Math.round(collection.stats.floor_price * 100) / 100}
               </span>
+            </p>
+            <p className="text-gray-400 mb-4 text-center">
+              $
+              {(
+                Math.round(collection.stats.floor_price * ethPrice * 100) / 100
+              ).toLocaleString()}
             </p>
             <div className="flex flex-row space-x-8 justify-center text-purple-300 ">
               <a

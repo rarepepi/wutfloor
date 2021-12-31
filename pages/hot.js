@@ -7,9 +7,12 @@ import Particles from "react-particles-js";
 import Router from "next/router";
 import Footer from "../components/Footer";
 import NFTCollection from "../components/NFTCollection";
+import NFTCollectionsTableHead from "../components/NFTCollectionsTableHead";
 import Head from "next/head";
 import Link from "next/link";
 import BackgroundMagic from "../components/BackgroundMagic";
+import _ from "lodash";
+
 const getHotCollectionsData = async () => {
   let collections = [];
   const collectionSlugs = [
@@ -23,6 +26,7 @@ const getHotCollectionsData = async () => {
     "mutant-ape-yacht-club",
     "veefriends",
     "galacticapesgenesis",
+    "doodles-official",
   ];
   await Promise.all(
     collectionSlugs.map(async (slug, i) => {
@@ -30,10 +34,14 @@ const getHotCollectionsData = async () => {
         `https://api.opensea.io/api/v1/collection/${slug}`
       );
       if (!data) return;
-      collections.push(data.collection);
+      collections.push({
+        ...data.collection,
+        avg_price_market_cap:
+          data.collection.stats.total_supply *
+          data.collection.stats.average_price,
+      });
     })
   );
-  console.log(collections);
 
   return collections;
 };
@@ -41,7 +49,8 @@ const getHotCollectionsData = async () => {
 const hot = (props) => {
   const [ethPrice, setETHPrice] = useState(0);
 
-  const [collections, setCollection] = useState([]);
+  const [collections, setCollections] = useState([]);
+  const [sortBy, setSortBy] = useState('stats.floor_price');
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
@@ -53,7 +62,12 @@ const hot = (props) => {
       setLoading(true);
 
       const results = await getHotCollectionsData();
-      setCollection(results);
+      const cols = _.sortBy(results, sortBy);
+      if (sortBy !== "name") {
+        setCollections(cols.reverse());
+      } else {
+        setCollections(cols);
+      }
       setLoading(false);
     };
     getData();
@@ -63,7 +77,7 @@ const hot = (props) => {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [sortBy]);
 
   return (
     <div className="">
@@ -90,17 +104,7 @@ const hot = (props) => {
             </div>
             <div class="flex sm:justify-center">
               <table className="table-auto mx-auto w-full overflow-x-scroll">
-                <thead className="rounded-t-2xl bg-bg-light text-left  h-12">
-                  <tr className="text-white">
-                    <th className="p-6">Collection</th>
-                    <th className="p-6">Floor</th>
-                    <th className="p-6">Avg</th>
-                    <th className="p-6">1D Vol</th>
-                    <th className="p-6">1D Sales</th>
-                    <th className="p-6">Market Cap</th>
-                    <th className="p-6">1D Δ(+/-%)</th>
-                  </tr>
-                </thead>
+                <NFTCollectionsTableHead onSortBy={setSortBy} />
                 <tbody>
                   {collections.length > 0 &&
                     collections.map((collection, i) => {

@@ -1,6 +1,5 @@
 import React from "react";
-import Particles from "react-particles-js";
-
+import Particles from "react-tsparticles";
 const BackgroundMagic = () => {
   return (
     <Particles

@@ -16,6 +16,8 @@
     "axios": "^0.24.0",
     "axios-rate-limit": "^1.3.0",
     "bootstrap": "5.1.0",
+    "browserslist": "^4.20.3",
+    "caniuse-lite": "^1.0.30001332",
     "cors": "^2.8.5",
     "croner": "^4.0.80",
     "dotenv": "^10.0.0",

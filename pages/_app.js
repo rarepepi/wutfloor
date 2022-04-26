@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import "tailwindcss/tailwind.css";
-
+import "../styles/main.css";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
@@ -24,24 +24,22 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Wut Floor</title>
-        <meta property="og:title" content="Wut Floor" key="title" />
-      </Head>
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-        rel="stylesheet"
-      />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link rel="preload" rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <meta property="og:title" content="Wut Floor - NFT Alpha Tool" key="title" />
+        <meta name="description" content="An NFT portfolio tracker designed by apes and built for degens. Data, stats, graphs, historial price data, and more!" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="preload" rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
+
+      </Head>
       <NextSeo
         openGraph={{
-          type: "Wut Floor",
+          type: "website",
           url: "https://wutfloor.xyz",
-          title: "Wut Floor",
+          title: "Wut Floor - NFT Alpha Tool",
           description:
-            "Save 🧠 power and stop calculating your portfolio manually!",
+            "Save 🧠 power and stop calculating your NFT portfolio manually! Wut Floor is an nft portfolio tracker designed by apes and built for degens.",
           images: [
             {
               url: "https://wutfloor.xyz/img/logo.png",

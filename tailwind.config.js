@@ -2,6 +2,7 @@
 
 module.exports = {
   important: true,
+  mode: "jit",
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
@@ -10,7 +11,7 @@ module.exports = {
       'secondary': '#8a5cf6',
       'danger': '#e3342f',
       'background': '#181818',
-      'bg-light': '#303048'
+      'bg-light': '#282828'
     }),
     extend: {
       backgroundImage: (theme) => ({
@@ -38,8 +39,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      'press-start': ['"Press Start 2P"', 'cursive'],
-      'share-tech': ['"Share Tech"', 'sans-serif']
+      'poppins': ['Poppins', 'sans-serif']
     }
   },
   variants: {

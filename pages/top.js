@@ -6,34 +6,35 @@ import TopNav from "../components/TopNav";
 import Particles from "react-particles-js";
 import Router from "next/router";
 import Footer from "../components/Footer";
+import NFTEvent from "../components/NFTEvent";
+import { ethers } from "ethers";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import randomColor from "randomcolor";
 import NFTCollection from "../components/NFTCollection";
 import NFTCollectionsTableHead from "../components/NFTCollectionsTableHead";
 import Head from "next/head";
 import Link from "next/link";
 import BackgroundMagic from "../components/BackgroundMagic";
+import { collectionSlugs } from "../lib/constants";
 import _ from "lodash";
 
-const getHotCollectionsData = async () => {
+const getTopCollectionsData = async () => {
   let collections = [];
-  const collectionSlugs = [
-    "fidenza-by-tyler-hobbs",
-    "autoglyphs",
-    "twinflames",
-    "cyberkongz",
-    "boredapeyachtclub",
-    "neo-tokyo-identities",
-    "cool-cats-nft",
-    "mutant-ape-yacht-club",
-    "veefriends",
-    "galacticapesgenesis",
-    "doodles-official",
-  ];
   await Promise.all(
     collectionSlugs.map(async (slug, i) => {
-      const { data } = await axios.get(
+      const {data} = await axios.get(
         `https://api.opensea.io/api/v1/collection/${slug}`
       );
       if (!data) return;
+      // console.log(data.data.asset_events);
       collections.push({
         ...data.collection,
         avg_price_market_cap:
@@ -42,11 +43,15 @@ const getHotCollectionsData = async () => {
       });
     })
   );
+  // const web3 = new Web3(provider);
+  // const result = await web3.eth.getBalance(address);
+  // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
+  // console.log(`There are ${collections.length} collections`);
 
   return collections;
 };
 
-const hot = (props) => {
+const top = (props) => {
   const [ethPrice, setETHPrice] = useState(0);
 
   const [collections, setCollections] = useState([]);
@@ -61,7 +66,13 @@ const hot = (props) => {
       setETHPrice(data.data.USD);
       setLoading(true);
 
-      const results = await getHotCollectionsData();
+      const results = await getTopCollectionsData();
+      if (!results) {
+        Router.push("/");
+        return;
+      }
+      console.log(results);
+
       const cols = _.sortBy(results, sortBy);
       if (sortBy !== "name") {
         setCollections(cols.reverse());
@@ -70,7 +81,7 @@ const hot = (props) => {
       }
       setLoading(false);
     };
-    getData();
+    await getData();
 
     const interval = setInterval(() => {
       getData();
@@ -82,25 +93,23 @@ const hot = (props) => {
   return (
     <div className="">
       <Head>
-        <title>Hot</title>
+        <title>Top Collections</title>
         <meta
           name="description"
-          content="View the hottest NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."
+          content="View the Top NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."
         />
       </Head>
+
       <div className="w-full">
         <div className="shadow-lg">
           <TopNav />
         </div>
         <Fade>
-          <div className="mx-auto px-16 mt-4">
+          <div className="mx-auto sm:px-16 mt-4">
             <div className="flex flex-col justify-center  p-4">
               <h1 className="text-white font-bold mb-1 text-2xl text-center">
-                Hot Collections
+                Top Collections
               </h1>
-              <p className="text-gray-300 text-sm text-center ml-2">
-                v.0.1 (beta)
-              </p>
             </div>
             <div class="flex sm:justify-center">
               <table className="table-auto mx-auto w-full overflow-x-scroll">
@@ -138,4 +147,4 @@ const hot = (props) => {
   );
 };
 
-export default hot;
+export default top;

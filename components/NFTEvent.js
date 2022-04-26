@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import { ethers } from "ethers";
+import Link from 'next/link';
 const NFTEvent = (props) => {
 
     const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -9,11 +10,13 @@ const NFTEvent = (props) => {
             <Fade>
                 <>
                     <div className="flex flex-row flex-wrap text-left justify-evenly space-x-24  text-white w-full h-full rounded-xl lg:pt-8 p-4">
-                        <div classname="flex">
+                        <div className="flex">
                             <img className="w-8 h-8 rounded-full" src={props.event.asset.image_url}></img>
                         </div>
-                        <div className="flex align-middle w-32">
-                            <h1 className="text-white text-xs text-left ml-2  overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                        <div className="flex align-middle w-32 hover:cursor-pointer">
+                            <Link href={'/c/' + props.event.asset.collection.slug} className="">
+                                <h1 className="text-white hover:text-green-300 hover:cursor-pointer text-xs text-left ml-2 overflow-ellipsis">{props.event.asset.collection.name}</h1>
+                            </Link>
                         </div>
                         <div className="flex space-x-8">
                             <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="h-4 w-4" />
@@ -27,9 +30,9 @@ const NFTEvent = (props) => {
 
                         <div className="flex" >
                             {/* <h1 className="text-white text-xs">{props.event.listing_time}</h1> */}
-                            <a href={props.event.asset.permalink} target="_blank">
+                            <Link href={'/c/' + props.event.asset.collection.slug} target="_blank" className="hover:cursor-pointer hover:text-green-300">
                                 <i className="fa fa-external-link-alt"></i>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* 

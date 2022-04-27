@@ -27,7 +27,7 @@
     "hardhat-gas-reporter": "^1.0.4",
     "heroicons": "^1.0.5",
     "moralis": "^0.0.93",
-    "next": "11.1.2",
+    "next": "10.2.0",
     "next-seo": "^4.28.1",
     "randomcolor": "^0.6.2",
     "react": "17.0.2",

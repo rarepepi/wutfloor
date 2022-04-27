@@ -1,6 +1,5 @@
 import React from "react";
-import Particles from "react-particles-js";
-
+import Particles from "react-tsparticles";
 const BackgroundMagic = () => {
   return (
     <Particles
@@ -9,10 +8,8 @@ const BackgroundMagic = () => {
       options={{
         background: {
           color: {
-            value: "#232741",
+            value: "none",
           },
-          image:
-            "url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png')",
           position: "50% 50%",
           repeat: "no-repeat",
           size: "100%",

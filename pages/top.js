@@ -3,7 +3,6 @@ import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
 import TopNav from "../components/TopNav";
-import Particles from "react-particles-js";
 import Router from "next/router";
 import Footer from "../components/Footer";
 import NFTEvent from "../components/NFTEvent";
@@ -30,7 +29,7 @@ const getTopCollectionsData = async () => {
   let collections = [];
   await Promise.all(
     collectionSlugs.map(async (slug, i) => {
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `https://api.opensea.io/api/v1/collection/${slug}`
       );
       if (!data) return;
@@ -55,7 +54,7 @@ const top = (props) => {
   const [ethPrice, setETHPrice] = useState(0);
 
   const [collections, setCollections] = useState([]);
-  const [sortBy, setSortBy] = useState('stats.floor_price');
+  const [sortBy, setSortBy] = useState("stats.floor_price");
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {

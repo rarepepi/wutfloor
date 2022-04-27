@@ -18,7 +18,6 @@ const request = rateLimit(axios.create(), {
 import Web3 from "web3";
 import TypeIt from "typeit-react";
 import Router from "next/router";
-import Particles from "react-tsparticles";
 import Head from "next/head";
 import Feed from "../components/Feed";
 function sleep(ms) {

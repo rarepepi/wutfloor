@@ -3,7 +3,6 @@ import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
 import TopNav from "../components/TopNav";
-import Particles from "react-tsparticles";
 import Router from "next/router";
 import Footer from "../components/Footer";
 import NFTCollection from "../components/NFTCollection";

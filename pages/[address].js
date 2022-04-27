@@ -12,7 +12,6 @@ import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import rateLimit from "axios-rate-limit";
 import NFTAsset from "../components/NFTAsset";
 import TopNav from "../components/TopNav";
-import Particles from "react-tsparticles";
 import Router from "next/router";
 import Footer from "../components/Footer";
 import Head from "next/head";

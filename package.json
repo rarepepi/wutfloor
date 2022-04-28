@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "croner": "^4.0.80",
     "dotenv": "^10.0.0",
+    "electron": "^18.1.0",
     "ethers": "^5.4.7",
     "express": "^4.17.1",
     "framer-motion": "^5.2.0",

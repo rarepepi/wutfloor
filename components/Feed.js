@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
-import Web3 from "web3";
 import TopNav from "./TopNav";
 import Router from "next/router";
 import Footer from "./Footer";

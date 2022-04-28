@@ -15,8 +15,6 @@ const request = rateLimit(axios.create(), {
   perMilliseconds: 1000,
   maxRPS: 5,
 });
-import Web3 from "web3";
-import TypeIt from "typeit-react";
 import Router from "next/router";
 import Head from "next/head";
 import Feed from "../components/Feed";

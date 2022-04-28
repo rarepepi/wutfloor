@@ -46,6 +46,7 @@
     "recharts": "^2.1.8",
     "styled-components": "^5.3.3",
     "tsparticles": "^1.35.4",
+    "web3": "^1.7.3",
     "web3modal": "^1.9.4"
   },
   "devDependencies": {

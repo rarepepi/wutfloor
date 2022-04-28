@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
-import Web3 from "web3";
 import TopNav from "../components/TopNav";
 import Router from "next/router";
 import Footer from "../components/Footer";
@@ -41,11 +40,6 @@ const getHotCollectionsData = async () => {
       }
     })
   );
-
-  // const web3 = new Web3(provider);
-  // const result = await web3.eth.getBalance(address);
-  // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
-  // console.log(`There are ${collections.length} collections`);
 
   return { newEvents };
 };

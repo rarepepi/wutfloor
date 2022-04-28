@@ -20,14 +20,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function TopNav() {
+function TopNav(props) {
   const [open, setOpen] = React.useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [gas, setGas] = useState(0);
   useEffect(async () => {
     const getData = async () => {
-      const { data } = await axios.get("https://ethgas.watch/api/gas");
-      setGas(data.normal.gwei);
+      // const { data } = await axios.get("https://ethgas.watch/api/gas");
+      // setGas(data.normal.gwei);
     };
     await getData();
     const interval = setInterval(() => {
@@ -37,7 +37,7 @@ function TopNav() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="">
+    <div className="z-10">
       <nav className="bg-bg-light">
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -81,13 +81,13 @@ function TopNav() {
                       Wallet
                     </a>
                   </Link> */}
-                  <SearchBar />
+                  {props.dontShow == undefined && <SearchBar />}
                 </div>
               </div>
               <div className="hidden md:block right-0 absolute">
                 <a className="text-gray-200 hover:bg-gray-700  font-bold text-lg	 hover:text-white px-3 py-2 rounded-md ">
-                  {gas}
-                  <i className="fas fa-gas-pump text-lg ml-2" />
+                  {/* {gas} */}
+                  {/* <i className="fas fa-gas-pump text-lg ml-2" /> */}
                 </a>
                 <a
                   href="https://twitter.com/wutfloorxyz"

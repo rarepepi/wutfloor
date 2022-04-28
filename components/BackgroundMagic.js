@@ -3,7 +3,7 @@ import Particles from "react-tsparticles";
 const BackgroundMagic = () => {
   return (
     <Particles
-      className="absolute -z-10 w-full h-full"
+      className="absolute w-full h-full z-0"
       id="tsparticles"
       options={{
         background: {

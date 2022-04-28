@@ -11,7 +11,7 @@ const features = (props) => {
     <div className="">
       <Fade>
         <Head>
-          <title>Features</title>
+          <title>Wutfloor</title>
           <meta
             name="description"
             content="View the hottest NFTs ranked by volume, floor price, and more. Including additional statistics and alpha tools."

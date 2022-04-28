@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import NFTCollection from "../components/NFTCollection";
 import Link from "next/link";
-
+import BackgroundMagic from "../components/BackgroundMagic";
 const request = rateLimit(axios.create(), {
   maxRequests: 5,
   perMilliseconds: 1000,
@@ -17,7 +17,7 @@ const request = rateLimit(axios.create(), {
 });
 import Router from "next/router";
 import Head from "next/head";
-import Feed from "../components/Feed";
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -38,33 +38,33 @@ class HomePage extends React.Component {
     this.updatePredicate();
     window.addEventListener("resize", this.updatePredicate);
 
-    const data = await axios.get(
-      "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
-    );
+    // const data = await axios.get(
+    //   "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+    // );
 
-    this.setState({ ethPrice: data.data.USD });
-    const results = await this.getTopCollectionsData();
-    this.setState({ collections: results });
+    // this.setState({ ethPrice: data.data.USD });
+    // const results = await this.getTopCollectionsData();
+    // this.setState({ collections: results });
   }
   getTopCollectionsData = async () => {
-    let collections = [];
-    const collectionSlugs = [
-      "cyberkongz",
-      "boredapeyachtclub",
-      "cool-cats-nft",
-      "cryptoadz-by-gremplin",
-      "doodles-official",
-    ];
-    await Promise.all(
-      collectionSlugs.map(async (slug, i) => {
-        const data = await axios.get(
-          `https://api.opensea.io/api/v1/collection/${slug}`
-        );
-        if (!data) return;
-        // console.log(data.data.asset_events);
-        collections.push(data.data.collection);
-      })
-    );
+    // let collections = [];
+    // const collectionSlugs = [
+    //   "cyberkongz",
+    //   "boredapeyachtclub",
+    //   "cool-cats-nft",
+    //   "cryptoadz-by-gremplin",
+    //   "doodles-official",
+    // ];
+    // await Promise.all(
+    //   collectionSlugs.map(async (slug, i) => {
+    //     const data = await axios.get(
+    //       `https://api.opensea.io/api/v1/collection/${slug}`
+    //     );
+    //     if (!data) return;
+    //     // console.log(data.data.asset_events);
+    //     collections.push(data.data.collection);
+    //   })
+    // );
     // const web3 = new Web3(provider);
     // const result = await web3.eth.getBalance(address);
     // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
@@ -88,10 +88,39 @@ class HomePage extends React.Component {
           <title>Wut Floor</title>
         </Head>
 
-        <div className="shadow-lg">
-          <TopNav />
+        <div className="shadow-lg z-10">
+          <TopNav dontShow={true} />
         </div>
-        <section>
+
+        <div className="h-screen flex flex-col">
+          <h1 className="text-white font-bold text-4xl text-center mt-16">
+            Enter wallet address
+          </h1>
+          <div className="flex justify-center mt-20">
+            <input
+              placeholder="0x0000 or foobar.eth"
+              className="address-search bg-background ring-green-400   rounded-2xl ring-4 p-6 text-green-300"
+            ></input>
+          </div>
+          <h1 className="text-white font-bold text-2xl text-center mt-16">
+            To see portfolio
+          </h1>
+          <div className="flex justify-center">
+            <a
+              className="text-center rounded-2xl  py-2 px-6 mt-20 bg-primary "
+              href="/"
+            >
+              Go!
+            </a>
+          </div>
+        </div>
+
+        <style jsx>{`
+          .address-search {
+            outline: none;
+          }
+        `}</style>
+        {/* <section>
           <Fade>
             <div className="mx-auto sm:px-16 mt-4">
               <div className="flex flex-col justify-center  p-4">
@@ -131,19 +160,12 @@ class HomePage extends React.Component {
               </div>
             </div>
           </Fade>
-        </section>
-
-        <section>
-          <div>
-            <Fade>
-              <Feed />
-            </Fade>
-          </div>
-        </section>
+        </section> */}
 
         <section className="mt-16 bg-bg-light">
           <Footer />
         </section>
+        <BackgroundMagic />
       </div>
     );
   }

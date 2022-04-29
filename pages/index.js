@@ -10,6 +10,8 @@ import axios from "axios";
 import NFTCollection from "../components/NFTCollection";
 import Link from "next/link";
 import BackgroundMagic from "../components/BackgroundMagic";
+import Web3 from "web3";
+import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 const request = rateLimit(axios.create(), {
   maxRequests: 5,
   perMilliseconds: 1000,
@@ -29,11 +31,42 @@ class HomePage extends React.Component {
       isMobile: false,
       collections: [],
       loading: true,
+      wrongAddress: false,
+      userAddress: "",
     };
     this.updatePredicate = this.updatePredicate.bind(this);
+    this.handleSumbit = this.handleSumbit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.myRef = React.createRef();
   }
 
+  async handleChange(event) {
+    this.setState({ userAddress: event.target.value });
+    this.setState({ wrongAddress: false });
+  }
+
+  async handleSumbit(e) {
+    e.preventDefault();
+    let ethAddress = this.state.userAddress;
+    if (ethAddress.endsWith(".eth")) {
+      const provider = new Web3.providers.HttpProvider(
+        "https://mainnet.infura.io/v3/558cd10a65b84096b34dc0ab71eb6ef7"
+      );
+      const ens = new ENS({ provider, ensAddress: getEnsAddress("1") });
+      ethAddress = await ens.name(ethAddress).getAddress();
+    }
+
+    if (!Web3.utils.isAddress(ethAddress)) {
+      this.setState({ wrongAddress: true });
+      return;
+    }
+
+    const acct = ethAddress.endsWith(".eth")
+      ? ethAddress
+      : this.state.userAddress;
+
+    Router.push(`/${acct}`);
+  }
   async componentDidMount() {
     this.updatePredicate();
     window.addEventListener("resize", this.updatePredicate);
@@ -96,23 +129,29 @@ class HomePage extends React.Component {
           <h1 className="text-white font-bold text-4xl text-center mt-16">
             Enter wallet address
           </h1>
-          <div className="flex justify-center mt-20">
-            <input
-              placeholder="0x0000 or foobar.eth"
-              className="address-search bg-background ring-green-400   rounded-2xl ring-4 p-6 text-green-300"
-            ></input>
-          </div>
-          <h1 className="text-white font-bold text-2xl text-center mt-16">
-            To see portfolio
-          </h1>
-          <div className="flex justify-center">
-            <a
-              className="text-center rounded-2xl  py-2 px-6 mt-20 bg-primary "
-              href="/"
-            >
-              Go!
-            </a>
-          </div>
+          <form onSubmit={this.handleSumbit}>
+            <div className="flex justify-center mt-20">
+              <input
+                value={this.state.userAddress}
+                onChange={this.handleChange}
+                placeholder="0x0000 or foobar.eth"
+                className="address-search bg-background ring-green-400   rounded-2xl ring-4 p-6 text-green-300"
+              ></input>
+            </div>
+            <h1 className="text-white font-bold text-2xl text-center mt-16">
+              To see portfolio
+            </h1>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                onClick={this.handleSumbit}
+                className="text-center rounded-2xl  py-2 px-6 mt-20 bg-primary "
+                href="/"
+              >
+                Go!
+              </button>
+            </div>
+          </form>
         </div>
 
         <style jsx>{`

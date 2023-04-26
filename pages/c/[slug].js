@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
 const request = rateLimit(axios.create(), {
@@ -8,12 +7,10 @@ const request = rateLimit(axios.create(), {
   perMilliseconds: 1000,
   maxRPS: 5,
 });
-import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import rateLimit from "axios-rate-limit";
 import TopNav from "../../components/TopNav";
 import Router from "next/router";
 import Footer from "../../components/Footer";
-import { CollectionIcon } from "@heroicons/react/outline";
 import Head from "next/head";
 import BackgroundMagic from "../../components/BackgroundMagic";
 const getOpenSeaData = async (
@@ -77,8 +74,9 @@ const Collection = (props) => {
         // setETHBalance(results.ethBalance);
         setLoading(false);
       };
-      await getData();
+      return await getData();
     }
+    return () => {};
   }, [router]);
 
   return (

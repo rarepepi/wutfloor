@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Fade } from "react-reveal";
-import Image from "next/image";
-import { isMobile } from "react-device-detect";
-import Router from "next/router";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { AdjustmentsIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { Link as ScrollLink } from "react-scroll";
+import { useEffect, useState } from "react";
+
+import { Transition } from "@headlessui/react";
+
 import Link from "next/link";
-import { PieChart } from "recharts";
-import axios from "axios";
+
 import SearchBar from "./SearchBar";
 const navigation = [
   { name: "Twitter", href: "#", current: false },
@@ -21,21 +15,10 @@ function classNames(...classes) {
 }
 
 function TopNav(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [gas, setGas] = useState(0);
-  useEffect(async () => {
-    const getData = async () => {
-      // const { data } = await axios.get("https://ethgas.watch/api/gas");
-      // setGas(data.normal.gwei);
-    };
-    await getData();
-    const interval = setInterval(() => {
-      getData();
-    }, 60000);
 
-    return () => clearInterval(interval);
-  }, []);
   return (
     <div className="z-10">
       <nav className="bg-bg-light">
@@ -43,7 +26,7 @@ function TopNav(props) {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Link className="" href="/">
+                <Link className="" href="/" legacyBehavior>
                   <a>
                     <img
                       className="h-8 w-8 "
@@ -55,18 +38,18 @@ function TopNav(props) {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-1">
-                  <Link href="/features">
+                  <Link href="/features" legacyBehavior>
                     <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Features
                     </a>
                   </Link>
-                  <Link href="/top">
+                  <Link href="/top" legacyBehavior>
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                       Top
                     </a>
                   </Link>
 
-                  <Link href="/hot">
+                  <Link href="/hot" legacyBehavior>
                     <a className="text-white  font-bold  flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md ">
                       Hot
                     </a>
@@ -97,7 +80,7 @@ function TopNav(props) {
                   <i className="fab fa-twitter text-xl mr-2" />
                 </a>
                 <a
-                  href="https://github.com/pepimartinez/wutfloor"
+                  href="https://github.com/rarepepi/wutfloor"
                   target="_blank"
                   className="text-gray-200 hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
@@ -164,17 +147,17 @@ function TopNav(props) {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <Link href="/features">
+                <Link href="/features" legacyBehavior>
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Features
                   </a>
                 </Link>
-                <Link href="/top">
+                <Link href="/top" legacyBehavior>
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Top
                   </a>
                 </Link>
-                <Link href="/hot">
+                <Link href="/hot" legacyBehavior>
                   <a className="text-white   font-bold flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md">
                     Hot
                   </a>
@@ -199,7 +182,7 @@ function TopNav(props) {
                   <i className="fab fa-twitter text-xl mr-2" />
                 </a>
                 <a
-                  href="https://github.com/pepimartinez/wutfloor"
+                  href="https://github.com/rarepepi/wutfloor"
                   target="_blank"
                   className="text-gray-200 flex justify-center hover:bg-gray-700 cursor-pointer	 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >

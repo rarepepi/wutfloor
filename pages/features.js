@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Fade } from "react-reveal";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";

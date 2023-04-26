@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
+import { useEffect, useState } from "react";
+import { Fade } from "react-reveal";
 import axios from "axios";
-import Web3 from "web3";
 import TopNav from "../components/TopNav";
 import Router from "next/router";
 import Footer from "../components/Footer";
-import NFTEvent from "../components/NFTEvent";
-import { ethers } from "ethers";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import randomColor from "randomcolor";
 import NFTCollection from "../components/NFTCollection";
 import NFTCollectionsTableHead from "../components/NFTCollectionsTableHead";
 import Head from "next/head";
@@ -33,7 +20,6 @@ const getTopCollectionsData = async () => {
         `https://api.opensea.io/api/v1/collection/${slug}`
       );
       if (!data) return;
-      // console.log(data.data.asset_events);
       collections.push({
         ...data.collection,
         avg_price_market_cap:
@@ -42,11 +28,6 @@ const getTopCollectionsData = async () => {
       });
     })
   );
-  // const web3 = new Web3(provider);
-  // const result = await web3.eth.getBalance(address);
-  // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
-  // console.log(`There are ${collections.length} collections`);
-
   return collections;
 };
 
@@ -57,7 +38,7 @@ const top = (props) => {
   const [sortBy, setSortBy] = useState("stats.floor_price");
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
+  useEffect(() => {
     const getData = async () => {
       const data = await axios.get(
         "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
@@ -80,7 +61,7 @@ const top = (props) => {
       }
       setLoading(false);
     };
-    await getData();
+    getData();
 
     const interval = setInterval(() => {
       getData();

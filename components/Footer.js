@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Fade } from "react-reveal";
 
 const Footer = () => {
@@ -25,7 +24,7 @@ const Footer = () => {
           <a
             className="text-purple-500 animate-pulse"
             target="_blank"
-            href="https://github.com/pepimartinez/wutfloor"
+            href="https://github.com/rarepepi/wutfloor"
           >
             <i className="fab fa-github text-xl mr-2" />
             Github

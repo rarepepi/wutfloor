@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
+import { Fade } from "react-reveal";
 import Router from "next/router";
 
 const MainContent = () => {

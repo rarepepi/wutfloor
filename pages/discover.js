@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import TopNav from "../components/TopNav";
-import Router from "next/router";
+
 import Footer from "../components/Footer";
-import NFTEvent from "../components/NFTEvent";
+
 import { ethers } from "ethers";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import randomColor from "randomcolor";
 import Head from "next/head";
 const getHotCollectionsData = async () => {
   const maxOffset = 800;
@@ -28,7 +16,6 @@ const getHotCollectionsData = async () => {
       { headers: { "X-API-KEY": process.env.OS_KEY } }
     );
     if (!data) return;
-    // console.log(data.data.asset_events);
     events.push(...data.data.asset_events);
   }
   console.log(events);
@@ -44,82 +31,7 @@ const getHotCollectionsData = async () => {
   return { newEvents };
 };
 
-function findOcc(arr, key) {
-  let arr2 = [];
-
-  arr.forEach((x) => {
-    // Checking if there is any object in arr2
-    // which contains the key value
-    if (
-      arr2.some((val) => {
-        return val[key] == x[key];
-      })
-    ) {
-      // If yes! then increase the occurrence by 1
-      arr2.forEach((k) => {
-        if (k[key] === x[key]) {
-          k["ocurrance"]++;
-          k["amt"]++;
-        }
-      });
-    } else {
-      // If not! Then create a new object initialize
-      // it with the present iteration key's value and
-      // set the occurrence to 1
-      let a = {};
-      a[key] = x[key];
-      a["name"] = x[key];
-      a["ocurrance"] = 1;
-      a["amt"] = 1;
-      arr2.push(a);
-    }
-  });
-
-  return arr2;
-}
-
 const discover = (props) => {
-  const [ethPrice, setETHPrice] = useState(0);
-
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [occurances, setOccurances] = useState([]);
-
-  useEffect(async () => {
-    const getData = async () => {
-      const data = await axios.get(
-        "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
-      );
-      setETHPrice(data.data.USD);
-      setLoading(true);
-
-      const results = await getHotCollectionsData();
-      if (!results) {
-        Router.push("/");
-        return;
-      }
-      if (results.address == "0x0000000000000000000000000000000000000000") {
-        Router.push("/");
-        console.log("no resolver / ens returned 0x000dead");
-        return;
-      }
-      setEvents(results.newEvents.slice(0, 20));
-      console.log(results.events);
-      let occur = findOcc(results.newEvents, "collection_slug");
-      occur = occur.sort((a, b) => (a.ocurrance > b.ocurrance ? -1 : 1));
-      setOccurances(occur.splice(0, 5));
-      console.log({ occur });
-      setLoading(false);
-    };
-    // getData();
-
-    const interval = setInterval(() => {
-      // getData();
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="">
       <Head>
@@ -146,7 +58,7 @@ const discover = (props) => {
           </p>
         </div>
 
-        <Footer></Footer>
+        <Footer />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import Link from "next/link";
 const NFTAsset = (props) => {
@@ -30,11 +30,7 @@ const NFTAsset = (props) => {
               </p>
             </a>
             <p className="mt-2 text-xs px-8 text-green-300">
-              <img
-                src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
-                className="h-4 w-4 inline mr-2"
-              />
-              {Math.round(props.asset.floor_price * 100) / 100}
+              Ξ{Math.round(props.asset.floor_price * 100) / 100}
             </p>
             <p className="mt-2 text-xs px-8 text-green-300 ">
               ($

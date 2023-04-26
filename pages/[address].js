@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
 const request = rateLimit(axios.create(), {
@@ -29,13 +28,10 @@ const getOpenSeaData = async (
   if (address.endsWith(".eth")) {
     const ens = new ENS({ provider, ensAddress: getEnsAddress("1") });
     address = await ens.name(address).getAddress();
-  } else {
-    // this.setState({ ethAddress: this.state.userAddress });
   }
 
   if (!Web3.utils.isAddress(address)) {
     provider;
-    // this.setState({ wrongAddress: true });
     return;
   }
 
@@ -125,7 +121,8 @@ const Account = (props) => {
   const [accountAssets, setAccountAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [ethAddress, setETHAddress] = useState("");
-  useEffect(async () => {
+
+  useEffect(() => {
     if (router.asPath !== router.route) {
       const getData = async () => {
         const data = await axios.get(
@@ -153,9 +150,11 @@ const Account = (props) => {
         setETHBalance(results.ethBalance);
         setLoading(false);
       };
-      await getData();
+      getData().catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
     }
-  }, [router]);
+  }, [router.query.address]);
 
   return (
     <div className="font-press-start ">

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
-import { ethers } from "ethers";
-import Link from "next/link";
+import { useState } from "react";
+import { Fade } from "react-reveal";
+
 const NFTCollection = (props) => {
   const [tooltipStatus, setTooltipStatus] = useState(0);
   return (
@@ -48,8 +47,8 @@ const NFTCollection = (props) => {
           {(
             Math.round(
               props.collection.stats.total_supply *
-              props.collection.stats.average_price *
-              100
+                props.collection.stats.average_price *
+                100
             ) / 100
           ).toLocaleString()}
         </p>

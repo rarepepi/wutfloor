@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Web3 from "web3";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import Router from "next/router";

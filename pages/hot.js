@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Zoom, Fade, Flip, Slide } from "react-reveal";
 import axios from "axios";
 import Web3 from "web3";
@@ -52,7 +52,7 @@ const hot = (props) => {
   const [sortBy, setSortBy] = useState("stats.floor_price");
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
+  useEffect(() => {
     const getData = async () => {
       const data = await axios.get(
         "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
@@ -131,7 +131,7 @@ const hot = (props) => {
             </>
           </div>
         )}
-        <Footer></Footer>
+        <Footer />
       </div>
     </div>
   );

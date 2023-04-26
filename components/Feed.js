@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Zoom, Fade, Flip, Slide } from "react-reveal";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import TopNav from "./TopNav";
 import Router from "next/router";
-import Footer from "./Footer";
 import NFTEvent from "./NFTEvent";
 import { ethers } from "ethers";
 import {
@@ -11,12 +8,9 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import randomColor from "randomcolor";
-import Head from "next/head";
 import BackgroundMagic from "./BackgroundMagic";
 const getHotCollectionsData = async () => {
   const maxOffset = 100;
@@ -110,8 +104,9 @@ const Feed = (props) => {
       setOccurances(occur.splice(0, 5));
       console.log({ occur });
       setLoading(false);
+      return results;
     };
-    getData();
+    return getData();
 
     const interval = setInterval(() => {
       getData();

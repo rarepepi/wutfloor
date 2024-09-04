@@ -27,22 +27,33 @@ const getOpenSeaData = async (
   console.log(address);
   if (address.endsWith(".eth")) {
     const ens = new ENS({ provider, ensAddress: getEnsAddress("1") });
+    console.log({ ens });
     address = await ens.name(address).getAddress();
+    console.log({ address });
   }
 
   if (!Web3.utils.isAddress(address)) {
+    console.log("exiting");
     provider;
     return;
   }
 
+  console.log("turned ens to address");
+  console.log({ address });
   const data = await request.get(
-    `https://api.opensea.io/api/v1/assets?limit=50&owner=${address}`,
-    { crossdomain: true }
+    `https://api.opensea.io/api/v2/chain/ethereum/account/${address}/nfts`,
+    {
+      crossdomain: true,
+      headers: {
+        "x-api-key": process.env.OS_KEY,
+      },
+    }
   );
-  setAssetAmount(data.data.assets.length);
+  console.log({ data });
+  setAssetAmount(data.data.nfts.length);
   if (!data) return;
 
-  let assets = data.data.assets;
+  let assets = data.data.nfts;
   let total_eth_value = 0;
   let total_eth_7_avg_value = 0;
   const web3 = new Web3(provider);
@@ -52,46 +63,77 @@ const getOpenSeaData = async (
   console.log(`There are ${assets.length} assets`);
   await Promise.all(
     assets.map(async (item, i) => {
-      const collectionSlug = item.collection.slug;
+      const collectionSlug = item.collection;
+      console.log({ collectionSlug });
       const data = await request.get(
-        `https://api.opensea.io/api/v1/collection/${collectionSlug}`,
-        { crossdomain: true }
-      );
-      if (data.data.collection.stats.floor_price > 0.01) {
-        total_eth_value += data.data.collection.stats.floor_price;
-        total_eth_7_avg_value +=
-          data.data.collection.stats.seven_day_average_price;
-
-        item.floor_price = data.data.collection.stats.floor_price;
-        item.average_price = data.data.collection.stats.average_price;
-        item.num_owners = data.data.collection.stats.num_owners;
-        item.total_supply = data.data.collection.stats.total_supply;
-        item.market_cap = data.data.collection.stats.market_cap;
-        item.total_volume = data.data.collection.stats.total_volume;
-
-        item.one_day_volume = data.data.collection.stats.one_day_volume;
-        item.one_day_change = data.data.collection.stats.one_day_change;
-        item.one_day_sales = data.data.collection.stats.one_day_sales;
-        item.one_day_average_price =
-          data.data.collection.stats.one_day_average_price;
-
-        item.seven_day_volume = data.data.collection.stats.seven_day_volume;
-        item.seven_day_change = data.data.collection.stats.seven_day_change;
-        item.seven_day_sales = data.data.collection.stats.seven_day_sales;
-        item.seven_day_average_price =
-          data.data.collection.stats.seven_day_average_price;
-
-        item.created_date = data.data.collection.created_date;
-
-        item.thirty_day_volume = data.data.collection.stats.thirty_day_volume;
-        item.thirty_day_change = data.data.collection.stats.thirty_day_change;
-        item.thirty_day_sales = data.data.collection.stats.thirty_day_sales;
-        item.thirty_day_average_price =
-          data.data.collection.stats.thirty_day_average_price;
-
-        if (item.image_url.length < 1) {
-          item.image_url = data.data.collection.image_url;
+        `https://api.opensea.io/api/v2/collections/${collectionSlug}/stats`,
+        {
+          crossdomain: true,
+          headers: {
+            "x-api-key": process.env.OS_KEY,
+          },
         }
+      );
+      console.log({ collectionData: data });
+      if (data.data.total.floor_price > 0.01) {
+        console.log("floor > 0.01");
+        total_eth_value += data.data.total.floor_price;
+        total_eth_7_avg_value += 0;
+
+        item.floor_price = 0;
+        item.average_price = 0;
+        item.num_owners = 0;
+        item.total_supply = 0;
+        item.market_cap = 0;
+        item.total_volume = 0;
+
+        item.one_day_volume = 0;
+        item.one_day_change = 0;
+        item.one_day_sales = 0;
+        item.one_day_average_price = 0;
+
+        item.seven_day_volume = 0;
+        item.seven_day_change = 0;
+        item.seven_day_sales = 0;
+        item.seven_day_average_price = 0;
+
+        item.created_date = 0;
+
+        item.thirty_day_volume = 0;
+        item.thirty_day_change = 0;
+        item.thirty_day_sales = 0;
+        item.thirty_day_average_price = 0;
+        // total_eth_value += data.data.total.floor_price;
+        // total_eth_7_avg_value += data.data.total.seven_day_average_price;
+
+        // item.floor_price = data.data.total.floor_price;
+        // item.average_price = data.data.total.average_price;
+        // item.num_owners = data.data.total.num_owners;
+        // item.total_supply = data.data.total.total_supply;
+        // item.market_cap = data.data.total.market_cap;
+        // item.total_volume = data.data.total.total_volume;
+
+        // item.one_day_volume = data.data.total.one_day_volume;
+        // item.one_day_change = data.data.total.one_day_change;
+        // item.one_day_sales = data.data.total.one_day_sales;
+        // item.one_day_average_price = data.data.total.one_day_average_price;
+
+        // item.seven_day_volume = data.data.total.seven_day_volume;
+        // item.seven_day_change = data.data.total.seven_day_change;
+        // item.seven_day_sales = data.data.total.seven_day_sales;
+        // item.seven_day_average_price = data.data.total.seven_day_average_price;
+
+        // item.created_date = data.data.collection.created_date;
+
+        // item.thirty_day_volume = data.data.total.stats.thirty_day_volume;
+        // item.thirty_day_change = data.data.total.stats.thirty_day_change;
+        // item.thirty_day_sales = data.data.total.stats.thirty_day_sales;
+        // item.thirty_day_average_price =
+        //   data.data.total.thirty_day_average_price;
+
+        // if (item.image_url.length < 1) {
+        //   item.image_url = data.data.collection.image_url;
+        // }
         setCurrentlyLoadingAssetNumber(i);
 
         newAssets.push(item);
@@ -134,6 +176,7 @@ const Account = (props) => {
           setAssetAmount,
           setCurrentlyLoadingAssetNumber
         );
+        console.log({ results });
         if (!results) {
           Router.push("/");
           return;

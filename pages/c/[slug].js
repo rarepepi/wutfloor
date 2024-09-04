@@ -27,16 +27,23 @@ const getOpenSeaData = async (
     `https://api.opensea.io/api/v1/collection/${collectionSlug}`,
     { crossdomain: true }
   );
-  // setAssetAmount(data.data.assets.length);
+  console.log({ osData: data });
+  setAssetAmount(data.data.assets.length);
   if (!data) return;
 
   let collection = data.data.collection;
   setCollection(collection);
   const web3 = new Web3(provider);
-  return collection;
-  // const result = await web3.eth.getBalance(address);
-  // const ethBalance = web3.utils.fromWei(result).slice(0, 6);
-  // return { assets: newAssets, totalETHValue: total_eth_value, totalETHValue7Day: total_eth_7_avg_value, address: address, ethBalance: ethBalance };
+  // return collection;
+  const result = await web3.eth.getBalance(address);
+  const ethBalance = web3.utils.fromWei(result).slice(0, 6);
+  return {
+    assets: newAssets,
+    totalETHValue: total_eth_value,
+    totalETHValue7Day: total_eth_7_avg_value,
+    address: address,
+    ethBalance: ethBalance,
+  };
 };
 
 const Collection = (props) => {
@@ -67,11 +74,11 @@ const Collection = (props) => {
           Router.push("/");
           return;
         }
-        // setAccountAssets(results.assets);
-        // setTotalETHValue(results.totalETHValue);
-        // setTotalETHValue7Day(results.totalETHValue7Day);
-        // setETHAddress(results.address);
-        // setETHBalance(results.ethBalance);
+        setAccountAssets(results.assets);
+        setTotalETHValue(results.totalETHValue);
+        setTotalETHValue7Day(results.totalETHValue7Day);
+        setETHAddress(results.address);
+        setETHBalance(results.ethBalance);
         setLoading(false);
       };
       return await getData();
